@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "../../pages/Orderfoodhomepage/Orderfoodhomepage.module.css";
+import { Link } from "react-router-dom";
+import styles from "../../styles/Orderfoodhomepagecss/Content.module.css";
 
 const Content = () => {
       return (
@@ -10,50 +11,51 @@ const Content = () => {
                   </p>
 
                   <div className={styles.grid}>
-                        <button className={styles.card}>
+                        <Link to="/orderhotdrinks" className={styles.card}>
                               <img
                                     src="src/assets/orderfoodhomepage_img/hotdrink.png"
                                     alt="Hot Drinks"
                                     className={styles.cardImageLeft}
                               />
                               <span>Order Hot Drinks</span>
-                        </button>
+                        </Link>
 
-                        <button className={styles.card}>
+                        <Link to="/ordercolddrinks" className={styles.card}>
                               <img
                                     src="src/assets/orderfoodhomepage_img/coldDrink.png"
                                     alt="Cold Drinks"
                                     className={styles.cardImageLeft}
                               />
                               <span>Order Cold Drinks</span>
-                        </button>
+                        </Link>
 
-                        <button className={styles.card}>
+                        {/* Do the same for other cards */}
+                        <Link to="/grabfood" className={styles.card}>
                               <img
                                     src="src/assets/orderfoodhomepage_img/hotFood.png"
                                     alt="Food"
                                     className={styles.cardImageLeft}
                               />
                               <span>Grab some food</span>
-                        </button>
+                        </Link>
 
-                        <button className={styles.card}>
+                        <Link to="/vegeoptions" className={styles.card}>
                               <img
                                     src="src/assets/orderfoodhomepage_img/vegeOption.png"
                                     alt="Veggie Options"
                                     className={styles.cardImageLeft}
                               />
                               <span>Vege options</span>
-                        </button>
+                        </Link>
 
-                        <button className={styles.cardLarge}>
+                        <Link to="/makecombo" className={styles.cardLarge}>
                               <span>Make it a COMBO</span>
                               <img
                                     src="src/assets/orderfoodhomepage_img/combo.png"
                                     alt="Combo"
                                     className={styles.cardImageRight}
                               />
-                        </button>
+                        </Link>
                   </div>
             </>
       );

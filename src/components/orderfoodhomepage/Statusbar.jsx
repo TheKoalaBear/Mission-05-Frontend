@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../pages/Orderfoodhomepage/Orderfoodhomepage.module.css";
+import styles from "../../styles/Orderfoodhomepagecss/Statusbar.module.css";
 
 const Statusbar = () => {
       return (

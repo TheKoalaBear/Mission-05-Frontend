@@ -1,0 +1,58 @@
+.hero {
+      position: relative;
+      width: 321px;
+      height: 142px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+}
+
+.imageContainer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+}
+
+.coffeeHero {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-color: #ffffff;
+}
+
+.leftArrow {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 32px;
+      height: 32px;
+      z-index: 2;
+      cursor: pointer;
+}
+
+.textContainer {
+      position: absolute;
+      bottom: 20px;
+      left: 20px; /* Align to the bottom-left corner */
+      display: flex;
+      align-items: center;
+      text-align: left;
+      z-index: 2;
+}
+
+.zLogo {
+      width: 30px;
+      margin-right: 40px;
+}
+
+.headline {
+      color: #1e196b;
+      font-size: 16px;
+      font-family: Roboto;
+      width: 218px;
+      max-width: 100%;
+      font-weight: 700;
+      line-height: 15px;
+      word-wrap: break-word;
+}
