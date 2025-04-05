@@ -40,7 +40,7 @@ const slides = [
   },
 ];
 
-const Onboarding = () => {
+const Onboarding = ({ onComplete }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => {
@@ -48,13 +48,15 @@ const Onboarding = () => {
   };
 
   const handleSkip = () => {
-    // TODO: Implement skip functionality
-    console.log("Skip onboarding");
+    if (onComplete) {
+      onComplete();
+    }
   };
 
   const handleGetStarted = () => {
-    // TODO: Implement get started functionality
-    console.log("Get started");
+    if (onComplete) {
+      onComplete();
+    }
   };
 
   return (
