@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import StatusBar from "../../components/shared/StatusBar";
 import Nav from "../../components/shared/Nav";
 import Horizontalscroll from "../../components/shared/Horizontalscroll";
-import Content from "../../components/shared/Content";
+// import Content from "../../components/shared/Content";
 import BottomNav from "../../components/shared/BottomNav";
-import styles from "../../styles/Orderhotdrinkscss/Orderhotdrinks.module.css";
+import styles from "../../styles/Shared/MobileFrame.module.css";
 
 const ProductPage = () => {
       const { productId } = useParams(); // ID from the URL

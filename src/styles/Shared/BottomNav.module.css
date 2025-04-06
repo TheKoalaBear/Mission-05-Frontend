@@ -1,4 +1,3 @@
-/* Navbar */
 .navbar {
       display: flex;
       justify-content: space-around;
@@ -10,6 +9,19 @@
       font-weight: 600;
       font-size: 11px;
       /* top: 600px; */
+}
+
+.navbar::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to bottom, rgba(252, 240, 232, 0.765), transparent);
+      filter: blur(1px);
+      z-index: -1;
+      pointer-events: none;
 }
 
 .navItem {
