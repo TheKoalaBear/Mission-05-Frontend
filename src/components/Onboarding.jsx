@@ -1,113 +1,101 @@
 import { useState } from "react";
-import orderCoffeeImage from "../assets/onboarding_img/order_coffee.png";
-import sharetankImage from "../assets/onboarding_img/sharetank.png";
-import comparePricesImage from "../assets/onboarding_img/compare_price.png";
-import "./Onboarding.css";
+import { useNavigate } from "react-router-dom";
+import orderCoffeeImg from "../assets/onboarding_img/order_coffee.png";
+import comparePriceImg from "../assets/onboarding_img/compare_price.png";
+import shareTankImg from "../assets/onboarding_img/sharetank.png";
+import styles from "./Onboarding.module.css";
 
-const slides = [
-  {
-    title: "Order Coffee",
-    description: "Order your favorite coffee from our wide selection",
-    illustration: (
-      <img
-        style={{ width: "249px", height: "300px" }}
-        src={orderCoffeeImage}
-        alt="Order Coffee"
-      />
-    ),
-  },
-  {
-    title: "Sharetank",
-    description: "Share your tank with your friends and family",
-    illustration: (
-      <img
-        style={{ width: "249px", height: "300px" }}
-        src={sharetankImage}
-        alt="Quick Delivery"
-      />
-    ),
-  },
-  {
-    title: "Compare Prices",
-    description: "Compare prices of different products",
-    illustration: (
-      <img
-        style={{ width: "249px", height: "300px" }}
-        src={comparePricesImage}
-        alt="Easy Payment"
-      />
-    ),
-  },
-];
-
-const Onboarding = ({ onComplete }) => {
+const Onboarding = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  };
+  const slides = [
+    {
+      title: "Order Your Coffee",
+      description:
+        "Browse our menu and order your favorite coffee with just a few taps.",
+      image: orderCoffeeImg,
+    },
+    {
+      title: "Quick Delivery",
+      description: "Get your coffee delivered to your location in minutes.",
+      image: comparePriceImg,
+    },
+    {
+      title: "Easy Payment",
+      description: "Pay securely with your preferred payment method.",
+      image: shareTankImg,
+    },
+  ];
 
-  const handleSkip = () => {
-    if (onComplete) {
-      onComplete();
+  const handleNext = () => {
+    if (currentSlide < slides.length - 1) {
+      setCurrentSlide(currentSlide + 1);
+    } else {
+      // Set flag and navigate to login
+      localStorage.setItem("hasSeenOnboarding", "true");
+      navigate("/login");
     }
   };
 
-  const handleGetStarted = () => {
-    if (onComplete) {
-      onComplete();
+  const handleSkip = () => {
+    localStorage.setItem("hasSeenOnboarding", "true");
+    navigate("/login");
+  };
+
+  const handleBack = () => {
+    if (currentSlide > 0) {
+      setCurrentSlide(currentSlide - 1);
     }
   };
 
   return (
-    <div className="onboarding-container">
+    <div className={styles.container}>
       {currentSlide > 0 && (
-        <div
-          className="back-button"
-          onClick={() => setCurrentSlide((prev) => prev - 1)}
-        >
-          ←
-        </div>
+        <button className={styles.backButton} onClick={handleBack}>
+          Back
+        </button>
       )}
-
       {currentSlide < slides.length - 1 && (
-        <button className="skip-button" onClick={handleSkip}>
+        <button className={styles.skipButton} onClick={handleSkip}>
           Skip
         </button>
       )}
-
-      <div className="slider-container">
-        <div className="slide">
-          <div className="illustration-container">
-            {slides[currentSlide].illustration}
-          </div>
-          <h2 className="slide-title">{slides[currentSlide].title}</h2>
-          <p className="slide-description">
-            {slides[currentSlide].description}
-          </p>
+      <div className={styles.sliderContainer}>
+        <div
+          className={styles.slide}
+          style={{ transform: `translateX(-${currentSlide * 33}%)` }}
+        >
+          {slides.map((slide, index) => (
+            <div key={index} className={styles.slideContent}>
+              <div className={styles.illustrationContainer}>
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className={styles.illustration}
+                />
+              </div>
+              <h2 className={styles.slideTitle}>{slide.title}</h2>
+              <p className={styles.slideDescription}>{slide.description}</p>
+            </div>
+          ))}
         </div>
       </div>
-
-      <div className="slider-controls">
-        <div className="dots">
+      <div className={styles.sliderControls}>
+        <div className={styles.dots}>
           {slides.map((_, index) => (
-            <div
+            <button
               key={index}
-              className={`dot ${index === currentSlide ? "active" : ""}`}
+              className={`${styles.dot} ${
+                index === currentSlide ? styles.active : ""
+              }`}
               onClick={() => setCurrentSlide(index)}
             />
           ))}
         </div>
-
-        {currentSlide < slides.length - 1 ? (
-          <button className="next-button" onClick={nextSlide}>
-            Next
-          </button>
-        ) : (
-          <button className="get-started-button" onClick={handleGetStarted}>
-            Get Started
-          </button>
-        )}
+        <button className={styles.nextButton} onClick={handleNext}>
+          {currentSlide === slides.length - 1 ? "Get Started" : "Next"}
+        </button>
       </div>
     </div>
   );

@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
-import styles from "./SignUp.module.css";
+import styles from "./Login.module.css";
 import ZEnergyLogo from "../assets/Z_Energy_logo.png";
 
-const Signup = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
   });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -22,47 +21,18 @@ const Signup = () => {
     }));
   };
 
-  const validateForm = () => {
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
-      return false;
-    }
-    if (formData.password.length < 6) {
-      setError("Password must be at least 6 characters long");
-      return false;
-    }
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setError("Please enter a valid email address");
-      return false;
-    }
-    return true;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
-    if (!validateForm()) {
-      return;
-    }
-
     setIsLoading(true);
 
     try {
-      console.log("Submitting registration form:", formData);
-      await authService.register({
-        email: formData.email,
-        password: formData.password,
-      });
-      console.log("Registration successful, navigating to login");
-      // If registration successful, navigate to login page
-      navigate("/login");
+      const result = await authService.login(formData);
+      // Navigate to home page
+      navigate("/home");
     } catch (error) {
-      console.error("Registration error in component:", error);
       setError(
-        error.response?.data?.message || "An error occurred during registration"
+        error.response?.data?.message || "An error occurred during login"
       );
     } finally {
       setIsLoading(false);
@@ -105,23 +75,8 @@ const Signup = () => {
           />
         </div>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="confirmPassword" className={styles.label}>
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className={styles.input}
-            required
-          />
-        </div>
-
         <button type="submit" className={styles.button} disabled={isLoading}>
-          {isLoading ? "Signing up..." : "Sign Up"}
+          {isLoading ? "Logging in..." : "Login"}
         </button>
 
         <div className={styles.divider}>
@@ -147,12 +102,12 @@ const Signup = () => {
           </button>
         </div>
 
-        <p className={styles.loginLink}>
-          Already have an account? <Link to="/login">Login</Link>
+        <p className={styles.signupLink}>
+          Don't have an account? <Link to="/signup">Sign up</Link>
         </p>
       </form>
     </div>
   );
 };
 
-export default Signup;
+export default Login;
