@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/Orderfoodhomepagecss/Bottomnav.module.css";
+import styles from "../../styles/Shared/BottomNav.module.css";
 
 const Bottomnav = () => {
       return (

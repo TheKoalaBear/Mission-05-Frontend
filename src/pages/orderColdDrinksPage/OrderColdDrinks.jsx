@@ -6,7 +6,7 @@ import Content from "../../components/shared/Content";
 import BottomNav from "../../components/shared/BottomNav";
 import styles from "../../styles/Orderhotdrinkscss/OrderHotDrinks.module.css";
 
-const Vegeoptions = () => {
+const Ordercolddrinks = () => {
       return (
             <div className={styles.mobileFrame}>
                   <div className={styles.container}>
@@ -20,4 +20,4 @@ const Vegeoptions = () => {
       );
 };
 
-export default Vegeoptions;
+export default Ordercolddrinks;

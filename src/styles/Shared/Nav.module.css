@@ -1,0 +1,34 @@
+.nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      width: 321px;
+      background-color: white;
+}
+
+.button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: -8px;
+      margin-right: 20px;
+}
+
+.logoContainer {
+      display: flex;
+      align-items: center;
+}
+
+.logo img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: orange;
+      margin-right: 5px;
+}
+
+.logoText {
+      font-weight: bold;
+      margin-right: 30px;
+}
