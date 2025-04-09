@@ -5,18 +5,20 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
 }
 
 .container {
       display: flex;
       flex-direction: column;
-      position: relative;
+      position: fixed;
       height: 100%;
       width: 321px;
       background: linear-gradient(to bottom, #ff6600, #ffcc00);
-      overflow-y: auto;
 }
+
+/* .container .productCard:last-child {
+      padding-bottom: 2000px;
+} */
 
 /* @media (min-width: 769px) {
       .grid {

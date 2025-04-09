@@ -13,7 +13,8 @@ const Grabfood = () => {
                         <StatusBar />
                         <Nav />
                         <Horizontalscroll />
-                        <Content />
+                        <Content category="Savoury" title="Food" />
+
                         <BottomNav />
                   </div>
             </div>

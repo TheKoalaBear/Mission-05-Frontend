@@ -1,0 +1,42 @@
+.container {
+      border-radius: 12px;
+      height: 47px;
+      width: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+}
+
+.quantityControls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+}
+
+.quantityControls button {
+      width: 50px;
+      height: 50px;
+      font-size: 44px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      outline: none;
+}
+
+.quantityDisplay {
+      font-size: 22px;
+      font-weight: bold;
+      width: 40px;
+      text-align: center;
+      color: #333;
+}

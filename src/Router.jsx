@@ -19,7 +19,7 @@ function Router() {
                         <Route path="/grabfood" element={<Grabfood />} />
                         <Route path="/vegeoptions" element={<Vegeoptions />} />
                         <Route path="/makecombo" element={<Makecombo />} />
-                        <Route path="/productpage" element={<Productpage />} />
+                        <Route path="/productpage/:productId" element={<Productpage />} />
                   </Routes>
             </BrowserRouter>
       );

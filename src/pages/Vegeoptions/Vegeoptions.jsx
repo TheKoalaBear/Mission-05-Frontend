@@ -4,7 +4,8 @@ import Nav from "../../components/shared/Nav";
 import Horizontalscroll from "../../components/shared/Horizontalscroll";
 import Content from "../../components/shared/Content";
 import BottomNav from "../../components/shared/BottomNav";
-import styles from "../../styles/Orderhotdrinkscss/OrderHotDrinks.module.css";
+// import styles from "../../styles/Orderhotdrinkscss/OrderHotDrinks.module.css";
+import styles from "../../styles/Shared/MobileFrame.module.css";
 
 const Vegeoptions = () => {
       return (
@@ -13,7 +14,8 @@ const Vegeoptions = () => {
                         <StatusBar />
                         <Nav />
                         <Horizontalscroll />
-                        <Content />
+                        <Content category="Vegetarian" title="Vegetarian Food" />
+
                         <BottomNav />
                   </div>
             </div>

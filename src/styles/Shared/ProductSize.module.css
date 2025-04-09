@@ -1,0 +1,68 @@
+.sizesSection {
+      display: flex;
+      align-items: center;
+      align-items: center;
+      gap: 60px;
+}
+
+.sizeCardContent {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+}
+
+.sizeTextGroup {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+}
+
+.sizeImage {
+      width: 40px;
+      margin-left: -16px;
+      height: auto;
+      object-fit: contain;
+}
+
+.sizeCard {
+      text-align: center;
+      width: 110px;
+      background-color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      margin-left: 14px;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border: 2px solid rgb(243, 111, 33);
+}
+
+.sizeCard:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.sizeCard span {
+      font-size: 0.9rem;
+      font-weight: 600;
+      width: 20px;
+      color: #333;
+}
+
+h5 {
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      color: #0056b3;
+      font-weight: 500;
+      margin: 8px 0;
+      margin-top: -8px;
+}
+
+h6 {
+      font-size: 1rem;
+      color: #0056b3;
+      font-weight: 500;
+}

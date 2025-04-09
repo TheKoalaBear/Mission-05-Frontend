@@ -13,7 +13,8 @@ const Orderhotdrinks = () => {
                         <StatusBar />
                         <Nav />
                         <Horizontalscroll />
-                        <Content />
+                        <Content category="Hot Drink" title="Hot Drink" />
+
                         <BottomNav />
                   </div>
             </div>

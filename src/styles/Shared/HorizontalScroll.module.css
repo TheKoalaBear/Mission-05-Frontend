@@ -2,8 +2,9 @@
       overflow-x: auto;
       white-space: nowrap;
       padding: 10px;
+      padding-bottom: 20px;
       width: 100%;
-      height: 40px;
+      height: 70px;
       background-color: white;
       user-select: none;
       -webkit-overflow-scrolling: touch;
@@ -17,11 +18,12 @@
 
 .scrollContainer {
       -ms-overflow-style: none;
-      scrollbar-width: none;
+      scrollbar-width: 321px;
 }
 
 .itemButton {
       background: none;
+      max-width: 100%;
       border: 2px solid rgb(243, 111, 33);
       border-radius: 20px;
       padding: 5px 10px;
@@ -31,7 +33,7 @@
       font-style: normal;
       font-weight: 400;
       line-height: normal;
-      letter-spacing: -0.24px;
+      letter-spacing: 0.24px;
       cursor: pointer;
       color: rgb(243, 111, 33);
 }

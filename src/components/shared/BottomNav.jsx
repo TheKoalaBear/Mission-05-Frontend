@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../../styles/Shared/BottomNav.module.css";
 
 const Bottomnav = () => {
+      console.log("Rendering BottomNav");
       return (
             <nav className={styles.navbar}>
                   <div className={styles.navItem}>
