@@ -22,9 +22,38 @@ export const authService = {
     }
   },
 
-  logout: () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+  logout: async () => {
+    try {
+      // Store onboarding state
+      const hasSeenOnboarding = localStorage.getItem("hasSeenOnboarding");
+
+      // Try to call logout endpoint if token exists
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          await api.post("/auth/logout");
+        } catch (error) {
+          console.error("Error calling logout endpoint:", error);
+          // Continue with local logout even if API call fails
+        }
+      }
+
+      // Clear all storage
+      localStorage.clear();
+
+      // Reset API authorization header
+      delete api.defaults.headers.common["Authorization"];
+
+      // Restore onboarding state
+      if (hasSeenOnboarding) {
+        localStorage.setItem("hasSeenOnboarding", hasSeenOnboarding);
+      }
+
+      return true;
+    } catch (error) {
+      console.error("Error during logout:", error);
+      return false;
+    }
   },
 
   getCurrentUser: () => {
@@ -39,14 +68,15 @@ export const authService = {
   },
 
   isAuthenticated: () => {
-    return !!localStorage.getItem("token");
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    return !!(token && user);
   },
 
   getUserDetails: async () => {
     try {
       const response = await api.get("/users/me");
       if (response.data) {
-        // Update the stored user data with fresh data from the server
         localStorage.setItem("user", JSON.stringify(response.data));
         return response.data;
       }

@@ -2,6 +2,7 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .loading-app {
@@ -9,6 +10,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .loading-app .wave-bg {
@@ -53,6 +57,7 @@
   z-index: 0;
   position: absolute;
 }
+
 .logo-container {
   margin-top: 100px;
 }
@@ -87,5 +92,60 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+  .loading-app .logo-container {
+    width: 100px;
+    height: 100px;
+    margin-top: 80px;
+  }
+
+  .loading-app .z-logo {
+    width: 70px;
+  }
+
+  .loading-app .loading-progress {
+    width: 70px;
+    height: 70px;
+  }
+
+  .loading-app .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 3px;
+  }
+}
+
+@media (max-width: 360px) {
+  .loading-app .logo-container {
+    width: 90px;
+    height: 90px;
+    margin-top: 70px;
+  }
+
+  .loading-app .z-logo {
+    width: 60px;
+  }
+
+  .loading-app .loading-progress {
+    width: 60px;
+    height: 60px;
+  }
+
+  .loading-app .loading-spinner {
+    width: 36px;
+    height: 36px;
+    border-width: 3px;
+  }
+}
+
+/* Safe area insets for modern mobile devices */
+@supports (padding: max(0px)) {
+  .app {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+      env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
 }

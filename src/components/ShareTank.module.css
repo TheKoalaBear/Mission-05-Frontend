@@ -8,6 +8,7 @@
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer and Edge */
   position: relative; /* Add position relative */
+  -webkit-overflow-scrolling: touch;
 }
 
 .container::-webkit-scrollbar {
@@ -89,6 +90,8 @@
   font-weight: 600;
   cursor: pointer;
   flex: 1;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .topUpButton {
@@ -107,6 +110,8 @@
   border: none;
   color: rgb(0, 0, 0);
   font-size: 20px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .membersSection {
@@ -131,6 +136,14 @@
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.membersList::-webkit-scrollbar {
+  display: none;
 }
 
 .memberAvatar {
@@ -138,6 +151,7 @@
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .memberAvatar img {
@@ -157,6 +171,9 @@
   justify-content: center;
   color: #666;
   cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .activityButton {
@@ -168,6 +185,8 @@
   color: #333;
   font-weight: 600;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .actionList {
@@ -315,4 +334,150 @@
 
 .logoutIcon {
   font-size: 16px;
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  .headerTitle h1 {
+    font-size: 18px;
+  }
+
+  .tankCard {
+    padding: 15px;
+  }
+
+  .progressCircle {
+    width: 160px;
+    height: 160px;
+    border-width: 12px;
+  }
+
+  .progressValue h2 {
+    font-size: 30px;
+  }
+
+  .progressValue span {
+    font-size: 20px;
+  }
+
+  .topUpButton,
+  .useButton {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .membersSection {
+    padding: 15px;
+  }
+
+  .membersSection h3 {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .memberAvatar,
+  .addMemberButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .actionItem {
+    padding: 15px;
+  }
+
+  .actionIcon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .actionText h4 {
+    font-size: 15px;
+  }
+
+  .actionText p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 12px;
+  }
+
+  .headerTitle h1 {
+    font-size: 16px;
+  }
+
+  .tankCard {
+    padding: 12px;
+  }
+
+  .progressCircle {
+    width: 140px;
+    height: 140px;
+    border-width: 10px;
+  }
+
+  .progressValue h2 {
+    font-size: 26px;
+  }
+
+  .progressValue span {
+    font-size: 18px;
+  }
+
+  .topUpButton,
+  .useButton {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .membersSection {
+    padding: 12px;
+  }
+
+  .membersSection h3 {
+    font-size: 15px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .memberAvatar,
+  .addMemberButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .actionItem {
+    padding: 12px;
+  }
+
+  .actionIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .actionText h4 {
+    font-size: 14px;
+  }
+
+  .actionText p {
+    font-size: 12px;
+  }
+}
+
+/* Safe area insets for modern mobile devices */
+@supports (padding: max(0px)) {
+  .container {
+    padding-bottom: max(100px, env(safe-area-inset-bottom));
+  }
 }

@@ -8,6 +8,7 @@
   justify-content: center;
   padding: 1rem;
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
 }
 
 .logo {
@@ -52,6 +53,8 @@
   border-radius: 8px;
   font-size: 14px;
   transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .inputGroup input:focus {
@@ -81,6 +84,8 @@
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .button:hover {
@@ -103,6 +108,8 @@
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .backButton:hover {
@@ -130,6 +137,7 @@
   color: #1a237e;
   text-decoration: none;
   font-weight: 500;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .loginLink a:hover {
@@ -210,7 +218,7 @@
   height: 20px;
 }
 
-/* Media Queries for Phone Screens */
+/* Media Queries */
 @media (max-width: 480px) {
   .container {
     padding: 0.5rem;
@@ -223,17 +231,35 @@
 
   .form {
     padding: 0.5rem;
-    gap: 0.75rem;
   }
 
-  .input {
-    padding: 0.6rem;
-    font-size: 0.9rem;
+  .form h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
   }
 
-  .button {
-    padding: 0.6rem;
-    font-size: 0.9rem;
+  .inputGroup {
+    margin-bottom: 15px;
+  }
+
+  .inputGroup label {
+    font-size: 13px;
+  }
+
+  .inputGroup input {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .button,
+  .backButton {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .error {
+    padding: 10px;
+    font-size: 13px;
   }
 
   .socialButton {
@@ -248,7 +274,6 @@
   }
 }
 
-/* Media Queries for Small Phones */
 @media (max-width: 360px) {
   .container {
     padding: 0.25rem;
@@ -261,17 +286,35 @@
 
   .form {
     padding: 0.25rem;
-    gap: 0.5rem;
   }
 
-  .input {
-    padding: 0.5rem;
-    font-size: 0.85rem;
+  .form h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
   }
 
-  .button {
-    padding: 0.5rem;
-    font-size: 0.85rem;
+  .inputGroup {
+    margin-bottom: 12px;
+  }
+
+  .inputGroup label {
+    font-size: 12px;
+  }
+
+  .inputGroup input {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .button,
+  .backButton {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .error {
+    padding: 8px;
+    font-size: 12px;
   }
 
   .socialButton {
@@ -283,6 +326,16 @@
     color: black;
     width: 16px;
     height: 16px;
+  }
+}
+
+/* Safe area insets for modern mobile devices */
+@supports (padding: max(0px)) {
+  .container {
+    padding: max(1rem, env(safe-area-inset-top))
+      max(1rem, env(safe-area-inset-right))
+      max(1rem, env(safe-area-inset-bottom))
+      max(1rem, env(safe-area-inset-left));
   }
 }
 

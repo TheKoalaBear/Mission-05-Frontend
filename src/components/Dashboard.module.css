@@ -6,6 +6,7 @@
   overflow-y: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+  -webkit-overflow-scrolling: touch;
 }
 
 .dashboard::-webkit-scrollbar {
@@ -58,6 +59,8 @@
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .viewTankBtn:hover {
@@ -80,6 +83,7 @@
   max-height: calc(100vh - 40vh); /* Adjust based on your header height */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+  -webkit-overflow-scrolling: touch;
 }
 
 .cardsGrid::-webkit-scrollbar {
@@ -97,6 +101,8 @@
   height: 140px;
   transition: transform 0.2s ease;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .card:hover {
@@ -200,4 +206,89 @@
 
 .logoutIcon {
   font-size: 16px;
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+  .header {
+    height: 25vh;
+    padding: 15px;
+  }
+
+  .greeting h1 {
+    font-size: 20px;
+  }
+
+  .sharetankInfo span {
+    font-size: 16px;
+  }
+
+  .sharetankInfo p {
+    font-size: 13px;
+  }
+
+  .viewTankBtn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .card {
+    height: 194px;
+    padding: 15px;
+  }
+
+  .cardContent {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header {
+    height: 22vh;
+    padding: 12px;
+  }
+
+  .greeting h1 {
+    font-size: 18px;
+  }
+
+  .sharetankInfo span {
+    font-size: 15px;
+  }
+
+  .sharetankInfo p {
+    font-size: 12px;
+  }
+
+  .viewTankBtn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .cardsGrid {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .card {
+    height: 110px;
+    padding: 12px;
+  }
+
+  .cardContent {
+    font-size: 13px;
+  }
+}
+
+/* Safe area insets for modern mobile devices */
+@supports (padding: max(0px)) {
+  .dashboard {
+    padding-bottom: max(100px, env(safe-area-inset-bottom));
+  }
 }

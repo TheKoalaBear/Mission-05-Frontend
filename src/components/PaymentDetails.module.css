@@ -2,6 +2,7 @@
   padding: 20px;
   background-color: white;
   min-height: 100vh;
+  -webkit-overflow-scrolling: touch;
 }
 
 .header {
@@ -17,6 +18,8 @@
   padding: 8px;
   cursor: pointer;
   color: #333;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .headerTitle {
@@ -67,7 +70,9 @@
 
 .cardNumberInput input {
   width: 100%;
-  padding-right: 80px; /* Space for card logos */
+  padding-right: 80px;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .cardTypes {
@@ -99,6 +104,8 @@ input {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   font-size: 14px;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 input::placeholder {
@@ -119,6 +126,8 @@ input::placeholder {
   font-weight: 600;
   cursor: pointer;
   font-size: 14px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .saveLaterButton {
@@ -131,4 +140,93 @@ input::placeholder {
   background: #1a237e;
   border: none;
   color: white;
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  .header {
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .headerTitle h1 {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .form {
+    gap: 15px;
+  }
+
+  .formGroup label {
+    font-size: 13px;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .saveLaterButton,
+  .saveButton {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 12px;
+  }
+
+  .header {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .headerTitle h1 {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+
+  .form {
+    gap: 12px;
+  }
+
+  .formGroup label {
+    font-size: 12px;
+  }
+
+  input {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .saveLaterButton,
+  .saveButton {
+    padding: 10px;
+    font-size: 12px;
+  }
+}
+
+/* Safe area insets for modern mobile devices */
+@supports (padding: max(0px)) {
+  .container {
+    padding: max(20px, env(safe-area-inset-top))
+      max(20px, env(safe-area-inset-right))
+      max(20px, env(safe-area-inset-bottom))
+      max(20px, env(safe-area-inset-left));
+  }
 }

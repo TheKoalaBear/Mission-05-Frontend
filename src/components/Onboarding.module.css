@@ -10,6 +10,7 @@
   box-sizing: border-box;
   position: relative;
   animation: fadeIn 0.5s ease-in-out;
+  -webkit-overflow-scrolling: touch;
 }
 
 .backButton {
@@ -23,6 +24,8 @@
   cursor: pointer;
   padding: 0.5rem;
   z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .skipButton {
@@ -36,6 +39,8 @@
   cursor: pointer;
   padding: 0.5rem;
   z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .sliderContainer {
@@ -43,6 +48,7 @@
   height: 70%;
   overflow: hidden;
   position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
 .slide {
@@ -125,6 +131,8 @@
   transition: all 0.3s ease;
   padding: 0;
   margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .dot:hover {
@@ -148,6 +156,8 @@
   cursor: pointer;
   transition: all 0.3s ease;
   width: 200px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .nextButton:hover {
@@ -197,9 +207,16 @@
   }
 }
 
+/* Media Queries */
 @media (max-width: 480px) {
   .container {
     padding: 1rem;
+  }
+
+  .backButton,
+  .skipButton {
+    top: 1rem;
+    padding: 0.4rem;
   }
 
   .illustrationContainer {
@@ -213,6 +230,7 @@
 
   .slideDescription {
     font-size: 1rem;
+    max-width: 90%;
   }
 
   .nextButton {
@@ -225,6 +243,12 @@
 @media (max-width: 360px) {
   .container {
     padding: 0.8rem;
+  }
+
+  .backButton,
+  .skipButton {
+    top: 0.8rem;
+    padding: 0.3rem;
   }
 
   .illustrationContainer {
@@ -244,5 +268,15 @@
     width: 140px;
     padding: 0.7rem 1.2rem;
     font-size: 0.9rem;
+  }
+}
+
+/* Safe area insets for modern mobile devices */
+@supports (padding: max(0px)) {
+  .container {
+    padding: max(2rem, env(safe-area-inset-top))
+      max(2rem, env(safe-area-inset-right))
+      max(2rem, env(safe-area-inset-bottom))
+      max(2rem, env(safe-area-inset-left));
   }
 }
