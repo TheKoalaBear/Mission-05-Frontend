@@ -1,6 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaCreditCard, FaQuestionCircle } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaCreditCard,
+  FaQuestionCircle,
+  FaCcVisa,
+  FaCcMastercard,
+} from "react-icons/fa";
 import styles from "./PaymentDetails.module.css";
 
 const PaymentDetails = () => {
@@ -41,8 +47,8 @@ const PaymentDetails = () => {
               maxLength="19"
             />
             <div className={styles.cardTypes}>
-              <img src="/mastercard-logo.png" alt="Mastercard" />
-              <img src="/visa-logo.png" alt="Visa" />
+              <FaCcMastercard />
+              <FaCcVisa />
             </div>
           </div>
         </div>

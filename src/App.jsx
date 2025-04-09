@@ -10,6 +10,7 @@ import Onboarding from "./components/Onboarding";
 import Dashboard from "./components/Dashboard";
 import ShareTank from "./components/ShareTank";
 import PaymentDetails from "./components/PaymentDetails";
+import HowItWorks from "./components/HowItWorks";
 import "./App.css";
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
 
           {/* QR Code Route */}
           <Route path="/qr-code" element={<Dashboard />} />
+
+          {/* How It Works Route */}
+          <Route path="/how-it-works" element={<HowItWorks />} />
         </Routes>
       </div>
     </Router>
