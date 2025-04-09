@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import productStyles from "../../styles/Shared/ProductLayout.module.css";
+import productStyles from "../../styles/Shared/ProductPage.module.css";
 
 const Cards = ({ category }) => {
       const [products, setProducts] = useState([]);
 
       useEffect(() => {
-            // Only grabbing relevant category
+            // Only grabbing category
             const fetchProducts = async () => {
                   try {
                         const response = await fetch(`/api/products?category=${category}`);

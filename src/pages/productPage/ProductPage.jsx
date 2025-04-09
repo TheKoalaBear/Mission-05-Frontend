@@ -49,16 +49,53 @@ const ProductPage = () => {
                                           <p>{product.description}</p>
                                     </div>
                               </div>
-                              <h3>Size</h3>
+                              {!(product.category === "Savoury" || product.category === "Vegetarian") && <h3>Size</h3>}
+
                               <ProductCard product={product} />
 
                               <h3>Quantity</h3>
                               <ProductQuantity />
+                              {product.milkOptions && product.milkOptions.length > 0 && (
+                                    <div>
+                                          <h3>Milk Options</h3>
+                                          <div>
+                                                {product.milkOptions.map((option, index) => (
+                                                      <button key={index}>{option}</button>
+                                                ))}
+                                          </div>
+                                    </div>
+                              )}
 
-                              {/* Have to style buttons seperately */}
+                              {product.strengthOptions && product.strengthOptions.length > 0 && (
+                                    <div>
+                                          <h3>Strength Options</h3>
+                                          <div>
+                                                {product.strengthOptions.map((option, index) => (
+                                                      <button key={index}>{option}</button>
+                                                ))}
+                                          </div>
+                                    </div>
+                              )}
+
+                              {product.flavourOptions && product.flavourOptions.length > 0 && (
+                                    <div>
+                                          <h3>Flavor Options</h3>
+                                          <div>
+                                                {product.flavourOptions.map((option, index) => (
+                                                      <button key={index}>{option}</button>
+                                                ))}
+                                          </div>
+                                    </div>
+                              )}
+
+                              {/* Had to style buttons seperately */}
                               <div className={productStyles.actionButtons}>
-                                    <button className={productStyles.cancelButton}>Cancel</button>
-                                    <button className={productStyles.addToCartButton}>Add to Cart</button>
+                                    <div className={productStyles.cancelButtonWrapper}>
+                                          <button className={productStyles.cancelButton}>Cancel</button>
+                                    </div>
+                                    <div className={productStyles.addToCartButtonWrapper}>
+                                          <button className={productStyles.addToCartButton}>Add to Cart</button>
+                                    </div>
                               </div>
                         </div>
 
