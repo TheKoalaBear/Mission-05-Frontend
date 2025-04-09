@@ -6,7 +6,10 @@ import {
 } from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import Onboarding from "./components/Onboarding";
+import Onboarding from "./components/Onboarding4";
+import Dashboard from "./components/Dashboard";
+import ShareTank from "./components/ShareTank";
+import PaymentDetails from "./components/PaymentDetails";
 import "./App.css";
 
 function App() {
@@ -20,7 +23,7 @@ function App() {
           <Route
             path="/"
             element={
-              hasSeenOnboarding ? <Login /> : <Navigate to="/onboarding" />
+              hasSeenOnboarding ? <Dashboard /> : <Navigate to="/onboarding" />
             }
           />
           <Route
@@ -36,6 +39,9 @@ function App() {
             }
           />
           <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/sharetank" element={<ShareTank />} />
+          <Route path="/payment-details" element={<PaymentDetails />} />
         </Routes>
       </div>
     </Router>

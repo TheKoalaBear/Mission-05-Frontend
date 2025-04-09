@@ -28,8 +28,8 @@ const Login = () => {
 
     try {
       const result = await authService.login(formData);
-      // Navigate to home page
-      navigate("/home");
+      // Navigate to dashboard instead of home
+      navigate("/dashboard");
     } catch (error) {
       setError(
         error.response?.data?.message || "An error occurred during login"

@@ -29,12 +29,13 @@ const Onboarding = () => {
   ];
 
   const handleNext = () => {
-    if (currentSlide < slides.length - 1) {
-      setCurrentSlide(currentSlide + 1);
-    } else {
-      // Set flag and navigate to login
+    if (currentSlide === slides.length - 1) {
+      // If on last slide, handle Get Started click
       localStorage.setItem("hasSeenOnboarding", "true");
       navigate("/login");
+    } else {
+      // Otherwise, go to next slide
+      setCurrentSlide(currentSlide + 1);
     }
   };
 

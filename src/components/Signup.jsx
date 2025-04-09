@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
-import styles from "./SignUp.module.css";
+import styles from "./Signup.module.css";
 import ZEnergyLogo from "../assets/Z_Energy_logo.png";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
   });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -22,47 +25,87 @@ const Signup = () => {
     }));
   };
 
-  const validateForm = () => {
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
-      return false;
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validatePhoneNumber = (phone) => {
+    // Basic NZ phone number validation (allows +64 or 0 prefix)
+    const re = /^(\+64|0)[2-9]\d{7,9}$/;
+    return re.test(phone.replace(/\s+/g, ""));
+  };
+
+  const handleNextStep = (e) => {
+    e.preventDefault();
+    if (step === 1) {
+      // Validate email and password
+      if (!formData.email || !formData.password) {
+        setError("Please fill in all fields");
+        return;
+      }
+      if (!validateEmail(formData.email)) {
+        setError("Please enter a valid email address");
+        return;
+      }
+      if (formData.password.length < 6) {
+        setError("Password must be at least 6 characters long");
+        return;
+      }
+      setStep(2);
+      setError("");
     }
-    if (formData.password.length < 6) {
-      setError("Password must be at least 6 characters long");
-      return false;
-    }
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setError("Please enter a valid email address");
-      return false;
-    }
-    return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
-    if (!validateForm()) {
-      return;
-    }
-
     setIsLoading(true);
 
     try {
-      console.log("Submitting registration form:", formData);
-      await authService.register({
-        email: formData.email,
-        password: formData.password,
-      });
-      console.log("Registration successful, navigating to login");
-      // If registration successful, navigate to login page
-      navigate("/login");
+      // Validate all required fields
+      if (!formData.firstName || !formData.lastName || !formData.phoneNumber) {
+        setError("Please fill in all fields");
+        setIsLoading(false);
+        return;
+      }
+
+      // Validate phone number format
+      if (!validatePhoneNumber(formData.phoneNumber)) {
+        setError("Please enter a valid NZ phone number");
+        setIsLoading(false);
+        return;
+      }
+
+      // Format phone number before sending (remove spaces)
+      const formattedData = {
+        ...formData,
+        phoneNumber: formData.phoneNumber.replace(/\s+/g, ""),
+      };
+
+      // Register user with all details
+      const result = await authService.register(formattedData);
+
+      // Store user data in localStorage
+      if (result.token) {
+        localStorage.setItem("token", result.token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            email: formData.email,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            phoneNumber: formattedData.phoneNumber,
+            ...result.user,
+          })
+        );
+      }
+
+      // Navigate to payment details page after successful registration
+      navigate("/payment-details");
     } catch (error) {
-      console.error("Registration error in component:", error);
       setError(
-        error.response?.data?.message || "An error occurred during registration"
+        error.response?.data?.message || "An error occurred during signup"
       );
     } finally {
       setIsLoading(false);
@@ -72,85 +115,110 @@ const Signup = () => {
   return (
     <div className={styles.container}>
       <img src={ZEnergyLogo} alt="Z Energy Logo" className={styles.logo} />
-      <form className={styles.form} onSubmit={handleSubmit}>
-        {error && <div className={styles.error}>{error}</div>}
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="email" className={styles.label}>
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={styles.input}
-            required
-          />
-        </div>
+      {step === 1 ? (
+        <form className={styles.form} onSubmit={handleNextStep}>
+          <h2>Create Account</h2>
+          {error && <div className={styles.error}>{error}</div>}
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="password" className={styles.label}>
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className={styles.input}
-            required
-          />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label htmlFor="confirmPassword" className={styles.label}>
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className={styles.input}
-            required
-          />
-        </div>
-
-        <button type="submit" className={styles.button} disabled={isLoading}>
-          {isLoading ? "Signing up..." : "Sign Up"}
-        </button>
-
-        <div className={styles.divider}>
-          <span>or</span>
-        </div>
-
-        <div className={styles.socialButtons}>
-          <button type="button" className={styles.socialButton}>
-            <img
-              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-              alt="Google"
-              className={styles.socialIcon}
+          <div className={styles.inputGroup}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              required
             />
-            Continue with Google
-          </button>
-          <button type="button" className={styles.socialButton}>
-            <img
-              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg"
-              alt="Facebook"
-              className={styles.socialIcon}
-            />
-            Continue with Facebook
-          </button>
-        </div>
+          </div>
 
-        <p className={styles.loginLink}>
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
-      </form>
+          <div className={styles.inputGroup}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              required
+            />
+            <small className={styles.hint}>Must be at least 6 characters</small>
+          </div>
+
+          <button type="submit" className={styles.button}>
+            Next
+          </button>
+
+          <p className={styles.loginLink}>
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </form>
+      ) : (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <h2>Personal Details</h2>
+          {error && <div className={styles.error}>{error}</div>}
+
+          <div className={styles.inputGroup}>
+            <label htmlFor="firstName">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              placeholder="Enter your first name"
+              required
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              placeholder="Enter your last name"
+              required
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label htmlFor="phoneNumber">Phone Number</label>
+            <input
+              type="tel"
+              id="phoneNumber"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              placeholder="e.g., 021 123 4567"
+              required
+            />
+            <small className={styles.hint}>Enter a valid NZ phone number</small>
+          </div>
+
+          <div className={styles.buttonGroup}>
+            <button
+              type="button"
+              className={styles.backButton}
+              onClick={() => setStep(1)}
+            >
+              Back
+            </button>
+            <button
+              type="submit"
+              className={styles.button}
+              disabled={isLoading}
+            >
+              {isLoading ? "Creating Account..." : "Create Account"}
+            </button>
+          </div>
+        </form>
+      )}
     </div>
   );
 };

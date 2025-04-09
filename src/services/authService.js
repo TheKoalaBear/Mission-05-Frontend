@@ -41,4 +41,18 @@ export const authService = {
   isAuthenticated: () => {
     return !!localStorage.getItem("token");
   },
+
+  getUserDetails: async () => {
+    try {
+      const response = await api.get("/users/me");
+      if (response.data) {
+        // Update the stored user data with fresh data from the server
+        localStorage.setItem("user", JSON.stringify(response.data));
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+      throw error;
+    }
+  },
 };
