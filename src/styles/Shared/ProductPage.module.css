@@ -5,7 +5,7 @@
       background-color: rgb(236, 236, 243);
       width: 100%;
       max-width: 321px;
-      height: 170px;
+      height: 155px;
       margin: 0 auto;
 }
 
@@ -21,8 +21,8 @@
 }
 
 .productDetails {
-      width: 110%;
-      padding-left: 20px;
+      width: 100%;
+      padding-left: 22px;
 }
 
 .productDetails h1 {
@@ -103,4 +103,92 @@ h3 {
       color: #0056b3;
       border-color: #0056b3;
       transform: scale(1.05);
+}
+
+.optionSection {
+      margin-bottom: 2rem;
+}
+
+.optionTitle {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      font-size: 18px;
+}
+
+.extraInfo {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 10px;
+      margin-left: 24px;
+}
+
+.optionGrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5px;
+      padding-left: 40px;
+}
+.optionGrid2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5px;
+      padding-left: 40px;
+}
+
+.optionItem {
+      display: flex;
+      align-items: center;
+      position: relative;
+      font-size: 14px;
+      cursor: pointer;
+}
+
+.radioInput {
+      opacity: 0;
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+}
+
+.customRadio {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgb(30, 25, 107);
+      border-radius: 50%;
+      margin-right: 8px;
+      position: relative;
+}
+
+.radioInput:checked + .customRadio::after {
+      content: "";
+      position: absolute;
+      top: 2.5px;
+      left: 2.5px;
+      width: 8px;
+      height: 8px;
+      background-color: rgb(30, 25, 107);
+      border-radius: 50%;
+}
+
+.optionText {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      font-weight: bold;
+}
+
+.extraCost {
+      font-size: 12px;
+      font-weight: 500;
+      color: #666;
+      margin-left: 6px;
+}
+.extraCost2 {
+      font-size: 12px;
+      font-weight: 500;
+      color: #666;
+      margin-left: 6px;
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import StatusBar from "../../components/shared/StatusBar";
+// import StatusBar from "../../components/shared/StatusBar";
 import Nav from "../../components/shared/Nav";
 import BottomNav from "../../components/shared/BottomNav";
 import ProductCard from "../../components/shared/ProductSize";
@@ -11,6 +11,10 @@ import productStyles from "../../styles/Shared/ProductPage.module.css";
 const ProductPage = () => {
       const { productId } = useParams();
       const [product, setProduct] = useState(null);
+
+      const [selectedMilk, setSelectedMilk] = useState("");
+      const [selectedStrength, setSelectedStrength] = useState("");
+      const [selectedFlavour, setSelectedFlavour] = useState("");
 
       useEffect(() => {
             // Fetch product data from MongoDB
@@ -35,7 +39,7 @@ const ProductPage = () => {
       return (
             <div className={styles.mobileFrame}>
                   <div className={styles.container}>
-                        <StatusBar />
+                        {/* <StatusBar /> */}
                         <Nav />
 
                         <div className={productStyles.wrapped}>
@@ -56,33 +60,86 @@ const ProductPage = () => {
                               <h3>Quantity</h3>
                               <ProductQuantity />
                               {product.milkOptions && product.milkOptions.length > 0 && (
-                                    <div>
-                                          <h3>Milk Options</h3>
-                                          <div>
+                                    <div className={productStyles.optionSection}>
+                                          <h3 className={productStyles.optionTitle}>Milk</h3>
+                                          <div className={productStyles.optionGrid}>
                                                 {product.milkOptions.map((option, index) => (
-                                                      <button key={index}>{option}</button>
+                                                      <label key={index} className={productStyles.optionItem}>
+                                                            <input
+                                                                  type="radio"
+                                                                  name="milk"
+                                                                  value={option}
+                                                                  checked={selectedMilk === option}
+                                                                  onChange={() => {
+                                                                        setSelectedMilk((prev) =>
+                                                                              prev === option ? "" : option
+                                                                        );
+                                                                  }}
+                                                                  className={productStyles.radioInput}
+                                                            />
+                                                            <span className={productStyles.customRadio}></span>
+                                                            {option}
+                                                      </label>
                                                 ))}
                                           </div>
                                     </div>
                               )}
 
                               {product.strengthOptions && product.strengthOptions.length > 0 && (
-                                    <div>
-                                          <h3>Strength Options</h3>
-                                          <div>
+                                    <div className={productStyles.optionSection}>
+                                          <h3 className={productStyles.optionTitle}>Strength</h3>
+                                          <div className={productStyles.optionGrid2}>
                                                 {product.strengthOptions.map((option, index) => (
-                                                      <button key={index}>{option}</button>
+                                                      <label key={index} className={productStyles.optionItem}>
+                                                            <input
+                                                                  type="radio"
+                                                                  name="strength"
+                                                                  value={option}
+                                                                  checked={selectedStrength === option}
+                                                                  onChange={() => setSelectedStrength(option)}
+                                                                  className={productStyles.radioInput}
+                                                            />
+                                                            <span className={productStyles.customRadio}></span>
+                                                            <span className={productStyles.optionLabel}>
+                                                                  {option}
+                                                                  {option.toLowerCase().includes("extra shot") && (
+                                                                        <span
+                                                                              className={productStyles.extraCost2}
+                                                                        ></span>
+                                                                  )}
+                                                            </span>
+                                                      </label>
                                                 ))}
+                                                <h4>+ 90 cents</h4>
                                           </div>
                                     </div>
                               )}
 
                               {product.flavourOptions && product.flavourOptions.length > 0 && (
-                                    <div>
-                                          <h3>Flavor Options</h3>
-                                          <div>
+                                    <div className={productStyles.optionSection}>
+                                          <h3 className={productStyles.optionTitle}>Flavour </h3>
+                                          <div className={productStyles.extraCost}></div>
+                                          <div className={productStyles.optionGrid2}>
                                                 {product.flavourOptions.map((option, index) => (
-                                                      <button key={index}>{option}</button>
+                                                      <label key={index} className={productStyles.optionItem}>
+                                                            <input
+                                                                  type="radio"
+                                                                  name="flavour"
+                                                                  value={option}
+                                                                  checked={selectedFlavour === option}
+                                                                  onChange={() => setSelectedFlavour(option)}
+                                                                  className={productStyles.radioInput}
+                                                            />
+
+                                                            <span className={productStyles.customRadio}></span>
+                                                            <span className={productStyles.optionLabel}>
+                                                                  {option}
+                                                                  <span className={productStyles.extraCost}>
+                                                                        {" "}
+                                                                        + $1.00
+                                                                  </span>
+                                                            </span>
+                                                      </label>
                                                 ))}
                                           </div>
                                     </div>

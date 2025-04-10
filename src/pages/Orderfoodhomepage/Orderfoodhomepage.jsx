@@ -1,5 +1,5 @@
 import React from "react";
-import StatusBar from "../../components/shared/StatusBar";
+// import StatusBar from "../../components/shared/StatusBar";
 import Hero from "../../components/orderFoodHomePage/Hero";
 import Content from "../../components/orderFoodHomePage/Content";
 import BottomNav from "../../components/shared/BottomNav";
@@ -9,7 +9,7 @@ const Orderfoodhomepage = () => {
       return (
             <div className={styles.mobileFrame}>
                   <div className={styles.container}>
-                        <StatusBar />
+                        {/* <StatusBar /> */}
                         <Hero />
                         <Content />
                         <BottomNav />
