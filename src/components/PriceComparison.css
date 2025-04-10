@@ -484,3 +484,45 @@
     padding: 10px;
   }
 }
+
+/* Test Payment Flow Button */
+.test-payment-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.test-payment-button {
+  background: linear-gradient(to right, rgba(49, 41, 171, 0.78), #1e196b);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Price Comparison header styles */
+.price-comparison-header {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.home-icon {
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.price-comparison-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #f79a1f;
+  margin: 0;
+  letter-spacing: -0.02em;
+  font-family: "Roboto", sans-serif;
+}

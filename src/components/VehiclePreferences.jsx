@@ -4,7 +4,13 @@ import { FaCarSide, FaBell } from "react-icons/fa";
 import creditCardIcon from "../assets/images/creditcard.svg";
 import zLogo from "../assets/images/z.png";
 
-const VehiclePreferences = ({ onBackClick, onSave, existingVehicle, isEditing = false }) => {
+const VehiclePreferences = ({
+  onBackClick,
+  onSave,
+  existingVehicle,
+  isEditing = false,
+  onAddPayment,
+}) => {
   const [plateNumber, setPlateNumber] = useState("");
   const [selectedFuelTypes, setSelectedFuelTypes] = useState([]);
   const [confirmOnArrival, setConfirmOnArrival] = useState(false);
@@ -224,7 +230,9 @@ const VehiclePreferences = ({ onBackClick, onSave, existingVehicle, isEditing = 
                 <div className="form-hint">Please select your payment type</div>
               </div>
             </div>
-            <button className="add-payment-button">+ Add</button>
+            <button className="add-payment-button" onClick={onAddPayment}>
+              + Add
+            </button>
           </div>
 
           {/* Saved for future backend integration

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./PriceComparison.css";
 import zLogo from "../assets/images/z-logo.png";
 import zFuelLogo from "../assets/images/z.png";
+import { FaHome } from "react-icons/fa";
 
 const PriceComparison = ({ onNavigateToPayByPlate }) => {
   const [currentTime, setCurrentTime] = useState(getCurrentTime());
@@ -288,20 +289,12 @@ const PriceComparison = ({ onNavigateToPayByPlate }) => {
         </div>
       </div>
 
-      {/* Header */}
-      <div className="header">
+      {/* Header with Title */}
+      <div className="price-comparison-header">
         <div className="home-icon" onClick={handleHomeClick}>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z" fill="#1E196B" />
-          </svg>
+          <FaHome color="#1E196B" size={24} />
         </div>
-        <h1 className="title">Price Comparison</h1>
+        <h1 className="price-comparison-title">Price Comparison</h1>
       </div>
 
       {/* Address Input Fields */}

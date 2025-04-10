@@ -10,4 +10,21 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   min-height: 932px;
   position: relative;
+  text-align: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Mobile container style for payment flows */
+.payment-loading-container,
+.payment-form-container,
+.payment-success-container {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 auto !important;
+  overflow-y: auto !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  max-width: 430px !important;
 }

@@ -1,0 +1,127 @@
+/* PaymentLoading component styles */
+.payment-loading-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Status Bar */
+.status-bar-container {
+  padding: 6px 16px;
+  background-color: white;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.status-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time {
+  font-size: 17px;
+  font-weight: 600;
+  color: black;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 0;
+  margin-bottom: 24px;
+  box-shadow: 0px 1px 3.9px 0px rgba(243, 111, 33, 0.1);
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.icon-container {
+  margin-right: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.credit-card-icon {
+  width: 20px;
+  height: 14px;
+  display: block;
+  stroke: #1e196b;
+}
+
+.title {
+  color: #1e196b;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Loading Content */
+.loading-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.loading-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+  letter-spacing: -0.02em;
+}
+
+.loading-subtext {
+  font-size: 12px;
+  font-weight: 400;
+  color: #ababab;
+  letter-spacing: -0.02em;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+  .header {
+    padding: 20px 0;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .credit-card-icon {
+    width: 24px;
+    height: 18px;
+  }
+
+  .loading-content {
+    padding: 60px 0;
+  }
+}
