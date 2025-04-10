@@ -1,11 +1,19 @@
 import creditCardIcon from "../assets/images/creditcard.svg";
 import carIllustration from "../assets/images/car-illustration.svg";
+import zLogo from "../assets/images/z.png";
 import "./PayByPlate.css";
 
-const PayByPlate = () => {
+const PayByPlate = ({ onAddVehicle, onEditVehicle, vehicleData }) => {
   const handleAddVehicle = () => {
-    // Implementation for adding a vehicle would go here
-    console.log("Add vehicle clicked");
+    if (onAddVehicle) {
+      onAddVehicle();
+    }
+  };
+
+  const handleEditVehicle = () => {
+    if (onEditVehicle) {
+      onEditVehicle();
+    }
   };
 
   const handleBackButton = () => {
@@ -154,22 +162,73 @@ const PayByPlate = () => {
           </div>
         </div>
 
-        {/* No Vehicles Message */}
-        <div className="no-vehicles-container">
-          <p className="no-vehicles-text">You don't have any registered vehicles</p>
-        </div>
+        {/* Vehicle information or no vehicles message */}
+        {vehicleData ? (
+          <div className="vehicle-info-container">
+            <div className="vehicle-card">
+              <div className="vehicle-details">
+                <div className="plate-number">{vehicleData.plateNumber}</div>
+                <div className="fuel-types">
+                  {Array.isArray(vehicleData.fuelType) ? (
+                    vehicleData.fuelType.map((type, index) => {
+                      // Format the display text based on the fuel type
+                      let displayText = type;
+                      if (type === "Z91") displayText = "Z 91";
+                      if (type === "ZX95") displayText = "Z X95";
+                      if (type === "ZD") displayText = "Z D";
 
-        {/* Add Vehicle Button - placed immediately after the no vehicles message */}
-        <div className="add-vehicle-button-container">
-          <button
-            onClick={handleAddVehicle}
-            className="add-vehicle-button"
-            aria-label="Add vehicle"
-            tabIndex="0"
-          >
-            +Add vehicle
-          </button>
-        </div>
+                      return (
+                        <span key={index} className={`fuel-badge ${type.toLowerCase()}`}>
+                          <img src={zLogo} alt="Z" className="badge-z-logo" />
+                          {displayText.replace("Z ", "")}
+                        </span>
+                      );
+                    })
+                  ) : (
+                    <span className={`fuel-badge ${vehicleData.fuelType?.toLowerCase()}`}>
+                      <img src={zLogo} alt="Z" className="badge-z-logo" />
+                      {vehicleData.fuelType === "Z91"
+                        ? "91"
+                        : vehicleData.fuelType === "ZX95"
+                        ? "X95"
+                        : vehicleData.fuelType === "ZD"
+                        ? "D"
+                        : vehicleData.fuelType?.replace("Z ", "")}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="vehicle-settings">
+                <button
+                  className="edit-vehicle-button"
+                  onClick={handleEditVehicle}
+                  aria-label="Edit vehicle"
+                  tabIndex="0"
+                >
+                  Edit
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="no-vehicles-container">
+              <p className="no-vehicles-text">You don't have any registered vehicles</p>
+            </div>
+
+            {/* Add Vehicle Button - placed immediately after the no vehicles message */}
+            <div className="add-vehicle-button-container">
+              <button
+                onClick={handleAddVehicle}
+                className="add-vehicle-button"
+                aria-label="Add vehicle"
+                tabIndex="0"
+              >
+                +Add vehicle
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
