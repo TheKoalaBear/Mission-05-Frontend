@@ -71,6 +71,64 @@
   color: #ff9f00;
 }
 
+/* Search Container */
+.search-container {
+  padding: 16px 16px 0;
+}
+
+.search-input-field {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: white;
+  outline: none;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-input:focus {
+  border-color: #1e196b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.clear-search-button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #757575;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.clear-search-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.search-status {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #757575;
+  padding-left: 4px;
+}
+
 /* Address Input Fields */
 .address-inputs {
   padding: 16px;
@@ -103,13 +161,66 @@
   border-color: #1e196b;
 }
 
-/* Station Cards */
+/* Comparison Section Headers */
+.comparison-headers {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.comparison-header {
+  flex: 1;
+  max-width: calc(50% - 8px);
+}
+
+.comparison-header h3 {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  padding: 8px 0;
+  border-bottom: 2px solid #ff9f00;
+}
+
+/* Station Groups */
+.station-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.from-stations,
+.to-stations {
+  margin-bottom: 24px;
+}
+
+/* Side-by-side comparison mode */
+.comparison-view .from-stations,
+.comparison-view .to-stations {
+  flex: 1;
+  min-width: calc(50% - 8px);
+  max-width: calc(50% - 8px);
+}
+
+/* Default for single search (full width) */
+.station-group:not(.from-stations):not(.to-stations) .station-card,
+.station-cards:not(.comparison-view) .station-card {
+  width: calc(50% - 8px);
+}
+
+/* Station Cards Container with side-by-side comparison */
 .station-cards {
   padding: 0 16px 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   justify-content: space-between;
+}
+
+/* For comparison view */
+.station-cards.comparison-view {
+  flex-direction: row;
 }
 
 .station-card {
@@ -123,6 +234,11 @@
   width: calc(50% - 8px);
   min-height: 280px;
   padding-bottom: 20px;
+}
+
+/* Make cards in comparison view take full width of their container */
+.comparison-view .station-group .station-card {
+  width: 100%;
 }
 
 .station-logo-container {
@@ -233,12 +349,138 @@
 
 /* Media Queries */
 @media (max-width: 400px) {
-  .station-card {
-    width: 100%;
-    min-height: 240px;
+  .fuel-type-selector {
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .address-inputs {
+  .fuel-selector-item {
+    padding: 10px;
+  }
+
+  .comparison-headers {
     flex-direction: column;
+    gap: 16px;
+  }
+
+  .comparison-view .from-stations,
+  .comparison-view .to-stations {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .comparison-header {
+    max-width: 100%;
+  }
+
+  .station-card {
+    width: 100%;
+  }
+}
+
+/* Loading and Error States */
+.loading-indicator,
+.error-message {
+  text-align: center;
+  padding: 20px;
+  margin: 10px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.loading-indicator {
+  background-color: #e8f4ff;
+  color: #1e196b;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  border-left: 4px solid #ef5350;
+}
+
+/* No Stations Message */
+.no-stations-message {
+  width: 100%;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #666;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Fuel Type Selector */
+.fuel-type-selector {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px 16px;
+  gap: 8px;
+}
+
+.fuel-selector-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 4px;
+  background-color: #f0f0f0;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  white-space: nowrap;
+  min-width: 105px;
+  max-width: 150px;
+}
+
+.fuel-selector-item:hover {
+  background-color: #e0e0e0;
+}
+
+.fuel-selector-item.active {
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.fuel-selector-item span {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fuel-selector-item.active span {
+  color: white;
+}
+
+.fuel-selector-item .fuel-badge-icon {
+  width: 18px;
+  height: 18px;
+  background-color: #ddd;
+  border-radius: 50%;
+  padding: 2px;
+  box-sizing: content-box;
+}
+
+.fuel-selector-item.active .fuel-badge-icon {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Make responsive for smaller screens */
+@media (max-width: 400px) {
+  .fuel-type-selector {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .fuel-selector-item {
+    padding: 10px;
   }
 }

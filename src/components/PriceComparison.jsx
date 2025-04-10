@@ -7,51 +7,155 @@ const PriceComparison = ({ onNavigateToPayByPlate }) => {
   const [currentTime, setCurrentTime] = useState(getCurrentTime());
   const [fromAddress, setFromAddress] = useState("");
   const [toAddress, setToAddress] = useState("");
+  const [backendStations, setBackendStations] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [selectedFuelType, setSelectedFuelType] = useState("91"); // Default to 91
+  const [fromStations, setFromStations] = useState([]);
+  const [toStations, setToStations] = useState([]);
 
-  // Sample station data that matches the images with all three fuel types
-  const stations = [
-    {
-      id: 1,
-      name: "Z Kingsway Station",
-      address: "26 Clevedon Road, Papakura",
-      price: 297.9,
-      fuelType: "91",
-    },
-    {
-      id: 2,
-      name: "Z Papakura Station",
-      address: "254 Great South Road, Takanini",
-      price: 264.9,
-      fuelType: "91",
-    },
-    {
-      id: 3,
-      name: "Z Kingsway Station",
-      address: "26 Clevedon Road, Papakura",
-      price: 316.9,
-      fuelType: "X95",
-    },
-    {
-      id: 4,
-      name: "Z Papakura Station",
-      address: "254 Great South Road, Takanini",
-      price: 282.9,
-      fuelType: "X95",
-    },
-    {
-      id: 5,
-      name: "Z Kingsway Station",
-      address: "26 Clevedon Road, Papakura",
-      price: 231.9,
-      fuelType: "D",
-    },
-    {
-      id: 6,
-      name: "Z Papakura Station",
-      address: "254 Great South Road, Takanini",
-      price: 196.9,
-      fuelType: "D",
-    },
+  // Fetch backend station data on component mount
+  useEffect(() => {
+    fetchAllStations();
+  }, []);
+
+  // Fetch all stations
+  const fetchAllStations = async () => {
+    setLoading(true);
+    try {
+      // Fetch the stations from the backend
+      const response = await fetch("http://localhost:5000/api/stations");
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setBackendStations(data);
+    } catch (err) {
+      console.error("Error fetching station data:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Search stations based on the 'from' address
+  const searchFromStations = async (query) => {
+    if (!query.trim()) {
+      setFromStations([]);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/stations/search?query=${encodeURIComponent(query)}`
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setFromStations(data);
+    } catch (err) {
+      console.error("Error searching station data:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Search stations based on the 'to' address
+  const searchToStations = async (query) => {
+    if (!query.trim()) {
+      setToStations([]);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/stations/search?query=${encodeURIComponent(query)}`
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setToStations(data);
+    } catch (err) {
+      console.error("Error searching station data:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle from address input change with debounce
+  const handleFromAddressChange = (e) => {
+    const value = e.target.value;
+    setFromAddress(value);
+
+    // Debounce the search to avoid excessive API calls
+    const timeoutId = setTimeout(() => {
+      searchFromStations(value);
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  };
+
+  // Handle to address input change with debounce
+  const handleToAddressChange = (e) => {
+    const value = e.target.value;
+    setToAddress(value);
+
+    // Debounce the search to avoid excessive API calls
+    const timeoutId = setTimeout(() => {
+      searchToStations(value);
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  };
+
+  // Group stations by fuel type - handles both all stations and search results
+  const getStationsByFuelType = (fuelType, stationSet) => {
+    const stationCards = [];
+    const stationsToProcess = stationSet || backendStations;
+
+    stationsToProcess.forEach((station) => {
+      let price;
+
+      // Get the price based on fuel type
+      if (fuelType === "91" && station.prices && station.prices.regular) {
+        price = station.prices.regular.toFixed(1);
+      } else if (fuelType === "X95" && station.prices && station.prices.premium) {
+        price = station.prices.premium.toFixed(1);
+      } else if (fuelType === "D" && station.prices && station.prices.diesel) {
+        price = station.prices.diesel.toFixed(1);
+      } else {
+        return; // Skip if price not available for this fuel type
+      }
+
+      stationCards.push({
+        id: `${station._id}-${fuelType}`,
+        name: station.name,
+        address: station.address,
+        price: price,
+        fuelType: fuelType,
+      });
+    });
+
+    // Sort stations by price (lowest first)
+    return stationCards.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+  };
+
+  const fuelTypesInfo = [
+    { id: "91", label: "Regular 91", color: "#00ac46" },
+    { id: "X95", label: "Premium 95", color: "#E53935" },
+    { id: "D", label: "Diesel", color: "#EF6C00" },
   ];
 
   useEffect(() => {
@@ -90,32 +194,18 @@ const PriceComparison = ({ onNavigateToPayByPlate }) => {
     return address;
   };
 
-  // Function to get the color for fuel type badges
-  const getFuelBadgeColor = (fuelType) => {
-    switch (fuelType) {
-      case "91":
-        return "#00ac46"; // Green
-      case "X95":
-        return "#E53935"; // Red
-      case "D":
-        return "#EF6C00"; // Orange
-      default:
-        return "#00ac46";
-    }
-  };
+  // Get stations for the currently selected fuel type
+  const fromStationsToDisplay = fromAddress
+    ? getStationsByFuelType(selectedFuelType, fromStations)
+    : [];
+  const toStationsToDisplay = toAddress ? getStationsByFuelType(selectedFuelType, toStations) : [];
+  const allStationsToDisplay =
+    !fromAddress && !toAddress ? getStationsByFuelType(selectedFuelType) : [];
 
-  // Function to get the price tag color
-  const getPriceTagColor = (fuelType) => {
-    switch (fuelType) {
-      case "91":
-        return "#00ac46"; // Green
-      case "X95":
-        return "#E53935"; // Red
-      case "D":
-        return "#EF6C00"; // Orange
-      default:
-        return "#00ac46";
-    }
+  // Function to get the color based on fuel type
+  const getFuelColor = (fuelType) => {
+    const fuelInfo = fuelTypesInfo.find((f) => f.id === fuelType);
+    return fuelInfo ? fuelInfo.color : "#00ac46";
   };
 
   return (
@@ -219,61 +309,306 @@ const PriceComparison = ({ onNavigateToPayByPlate }) => {
         <div className="address-input-field">
           <input
             type="text"
-            placeholder="Enter Address"
+            placeholder="Search by address or name"
             value={fromAddress}
-            onChange={(e) => setFromAddress(e.target.value)}
+            onChange={handleFromAddressChange}
           />
+          {fromAddress && fromStations.length > 0 && (
+            <div className="search-status">Found {fromStations.length} stations</div>
+          )}
         </div>
         <div className="address-input-field">
           <input
             type="text"
-            placeholder="Enter Address"
+            placeholder="Search by address or name"
             value={toAddress}
-            onChange={(e) => setToAddress(e.target.value)}
+            onChange={handleToAddressChange}
           />
+          {toAddress && toStations.length > 0 && (
+            <div className="search-status">Found {toStations.length} stations</div>
+          )}
         </div>
       </div>
 
-      {/* Station Cards Container */}
-      <div className="station-cards">
-        {stations.map((station) => (
-          <div key={station.id} className="station-card">
-            <div className="station-logo-container">
-              <div className="station-logo">
-                <img src={zLogo} alt="Z Energy Logo" className="z-logo-img" />
-              </div>
-              <div className="station-info">
-                <h3 className="station-name">{station.name}</h3>
-                <p className="station-address">{formatAddress(station.address)}</p>
-              </div>
-            </div>
-
-            <div className="price-container">
-              <div
-                className="price-tag"
-                style={{ backgroundColor: getPriceTagColor(station.fuelType) }}
-              >
-                ${station.price} per liter
-              </div>
-            </div>
-
-            <div className="fuel-type-container">
-              <div
-                className="fuel-badge"
-                style={{ backgroundColor: getFuelBadgeColor(station.fuelType) }}
-              >
-                <img src={zFuelLogo} alt="Z" className="fuel-badge-icon" />
-                <span>{station.fuelType}</span>
-              </div>
-            </div>
-
-            <div className="button-container">
-              <button className="top-up-button" onClick={() => handleTopUp(station.id)}>
-                Top up
-              </button>
-            </div>
+      {/* Fuel Type Selector */}
+      <div className="fuel-type-selector">
+        {fuelTypesInfo.map((fuelType) => (
+          <div
+            key={fuelType.id}
+            className={`fuel-selector-item ${selectedFuelType === fuelType.id ? "active" : ""}`}
+            style={selectedFuelType === fuelType.id ? { backgroundColor: fuelType.color } : {}}
+            onClick={() => setSelectedFuelType(fuelType.id)}
+          >
+            <img src={zFuelLogo} alt="Z" className="fuel-badge-icon" />
+            <span>{fuelType.label}</span>
           </div>
         ))}
+      </div>
+
+      {/* Loading state */}
+      {loading && <div className="loading-indicator">Loading station data...</div>}
+
+      {/* Error state */}
+      {error && <div className="error-message">Error: {error}</div>}
+
+      {/* Section Headers for Search Results */}
+      {(fromAddress || toAddress) && (
+        <div className="comparison-headers">
+          {fromAddress && (
+            <div className="comparison-header">
+              <h3>Stations near "{fromAddress}"</h3>
+            </div>
+          )}
+          {toAddress && (
+            <div className="comparison-header">
+              <h3>Stations near "{toAddress}"</h3>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Station Cards Container */}
+      <div className={`station-cards ${fromAddress && toAddress ? "comparison-view" : ""}`}>
+        {/* Comparison View - Both From and To */}
+        {fromAddress && toAddress && (
+          <>
+            {/* From Stations */}
+            {fromStationsToDisplay.length > 0 ? (
+              <div className="station-group from-stations">
+                {fromStationsToDisplay.map((station) => (
+                  <div key={station.id} className="station-card">
+                    <div className="station-logo-container">
+                      <div className="station-logo">
+                        <img src={zLogo} alt="Z Energy Logo" className="z-logo-img" />
+                      </div>
+                      <div className="station-info">
+                        <h3 className="station-name">{station.name}</h3>
+                        <p className="station-address">{formatAddress(station.address)}</p>
+                      </div>
+                    </div>
+
+                    <div className="price-container">
+                      <div
+                        className="price-tag"
+                        style={{ backgroundColor: getFuelColor(selectedFuelType) }}
+                      >
+                        ${station.price} per liter
+                      </div>
+                    </div>
+
+                    <div className="fuel-type-container">
+                      <div
+                        className="fuel-badge"
+                        style={{ backgroundColor: getFuelColor(selectedFuelType) }}
+                      >
+                        <img src={zFuelLogo} alt="Z" className="fuel-badge-icon" />
+                        <span>{selectedFuelType}</span>
+                      </div>
+                    </div>
+
+                    <div className="button-container">
+                      <button className="top-up-button" onClick={() => handleTopUp(station.id)}>
+                        Top up
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="station-group from-stations">
+                <div className="no-stations-message">No stations found for "{fromAddress}"</div>
+              </div>
+            )}
+
+            {/* To Stations */}
+            {toStationsToDisplay.length > 0 ? (
+              <div className="station-group to-stations">
+                {toStationsToDisplay.map((station) => (
+                  <div key={station.id} className="station-card">
+                    <div className="station-logo-container">
+                      <div className="station-logo">
+                        <img src={zLogo} alt="Z Energy Logo" className="z-logo-img" />
+                      </div>
+                      <div className="station-info">
+                        <h3 className="station-name">{station.name}</h3>
+                        <p className="station-address">{formatAddress(station.address)}</p>
+                      </div>
+                    </div>
+
+                    <div className="price-container">
+                      <div
+                        className="price-tag"
+                        style={{ backgroundColor: getFuelColor(selectedFuelType) }}
+                      >
+                        ${station.price} per liter
+                      </div>
+                    </div>
+
+                    <div className="fuel-type-container">
+                      <div
+                        className="fuel-badge"
+                        style={{ backgroundColor: getFuelColor(selectedFuelType) }}
+                      >
+                        <img src={zFuelLogo} alt="Z" className="fuel-badge-icon" />
+                        <span>{selectedFuelType}</span>
+                      </div>
+                    </div>
+
+                    <div className="button-container">
+                      <button className="top-up-button" onClick={() => handleTopUp(station.id)}>
+                        Top up
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="station-group to-stations">
+                <div className="no-stations-message">No stations found for "{toAddress}"</div>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* Single From Search View */}
+        {fromAddress && !toAddress && fromStationsToDisplay.length > 0 && (
+          <div className="station-group from-stations">
+            {fromStationsToDisplay.map((station) => (
+              <div key={station.id} className="station-card">
+                <div className="station-logo-container">
+                  <div className="station-logo">
+                    <img src={zLogo} alt="Z Energy Logo" className="z-logo-img" />
+                  </div>
+                  <div className="station-info">
+                    <h3 className="station-name">{station.name}</h3>
+                    <p className="station-address">{formatAddress(station.address)}</p>
+                  </div>
+                </div>
+
+                <div className="price-container">
+                  <div
+                    className="price-tag"
+                    style={{ backgroundColor: getFuelColor(selectedFuelType) }}
+                  >
+                    ${station.price} per liter
+                  </div>
+                </div>
+
+                <div className="fuel-type-container">
+                  <div
+                    className="fuel-badge"
+                    style={{ backgroundColor: getFuelColor(selectedFuelType) }}
+                  >
+                    <img src={zFuelLogo} alt="Z" className="fuel-badge-icon" />
+                    <span>{selectedFuelType}</span>
+                  </div>
+                </div>
+
+                <div className="button-container">
+                  <button className="top-up-button" onClick={() => handleTopUp(station.id)}>
+                    Top up
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Single To Search View */}
+        {!fromAddress && toAddress && toStationsToDisplay.length > 0 && (
+          <div className="station-group to-stations">
+            {toStationsToDisplay.map((station) => (
+              <div key={station.id} className="station-card">
+                <div className="station-logo-container">
+                  <div className="station-logo">
+                    <img src={zLogo} alt="Z Energy Logo" className="z-logo-img" />
+                  </div>
+                  <div className="station-info">
+                    <h3 className="station-name">{station.name}</h3>
+                    <p className="station-address">{formatAddress(station.address)}</p>
+                  </div>
+                </div>
+
+                <div className="price-container">
+                  <div
+                    className="price-tag"
+                    style={{ backgroundColor: getFuelColor(selectedFuelType) }}
+                  >
+                    ${station.price} per liter
+                  </div>
+                </div>
+
+                <div className="fuel-type-container">
+                  <div
+                    className="fuel-badge"
+                    style={{ backgroundColor: getFuelColor(selectedFuelType) }}
+                  >
+                    <img src={zFuelLogo} alt="Z" className="fuel-badge-icon" />
+                    <span>{selectedFuelType}</span>
+                  </div>
+                </div>
+
+                <div className="button-container">
+                  <button className="top-up-button" onClick={() => handleTopUp(station.id)}>
+                    Top up
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* All Stations (when no search) */}
+        {!fromAddress &&
+          !toAddress &&
+          allStationsToDisplay.length > 0 &&
+          allStationsToDisplay.map((station) => (
+            <div key={station.id} className="station-card">
+              <div className="station-logo-container">
+                <div className="station-logo">
+                  <img src={zLogo} alt="Z Energy Logo" className="z-logo-img" />
+                </div>
+                <div className="station-info">
+                  <h3 className="station-name">{station.name}</h3>
+                  <p className="station-address">{formatAddress(station.address)}</p>
+                </div>
+              </div>
+
+              <div className="price-container">
+                <div
+                  className="price-tag"
+                  style={{ backgroundColor: getFuelColor(selectedFuelType) }}
+                >
+                  ${station.price} per liter
+                </div>
+              </div>
+
+              <div className="fuel-type-container">
+                <div
+                  className="fuel-badge"
+                  style={{ backgroundColor: getFuelColor(selectedFuelType) }}
+                >
+                  <img src={zFuelLogo} alt="Z" className="fuel-badge-icon" />
+                  <span>{selectedFuelType}</span>
+                </div>
+              </div>
+
+              <div className="button-container">
+                <button className="top-up-button" onClick={() => handleTopUp(station.id)}>
+                  Top up
+                </button>
+              </div>
+            </div>
+          ))}
+
+        {/* No Stations Message */}
+        {(!fromAddress && !toAddress && allStationsToDisplay.length === 0) ||
+        (fromAddress && !toAddress && fromStationsToDisplay.length === 0) ||
+        (!fromAddress && toAddress && toStationsToDisplay.length === 0) ? (
+          <div className="no-stations-message">
+            {loading ? "Loading stations..." : `No stations found with ${selectedFuelType} fuel`}
+          </div>
+        ) : null}
       </div>
     </div>
   );
