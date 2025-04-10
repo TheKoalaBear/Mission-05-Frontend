@@ -1,10 +1,10 @@
 import "./App.css";
-import Onboarding from "./components/Onboarding";
+import PayByPlate from "./components/PayByPlate";
 
 function App() {
   return (
     <div className="app">
-      <Onboarding />
+      <PayByPlate />
     </div>
   );
 }

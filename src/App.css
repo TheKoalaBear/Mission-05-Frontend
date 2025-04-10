@@ -1,0 +1,13 @@
+/* App styles */
+
+/* App-specific styles */
+.app {
+  width: 100%;
+  height: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-height: 932px;
+  position: relative;
+}
