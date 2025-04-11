@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./pages/ProductSelection/CartContext";
 import Onboarding from "./components/Onboarding";
-import Orderhotdrinks from "./pages/orderHotDrinksPage/OrderHotDrinks";
-import Ordercolddrinks from "./pages/orderColdDrinksPage/OrderColdDrinks";
-import Grabfood from "./pages/grabFoodPage/GrabFood";
-import Vegeoptions from "./pages/vegeOptions/VegeOptions";
-import Makecombo from "./pages/makeComboPage/MakeCombo";
-import Productpage from "./pages/productPage/ProductPage";
-import OrderFoodHomepage from "./pages/orderFoodHomePage/OrderFoodHomePage";
+import Orderhotdrinks from "./pages/ProductSelection/OrderHotDrinks";
+import Ordercolddrinks from "./pages/ProductSelection/OrderColdDrinks";
+import Grabfood from "./pages/ProductSelection/GrabFood";
+import Vegeoptions from "./pages/ProductSelection/VegeOptions";
+import Makecombo from "./pages/ProductSelection/MakeCombo";
+import Productpage from "./pages/ProductSelection/ProductPage";
+import OrderFoodHomepage from "./pages/ProductSelection/OrderFoodHomePage";
 
 function Router() {
       return (

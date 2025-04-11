@@ -5,8 +5,8 @@ import Nav from "../../components/shared/Nav";
 import BottomNav from "../../components/shared/BottomNav";
 import ProductCard from "../../components/shared/ProductSize";
 import ProductQuantity from "../../components/shared/ProductQuantity";
-import { useCart } from "../ProductSelection/CartContext";
-import useProductOptions from "../ProductSelection/UseProductOptions";
+import { useCart } from "./CartContext";
+import useProductOptions from "./UseProductOptions";
 
 // Styles
 import styles from "../../styles/Shared/ProductMobileFrame.module.css";
