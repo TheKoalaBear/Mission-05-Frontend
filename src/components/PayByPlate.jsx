@@ -1,6 +1,7 @@
 import creditCardIcon from "../assets/images/creditcard.svg";
 import carIllustration from "../assets/images/car-illustration.svg";
 import zLogo from "../assets/images/z.png";
+import { IoMdArrowBack } from "react-icons/io";
 import "./PayByPlate.css";
 
 const PayByPlate = ({
@@ -127,28 +128,12 @@ const PayByPlate = ({
               aria-label="Go back"
               tabIndex="0"
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15 6L9 12L15 18"
-                  stroke="#1E196B"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <IoMdArrowBack size={24} color="#1E196B" />
             </button>
-            <div className="title-section">
-              <div className="icon-container">
-                <img src={creditCardIcon} alt="Credit Card" className="credit-card-icon" />
-              </div>
-              <span className="title">Pay by plate</span>
+            <div className="icon-container">
+              <img src={creditCardIcon} alt="Credit Card" className="credit-card-icon" />
             </div>
+            <span className="title">Pay by plate</span>
           </div>
         </div>
 

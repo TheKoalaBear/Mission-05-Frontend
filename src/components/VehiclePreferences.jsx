@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./VehiclePreferences.css";
 import { FaCarSide, FaBell } from "react-icons/fa";
+import { IoMdArrowBack } from "react-icons/io";
 import creditCardIcon from "../assets/images/creditcard.svg";
 import zLogo from "../assets/images/z.png";
 
@@ -144,28 +145,12 @@ const VehiclePreferences = ({
         <div className="header">
           <div className="header-left">
             <button className="back-button" onClick={onBackClick} aria-label="Go back" tabIndex="0">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15 6L9 12L15 18"
-                  stroke="#1E196B"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <IoMdArrowBack size={24} color="#1E196B" />
             </button>
-            <div className="title-section">
-              <div className="icon-container">
-                <FaCarSide className="car-icon" />
-              </div>
-              <span className="title">{isEditing ? "Edit vehicle" : "Vehicle preferences"}</span>
+            <div className="icon-container">
+              <FaCarSide className="car-icon" />
             </div>
+            <span className="title">{isEditing ? "Edit vehicle" : "Vehicle preferences"}</span>
           </div>
         </div>
 
