@@ -15,13 +15,15 @@ import {
 import styles from "./ShareTank.module.css";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
+import { tankService } from "../services/tankService";
 import BottomNav from "./BottomNav";
 
 const ShareTank = () => {
   const navigate = useNavigate();
-  const [showMoreMenu, setShowMoreMenu] = React.useState(false);
   const [user, setUser] = useState(null);
-  const [fuelPercentage, setFuelPercentage] = useState(30);
+  const [balance, setBalance] = useState(0);
+  const [isLoadingBalance, setIsLoadingBalance] = useState(true);
+  const [fuelPercentage, setFuelPercentage] = useState(0);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,9 +33,55 @@ const ShareTank = () => {
     fetchUser();
   }, []);
 
-  const handleLogout = () => {
-    authService.logout();
-    navigate("/login");
+  useEffect(() => {
+    const fetchBalance = async () => {
+      if (!user?.id) {
+        console.error("Cannot fetch balance without user ID");
+        setIsLoadingBalance(false);
+        return;
+      }
+
+      setIsLoadingBalance(true);
+      try {
+        const tankData = await tankService.getTankDetails(user.id);
+        const fetchedBalance = tankData.balance;
+        const maxCapacity = tankData.capacity;
+
+        if (
+          typeof fetchedBalance !== "number" ||
+          typeof maxCapacity !== "number"
+        ) {
+          throw new Error("Invalid data received from API");
+        }
+
+        setBalance(fetchedBalance);
+        setFuelPercentage(
+          maxCapacity > 0 ? (fetchedBalance / maxCapacity) * 100 : 0
+        );
+      } catch (error) {
+        console.error("Failed to fetch tank balance:", error);
+        // Redirect to login if unauthorized or other error occurs
+        if (error.response && error.response.status === 401) {
+          navigate("/signup"); // Redirect to signup/login entry point
+        }
+        // Handle other errors as needed
+      } finally {
+        setIsLoadingBalance(false);
+      }
+    };
+
+    if (user) {
+      fetchBalance();
+    } else {
+      setIsLoadingBalance(false);
+      setBalance(0);
+      setFuelPercentage(0);
+    }
+  }, [user]);
+
+  const handleLogout = async () => {
+    await authService.logout();
+    navigate("/signup"); // Redirect to signup/login entry point after logout
   };
 
   const navigateToHome = () => {
@@ -70,12 +118,23 @@ const ShareTank = () => {
               <circle className={styles.circleForeground} />
             </svg>
             <div className={styles.progressValue}>
-              <h2>$115</h2>
-              <span>{fuelPercentage}%</span>
+              {isLoadingBalance ? (
+                <h2>Loading...</h2>
+              ) : (
+                <>
+                  <h2>${balance}</h2>
+                  <span>{fuelPercentage.toFixed(0)}%</span>
+                </>
+              )}
             </div>
           </figure>
           <div className={styles.actionButtons}>
-            <button className={styles.topUpButton}>Top up now</button>
+            <button
+              onClick={() => navigate("/top-up")}
+              className={styles.topUpButton}
+            >
+              Top up now
+            </button>
             <button className={styles.useButton}>Use fuel</button>
           </div>
         </div>

@@ -40,7 +40,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     authService.logout();
-    navigate("/login");
+    navigate("/signup");
   };
 
   const navigateToShareTank = () => {
@@ -52,7 +52,7 @@ const Dashboard = () => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/signup" replace />;
   }
 
   return (

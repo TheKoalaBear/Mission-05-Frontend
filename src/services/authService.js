@@ -1,15 +1,6 @@
 import api from "./api";
 
 export const authService = {
-  login: async (credentials) => {
-    const response = await api.post("/auth/login", credentials);
-    if (response.data.token) {
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-    }
-    return response.data;
-  },
-
   register: async (userData) => {
     console.log("Attempting to register user:", userData);
     try {
@@ -71,6 +62,54 @@ export const authService = {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
     return !!(token && user);
+  },
+
+  // NEW: Check if phone number exists
+  checkPhoneNumber: async (phoneNumber) => {
+    try {
+      const response = await api.post("/auth/check-phone", { phoneNumber });
+      return response.data; // Should return { exists: true/false }
+    } catch (error) {
+      console.error(
+        "Error checking phone number:",
+        error.response?.data || error
+      );
+      throw error; // Re-throw for component to handle
+    }
+  },
+
+  // NEW: Send OTP (Calls the backend simulation)
+  sendOtp: async (phoneNumber) => {
+    try {
+      const response = await api.post("/auth/send-otp", { phoneNumber });
+      console.log("Send OTP response:", response.data); // Log backend message
+      return response.data;
+    } catch (error) {
+      console.error("Error sending OTP:", error.response?.data || error);
+      throw error;
+    }
+  },
+
+  // NEW: Login with OTP
+  loginWithOtp: async ({ phoneNumber, otp }) => {
+    try {
+      const response = await api.post("/auth/login-otp", { phoneNumber, otp });
+      // Handle successful login (store token/user like regular login)
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        if (response.data.user && response.data.user.id) {
+          localStorage.setItem("userId", response.data.user.id);
+        }
+      }
+      return response.data;
+    } catch (error) {
+      console.error(
+        "Error logging in with OTP:",
+        error.response?.data || error
+      );
+      throw error;
+    }
   },
 
   getUserDetails: async () => {

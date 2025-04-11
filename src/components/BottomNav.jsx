@@ -33,16 +33,15 @@ const BottomNav = () => {
     [location.pathname]
   );
 
-  const handleLogout = useCallback(async () => {
+  const handleLogout = async () => {
     try {
-      console.log("Attempting to logout...");
       await authService.logout();
-      console.log("Redirecting to login...");
-      navigate("/login");
+      navigate("/signup"); // Redirect to signup after logout
     } catch (error) {
-      console.error("Error during logout:", error);
+      console.error("Logout failed:", error);
+      // Optionally show an error message to the user
     }
-  }, [navigate]);
+  };
 
   const toggleMoreMenu = (e) => {
     e.stopPropagation();

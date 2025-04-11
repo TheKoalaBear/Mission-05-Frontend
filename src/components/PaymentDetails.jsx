@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FaArrowLeft,
@@ -11,11 +11,75 @@ import styles from "./PaymentDetails.module.css";
 
 const PaymentDetails = () => {
   const navigate = useNavigate();
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [nameOnCard, setNameOnCard] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle payment details submission
-    navigate("/dashboard"); // Navigate to dashboard after successful submission
+
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+      console.error("User ID not found. Cannot save payment details.");
+      return;
+    }
+
+    console.log("Submitting Card Number:", cardNumber);
+
+    try {
+      // Simulate successful API call for now
+      // await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
+      // console.log("Simulated API call successful");
+
+      const token = localStorage.getItem("token"); // Get token
+      if (!token) {
+        console.error("Authentication token not found. Please log in.");
+        // Handle appropriately - maybe redirect to login
+        return;
+      }
+
+      // const response = await fetch("/api/payments", { // OLD endpoint
+      const response = await fetch("/api/users/me/payment", {
+        // NEW endpoint
+        method: "PUT", // Changed from POST in previous example to PUT
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Add Authorization header
+        },
+        body: JSON.stringify({
+          cardNumber: cardNumber.replace(/\s/g, ""), // Remove spaces before sending
+          expiryDate,
+          cvv,
+          nameOnCard,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Payment details saved successfully");
+        navigate("/dashboard");
+      } else {
+        console.error("Error saving payment details:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error saving payment details:", error);
+    }
+  };
+
+  const handleCardNumberChange = (e) => {
+    const value = e.target.value.replace(/\D/g, "");
+    const formattedValue = value.replace(/(.{4})/g, "$1 ").trim();
+    setCardNumber(formattedValue);
+  };
+
+  const handleExpiryDateChange = (e) => {
+    const value = e.target.value.replace(/\D/g, "");
+    let formattedValue = value;
+    if (value.length > 2) {
+      formattedValue = `${value.slice(0, 2)}/${value.slice(2, 4)}`;
+    }
+    setExpiryDate(formattedValue);
   };
 
   return (
@@ -45,6 +109,9 @@ const PaymentDetails = () => {
               id="cardNumber"
               placeholder="Please enter your card number"
               maxLength="19"
+              value={cardNumber}
+              onChange={handleCardNumberChange}
+              required
             />
             <div className={styles.cardTypes}>
               <FaCcMastercard />
@@ -60,6 +127,9 @@ const PaymentDetails = () => {
             id="expiryDate"
             placeholder="MM/YY"
             maxLength="5"
+            value={expiryDate}
+            onChange={handleExpiryDateChange}
+            required
           />
         </div>
 
@@ -73,6 +143,9 @@ const PaymentDetails = () => {
             id="cvv"
             placeholder="Please enter your CVV number"
             maxLength="3"
+            value={cvv}
+            onChange={(e) => setCvv(e.target.value.replace(/\D/g, ""))}
+            required
           />
         </div>
 
@@ -82,6 +155,9 @@ const PaymentDetails = () => {
             type="text"
             id="nameOnCard"
             placeholder="Please enter your name on card"
+            value={nameOnCard}
+            onChange={(e) => setNameOnCard(e.target.value)}
+            required
           />
         </div>
 

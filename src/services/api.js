@@ -25,11 +25,19 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      // Clear auth data on 401 Unauthorized
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !error.config.url.includes("/login") && // Avoid redirect loop on login failure
+      !error.config.url.includes("/signup") // Avoid redirect loop on signup page
+    ) {
+      console.log("Unauthorized access or expired token, redirecting...");
+      // Clear potentially invalid token/user data
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      window.location.href = "/login";
+      localStorage.removeItem("userId");
+      // Redirect to the signup/login entry point
+      window.location.href = "/signup";
     }
     return Promise.reject(error);
   }

@@ -32,7 +32,7 @@ const Onboarding = () => {
     if (currentSlide === slides.length - 1) {
       // If on last slide, handle Get Started click
       localStorage.setItem("hasSeenOnboarding", "true");
-      navigate("/login");
+      navigate("/signup");
     } else {
       // Otherwise, go to next slide
       setCurrentSlide(currentSlide + 1);
@@ -41,13 +41,18 @@ const Onboarding = () => {
 
   const handleSkip = () => {
     localStorage.setItem("hasSeenOnboarding", "true");
-    navigate("/login");
+    navigate("/signup");
   };
 
   const handleBack = () => {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
     }
+  };
+
+  const handleFinish = () => {
+    localStorage.setItem("hasSeenOnboarding", "true");
+    navigate("/signup");
   };
 
   return (
