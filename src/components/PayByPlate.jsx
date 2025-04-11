@@ -3,7 +3,13 @@ import carIllustration from "../assets/images/car-illustration.svg";
 import zLogo from "../assets/images/z.png";
 import "./PayByPlate.css";
 
-const PayByPlate = ({ onAddVehicle, onEditVehicle, vehicleData }) => {
+const PayByPlate = ({
+  onAddVehicle,
+  onEditVehicle,
+  vehicleData,
+  onNavigateToPriceComparison,
+  onBackClick,
+}) => {
   const handleAddVehicle = () => {
     if (onAddVehicle) {
       onAddVehicle();
@@ -17,7 +23,13 @@ const PayByPlate = ({ onAddVehicle, onEditVehicle, vehicleData }) => {
   };
 
   const handleBackButton = () => {
-    console.log("Back button clicked");
+    if (onBackClick) {
+      onBackClick();
+    } else if (onNavigateToPriceComparison) {
+      onNavigateToPriceComparison();
+    } else {
+      console.log("Back button clicked but no handler provided");
+    }
   };
 
   const handleHowItWorks = () => {
@@ -116,14 +128,14 @@ const PayByPlate = ({ onAddVehicle, onEditVehicle, vehicleData }) => {
               tabIndex="0"
             >
               <svg
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M18 8L10 15L18 22"
+                  d="M15 6L9 12L15 18"
                   stroke="#1E196B"
                   strokeWidth="2"
                   strokeLinecap="round"

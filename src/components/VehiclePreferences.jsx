@@ -10,6 +10,8 @@ const VehiclePreferences = ({
   existingVehicle,
   isEditing = false,
   onAddPayment,
+  isSaving = false,
+  error = null,
 }) => {
   const [plateNumber, setPlateNumber] = useState("");
   const [selectedFuelTypes, setSelectedFuelTypes] = useState([]);
@@ -143,14 +145,14 @@ const VehiclePreferences = ({
           <div className="header-left">
             <button className="back-button" onClick={onBackClick} aria-label="Go back" tabIndex="0">
               <svg
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M18 8L10 15L18 22"
+                  d="M15 6L9 12L15 18"
                   stroke="#1E196B"
                   strokeWidth="2"
                   strokeLinecap="round"
@@ -286,13 +288,14 @@ const VehiclePreferences = ({
         </div>
 
         {/* Save Button */}
-        <div className="save-button-container">
+        <div className="form-actions">
+          {error && <div className="error-message">{error}</div>}
           <button
-            className="save-button"
+            className={`save-button ${isSaving ? "saving" : ""}`}
             onClick={handleSave}
-            disabled={!plateNumber || selectedFuelTypes.length === 0}
+            disabled={isSaving || !plateNumber || selectedFuelTypes.length === 0}
           >
-            {isEditing ? "Update" : "Save"}
+            {isSaving ? "Saving..." : "Save"}
           </button>
         </div>
       </div>

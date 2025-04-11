@@ -54,52 +54,65 @@
   margin-bottom: 24px;
 }
 
-.header-left {
+/* Specific Pay by plate header styling */
+.pay-by-plate-container .header-left {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
-.back-button {
-  background-color: white;
+.pay-by-plate-container .back-button {
+  background: transparent;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   border: none;
   cursor: pointer;
   color: #1e196b;
+  flex-shrink: 0;
+  margin-right: -8px;
+  position: relative;
+  z-index: 3;
 }
 
-.back-button svg {
-  width: 30px;
-  height: 30px;
+.pay-by-plate-container .back-button svg {
+  width: 24px;
+  height: 24px;
 }
 
-.title-section {
+.pay-by-plate-container .title-section {
   display: flex;
   align-items: center;
-  margin-left: 8px;
+  margin-left: 0;
+  position: relative;
+  z-index: 1;
 }
 
-.icon-container {
+.pay-by-plate-container .icon-container {
   margin-right: 12px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
-.credit-card-icon {
-  width: 20px;
-  height: 14px;
+.pay-by-plate-container .credit-card-icon {
+  width: 24px;
+  height: 18px;
   display: block;
 }
 
-.title {
+.pay-by-plate-container .title {
   color: #1e196b;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  white-space: nowrap;
 }
 
 /* Info Text */
@@ -201,32 +214,34 @@
 .add-vehicle-button-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 40px;
+  margin-top: 16px;
 }
 
 .add-vehicle-button {
-  width: 100%;
-  text-align: center;
+  background-color: transparent;
   color: #1e196b;
-  font-size: 18px;
-  font-weight: 600;
   border: none;
-  background: none;
+  padding: 8px 0;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  padding: 10px 0;
+  transition: opacity 0.3s ease;
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-/* Vehicle Card (when vehicle data exists) */
+.add-vehicle-button:hover {
+  opacity: 0.8;
+}
+
+/* Vehicle Info Display */
 .vehicle-info-container {
-  margin-top: 20px;
-  margin-bottom: 40px;
+  padding: 8px 0;
 }
 
 .vehicle-card {
-  background-color: #ebe9e9;
-  border-radius: 16px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
   padding: 16px;
   display: flex;
   justify-content: space-between;
@@ -237,69 +252,71 @@
 .vehicle-details {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .plate-number {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
   color: #1e196b;
-  margin-bottom: 4px;
+  letter-spacing: 1px;
 }
 
 .fuel-types {
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
 }
 
 .fuel-badge {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 12px;
-  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 12px;
   font-weight: 600;
   color: white;
-  border-radius: 12px;
+  gap: 4px;
 }
 
 .badge-z-logo {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-  margin-right: 3px;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
 }
 
 .fuel-badge.z91 {
-  background-color: #009c4f;
+  background-color: #00ac46;
 }
 
 .fuel-badge.zx95 {
-  background-color: #f47920;
+  background-color: #e53935;
 }
 
 .fuel-badge.zd {
-  background-color: #009c4f;
+  background-color: #ef6c00;
 }
 
 .fuel-type {
-  font-size: 14px;
-  color: #6e6e6e;
+  margin-left: 4px;
 }
 
 .vehicle-settings {
   display: flex;
-  align-items: center;
 }
 
 .edit-vehicle-button {
+  padding: 8px 16px;
+  background-color: white;
+  border: 1px solid #1e196b;
+  border-radius: 8px;
   color: #1e196b;
-  font-weight: 600;
   font-size: 14px;
-  background: none;
-  border: none;
-  padding: 8px 12px;
+  font-weight: 600;
   cursor: pointer;
-  text-decoration: underline;
+  transition: background-color 0.3s;
+}
+
+.edit-vehicle-button:hover {
+  background-color: rgba(30, 25, 107, 0.05);
 }

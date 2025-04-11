@@ -53,6 +53,7 @@
 .header-left {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .back-button {
@@ -63,22 +64,46 @@
   color: #1e196b;
   display: flex;
   align-items: center;
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  margin-right: -8px;
+  position: relative;
+  z-index: 3;
+}
+
+.back-button svg {
+  width: 24px;
+  height: 24px;
 }
 
 .title-section {
   display: flex;
   align-items: center;
-  margin-left: 8px;
+  margin-left: 0;
 }
 
 .icon-container {
   margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.car-icon {
+  width: 20px;
+  height: 20px;
+  color: #1e196b;
 }
 
 .title {
   color: #1e196b;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 /* Form Elements */
@@ -347,11 +372,29 @@ input:checked + .slider:before {
 }
 
 /* Save Button */
-.save-button-container {
+.form-actions {
   margin-top: auto;
-  padding: 24px 0;
+  padding: 24px 0 48px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  z-index: 10;
+}
+
+.error-message {
+  color: #e74c3c;
+  background-color: #fadbd8;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  font-size: 14px;
 }
 
 .save-button {
@@ -367,9 +410,35 @@ input:checked + .slider:before {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(30, 25, 107, 0.25);
+  position: relative;
 }
 
-.save-button:hover:not(:disabled) {
+.save-button.saving {
+  background: linear-gradient(90deg, #2f2599 0%, #5535ec 100%);
+  cursor: wait;
+}
+
+.save-button.saving::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+.save-button:hover:not(:disabled):not(.saving) {
   background: linear-gradient(90deg, #2f2599 0%, #5535ec 100%);
   transform: translateY(-2px);
 }
