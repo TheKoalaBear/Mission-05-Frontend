@@ -73,10 +73,10 @@ h3 {
       outline: none;
 }
 
-.addToCartButton:hover {
+/* .addToCartButton:hover {
       filter: brightness(1.2);
       transform: scale(1.05);
-}
+} */
 
 .cancelButtonWrapper {
       margin-right: 30px;
@@ -98,12 +98,12 @@ h3 {
       outline: none;
 }
 
-.cancelButton:hover {
+/* .cancelButton:hover {
       background-color: #f0f0f0;
       color: #0056b3;
       border-color: #0056b3;
       transform: scale(1.05);
-}
+} */
 
 .optionSection {
       margin-bottom: 2rem;

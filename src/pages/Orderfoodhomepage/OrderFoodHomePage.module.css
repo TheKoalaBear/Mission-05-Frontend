@@ -5,51 +5,29 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
 }
 
 .container {
       display: flex;
       flex-direction: column;
-      position: fixed;
+      position: relative;
       height: 100%;
       width: 321px;
       background: linear-gradient(to bottom, #ff6600, #ffcc00);
+      overflow-y: auto;
 }
 
-/* .container .productCard:last-child {
-      padding-bottom: 2000px;
-} */
-
-/* @media (min-width: 769px) {
-      .grid {
-            grid-template-columns: repeat(2, 1fr);
-      }
-}
-
-@media (min-width: 1025px) {
-      .grid {
-            grid-template-columns: repeat(3, 1fr);
+/* Roughly Tablet size */
+@media (min-width: 768px) {
+      .container {
+            max-width: 768px;
       }
 }
 
-@media (max-width: 768px) {
-      .hero {
-            height: 250px;
+/* Desktop size */
+@media (min-width: 1024px) {
+      .container {
+            max-width: 1024px;
       }
-
-      .headline {
-            font-size: 16px;
-      }
-
-      .zLogo {
-            width: 40px;
-      }
-
-      .grid {
-            grid-template-columns: 1fr;
-      }
-
-      .cardLarge {
-            grid-column: span 1;
-      }
-} */
+}

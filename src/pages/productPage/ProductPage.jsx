@@ -5,16 +5,27 @@ import Nav from "../../components/shared/Nav";
 import BottomNav from "../../components/shared/BottomNav";
 import ProductCard from "../../components/shared/ProductSize";
 import ProductQuantity from "../../components/shared/ProductQuantity";
-import styles from "../../styles/Shared/MobileFrame.module.css";
+import { useCart } from "../ProductSelection/CartContext";
+import useProductOptions from "../ProductSelection/UseProductOptions";
+
+// Styles
+import styles from "../../styles/Shared/ProductMobileFrame.module.css";
 import productStyles from "../../styles/Shared/ProductPage.module.css";
 
 const ProductPage = () => {
       const { productId } = useParams();
       const [product, setProduct] = useState(null);
 
-      const [selectedMilk, setSelectedMilk] = useState("");
-      const [selectedStrength, setSelectedStrength] = useState("");
-      const [selectedFlavour, setSelectedFlavour] = useState("");
+      const {
+            selectedMilk,
+            setSelectedMilk,
+            selectedStrength,
+            setSelectedStrength,
+            selectedFlavour,
+            setSelectedFlavour,
+      } = useProductOptions();
+
+      const { addToCart } = useCart();
 
       useEffect(() => {
             // Fetch product data from MongoDB
@@ -151,7 +162,20 @@ const ProductPage = () => {
                                           <button className={productStyles.cancelButton}>Cancel</button>
                                     </div>
                                     <div className={productStyles.addToCartButtonWrapper}>
-                                          <button className={productStyles.addToCartButton}>Add to Cart</button>
+                                          <button
+                                                className={productStyles.addToCartButton}
+                                                onClick={() => {
+                                                      const selectedOptions = {
+                                                            milk: selectedMilk,
+                                                            strength: selectedStrength,
+                                                            flavour: selectedFlavour,
+                                                      };
+                                                      addToCart(product, selectedOptions);
+                                                      alert("Item added to cart!");
+                                                }}
+                                          >
+                                                Add to Cart
+                                          </button>
                                     </div>
                               </div>
                         </div>
