@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { authService } from "../services/authService";
-import styles from "./Signup.module.css";
-import ZEnergyLogo from "../assets/Z_Energy_logo.png";
+import { authService } from "../../services/authService";
+import styles from "../css/Signup.module.css";
+import ZEnergyLogo from "../../assets/Z_Energy_logo.png";
 import { FaArrowLeft } from "react-icons/fa";
 
 // Helper function for artificial delay
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-const ARTIFICIAL_DELAY_MS = 2000000; // 2 seconds delay
+const ARTIFICIAL_DELAY_MS = 2000; // 2 seconds delay
 
 // Combined Loading Component
 const LoadingIndicator = ({ message = "Please wait..." }) => (

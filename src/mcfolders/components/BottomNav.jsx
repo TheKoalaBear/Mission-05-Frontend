@@ -19,7 +19,7 @@ import {
   FaHeadset,
 } from "react-icons/fa";
 import styles from "./BottomNav.module.css";
-import { authService } from "../services/authService";
+import { authService } from "../../services/authService";
 
 const BottomNav = () => {
   const location = useLocation();

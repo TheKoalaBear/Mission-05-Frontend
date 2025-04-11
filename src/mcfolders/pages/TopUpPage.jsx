@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaCcVisa, FaCcMastercard } from "react-icons/fa"; // Placeholder icons
-import styles from "./TopUpPage.module.css";
+import styles from "../css/TopUpPage.module.css";
 
 const TopUpPage = () => {
   const navigate = useNavigate();

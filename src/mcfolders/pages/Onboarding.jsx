@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import orderCoffeeImg from "../assets/onboarding_img/order_coffee.png";
-import comparePriceImg from "../assets/onboarding_img/compare_price.png";
-import shareTankImg from "../assets/onboarding_img/sharetank.png";
-import styles from "./Onboarding.module.css";
+import orderCoffeeImg from "../../assets/onboarding_img/order_coffee.png";
+import comparePriceImg from "../../assets/onboarding_img/compare_price.png";
+import shareTankImg from "../../assets/onboarding_img/sharetank.png";
+import styles from "../css/Onboarding.module.css";
 
 const Onboarding = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

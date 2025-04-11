@@ -7,7 +7,7 @@ import {
   FaCcVisa,
   FaCcMastercard,
 } from "react-icons/fa";
-import styles from "./PaymentDetails.module.css";
+import styles from "../css/PaymentDetails.module.css";
 
 const PaymentDetails = () => {
   const navigate = useNavigate();

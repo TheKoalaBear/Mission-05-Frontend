@@ -12,8 +12,8 @@ import {
   FaGasPump,
   FaCookieBite,
 } from "react-icons/fa";
-import styles from "./HowItWorks.module.css";
-import BottomNav from "./BottomNav";
+import styles from "../css/HowItWorks.module.css";
+import BottomNav from "../components/BottomNav";
 const HowItWorks = () => {
   const navigate = useNavigate();
 

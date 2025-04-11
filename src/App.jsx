@@ -4,13 +4,13 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Signup from "./components/Signup";
-import Onboarding from "./components/Onboarding";
-import Dashboard from "./components/Dashboard";
-import ShareTank from "./components/ShareTank";
-import PaymentDetails from "./components/PaymentDetails";
-import HowItWorks from "./components/HowItWorks";
-import TopUpPage from "./components/TopUpPage";
+import Signup from "./mcfolders/pages/Signup";
+import Onboarding from "./mcfolders/pages/Onboarding";
+import Dashboard from "./mcfolders/pages/Dashboard";
+import ShareTank from "./mcfolders/pages/ShareTank";
+import PaymentDetails from "./mcfolders/pages/PaymentDetails";
+import HowItWorks from "./mcfolders/pages/HowItWorks";
+import TopUpPage from "./mcfolders/pages/TopUpPage";
 import "./App.css";
 
 function App() {
