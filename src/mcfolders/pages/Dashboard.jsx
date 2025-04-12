@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import styles from "../css/Dashboard.module.css";
 import { authService } from "../../services/authService";
-import BottomNav from "../components/BottomNav";
+import BottomNav from "../../mcfolders/components/BottomNav";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -87,7 +87,7 @@ const Dashboard = () => {
         <div className={styles.card}>
           <span className={styles.cardContent}>Z</span>
         </div>
-        <div className={styles.card}>
+        <div className={styles.card} onClick={() => navigate("/orderfood")}>
           <span className={styles.cardContent}>Order Food</span>
         </div>
         <div className={styles.card}>
