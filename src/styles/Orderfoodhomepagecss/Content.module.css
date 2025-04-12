@@ -62,7 +62,7 @@
 
 .card:hover,
 .cardLarge:hover {
-      transform: scale(1.04);
+      transform: scale(1.01);
       color: rgb(0, 13, 255);
 }
 
