@@ -442,9 +442,15 @@ const Signup = () => {
       case 4: // Notification Permission (Signup Flow)
         return (
           <div className={styles.permissionContainer}>
-            <div className={styles.headerImageContainer}></div>
+            <div className={styles.headerImageContainer}>
+              <div className={styles.bowContainer2}>
+                <div className={styles.blueBow}></div>
+                <div className={styles.yellowBow}></div>
+                <div className={styles.whiteBow}></div>
+              </div>
+            </div>
             <div className={styles.permissionContent}>
-              <p>
+              <p style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}>
                 Notifications may include alerts, sounds, and icon badges. These
                 can be configured in Settings.
               </p>
@@ -469,7 +475,13 @@ const Signup = () => {
       case 5: // Location Permission (Signup Flow)
         return (
           <div className={styles.permissionContainer}>
-            <div className={styles.headerImageContainer}></div>
+            <div className={styles.headerImageContainer}>
+              <div className={styles.bowContainer2}>
+                <div className={styles.blueBow}></div>
+                <div className={styles.yellowBow}></div>
+                <div className={styles.whiteBow}></div>
+              </div>
+            </div>
             <div className={styles.permissionContent}>
               <p>
                 Allow this application to access your device's Location. These

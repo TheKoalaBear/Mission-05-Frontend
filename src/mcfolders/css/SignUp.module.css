@@ -655,11 +655,7 @@
 /* Steps 4 & 5: Permissions */
 .permissionContainer {
   width: 100%;
-  max-width: 400px;
   background-color: white;
-  padding: 2.5rem 1.5rem 1.5rem 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   z-index: 2;
   position: relative;
   display: flex;
@@ -673,6 +669,8 @@
   color: #333;
   font-size: 1rem;
   line-height: 1.5;
+  z-index: 3;
+  padding: 2rem;
 }
 
 .permissionContent p {
@@ -683,7 +681,7 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
-  border-top: 1px solid #eee;
+  border-top: 2px solid #eee;
 }
 
 .permissionButtons button {
@@ -703,11 +701,15 @@
 }
 
 .permissionButtonDeny {
-  border-right: 1px solid #eee;
+  border-radius: 0;
+  font-weight: bold;
+  border-right: 1px solid #eee !important;
 }
 
 .permissionButtonAllow {
+  border-radius: 0;
   font-weight: bold;
+  border-left: 1px solid #eee !important;
 }
 
 /* Add class to main container per step for specific overrides if needed */
@@ -760,14 +762,12 @@
     font-size: 1.1rem;
     padding-right: 2rem;
   }
-  .permissionContainer {
-    padding: 2rem 1rem 1rem 1rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    width: calc(100% - 1rem);
+
+  .permissionButtonAllow button {
+    border-left: 1px solid #eee;
   }
-  .permissionButtons button {
-    font-size: 1rem;
+  .permissionButtonDeny button {
+    border-right: 1px solid #eee;
   }
 }
 
