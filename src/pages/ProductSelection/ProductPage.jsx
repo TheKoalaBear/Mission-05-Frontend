@@ -24,6 +24,11 @@ const ProductPage = () => {
       //       setSelectedFlavour,
       // } = useProductOptions();
 
+      // git commit -m
+      const [selectedMilk, setSelectedMilk] = useState("");
+      const [selectedStrength, setSelectedStrength] = useState("");
+      const [selectedFlavour, setSelectedFlavour] = useState("");
+
       //   const { addToCart } = useCart();
 
       useEffect(() => {

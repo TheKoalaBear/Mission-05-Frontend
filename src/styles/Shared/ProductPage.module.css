@@ -67,6 +67,7 @@ h3 {
       min-width: 30%;
       padding-right: 10px;
       padding-left: 10px;
+      padding-bottom: 40px;
 }
 
 .centerGap {
@@ -141,20 +142,22 @@ h3 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 5px;
+      margin: 0 auto;
       padding-left: 40px;
 }
 .optionGrid2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 5px;
+      margin: 0 auto;
       padding-left: 40px;
 }
 
 .optionItem {
       display: flex;
       align-items: center;
-      position: relative;
       font-size: 14px;
+      /* margin: 0 auto; */
       cursor: pointer;
 }
 
