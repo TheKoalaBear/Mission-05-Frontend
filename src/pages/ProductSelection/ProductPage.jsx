@@ -5,6 +5,7 @@ import BottomNav from "../../mcfolders/components/BottomNav";
 import ProductCard from "../../components/shared/ProductSize";
 import ProductQuantity from "../../components/shared/ProductQuantity";
 import { useCart } from "../../components/shared/CartContext";
+import MilkStrengthFlavourOptions from "../../components/shared/MilkStrengthFlavourOptions";
 // import useProductOptions from "../../components/shared/UseProductOptions";
 
 // Styles
@@ -15,20 +16,12 @@ const ProductPage = () => {
       const { productId } = useParams();
       const [product, setProduct] = useState(null);
 
-      // const {
-      //       selectedMilk,
-      //       setSelectedMilk,
-      //       selectedStrength,
-      //       setSelectedStrength,
-      //       selectedFlavour,
-      //       setSelectedFlavour,
-      // } = useProductOptions();
-
-      // git commit -m
+      // Temp will use again (:D)
       const [selectedMilk, setSelectedMilk] = useState("");
       const [selectedStrength, setSelectedStrength] = useState("");
       const [selectedFlavour, setSelectedFlavour] = useState("");
 
+      // Add to cart will come back and u8se
       //   const { addToCart } = useCart();
 
       useEffect(() => {
@@ -74,115 +67,16 @@ const ProductPage = () => {
 
                               <h3>Quantity</h3>
                               <ProductQuantity />
-                              {product.milkOptions && product.milkOptions.length > 0 && (
-                                    <div className={productStyles.optionSection}>
-                                          <h3 className={productStyles.optionTitle}>Milk</h3>
-                                          <div className={productStyles.optionGrid}>
-                                                {product.milkOptions.map((option, index) => (
-                                                      <label key={index} className={productStyles.optionItem}>
-                                                            <input
-                                                                  type="radio"
-                                                                  name="milk"
-                                                                  value={option}
-                                                                  checked={selectedMilk === option}
-                                                                  onChange={() => {
-                                                                        setSelectedMilk((prev) =>
-                                                                              prev === option ? "" : option
-                                                                        );
-                                                                  }}
-                                                                  className={productStyles.radioInput}
-                                                            />
-                                                            <span className={productStyles.customRadio}></span>
-                                                            {option}
-                                                      </label>
-                                                ))}
-                                          </div>
-                                    </div>
-                              )}
 
-                              {product.strengthOptions && product.strengthOptions.length > 0 && (
-                                    <div className={productStyles.optionSection}>
-                                          <h3 className={productStyles.optionTitle}>Strength</h3>
-                                          <div className={productStyles.optionGrid2}>
-                                                {product.strengthOptions.map((option, index) => (
-                                                      <label key={index} className={productStyles.optionItem}>
-                                                            <input
-                                                                  type="radio"
-                                                                  name="strength"
-                                                                  value={option}
-                                                                  checked={selectedStrength === option}
-                                                                  onChange={() => setSelectedStrength(option)}
-                                                                  className={productStyles.radioInput}
-                                                            />
-                                                            <span className={productStyles.customRadio}></span>
-                                                            <span className={productStyles.optionLabel}>
-                                                                  {option}
-                                                                  {option.toLowerCase().includes("extra shot") && (
-                                                                        <span
-                                                                              className={productStyles.extraCost2}
-                                                                        ></span>
-                                                                  )}
-                                                            </span>
-                                                      </label>
-                                                ))}
-                                                <h4>+ 90 cents</h4>
-                                          </div>
-                                    </div>
-                              )}
-
-                              {product.flavourOptions && product.flavourOptions.length > 0 && (
-                                    <div className={productStyles.optionSection}>
-                                          <h3 className={productStyles.optionTitle}>Flavour </h3>
-                                          <div className={productStyles.extraCost}></div>
-                                          <div className={productStyles.optionGrid2}>
-                                                {product.flavourOptions.map((option, index) => (
-                                                      <label key={index} className={productStyles.optionItem}>
-                                                            <input
-                                                                  type="radio"
-                                                                  name="flavour"
-                                                                  value={option}
-                                                                  checked={selectedFlavour === option}
-                                                                  onChange={() => setSelectedFlavour(option)}
-                                                                  className={productStyles.radioInput}
-                                                            />
-
-                                                            <span className={productStyles.customRadio}></span>
-                                                            <span className={productStyles.optionLabel}>
-                                                                  {option}
-                                                                  <span className={productStyles.extraCost}>
-                                                                        {" "}
-                                                                        + $1.00
-                                                                  </span>
-                                                            </span>
-                                                      </label>
-                                                ))}
-                                          </div>
-                                    </div>
-                              )}
-
-                              {/* Had to style buttons seperately */}
-                              <div className={productStyles.actionButtons}>
-                                    <button className={`${productStyles.button} ${productStyles.cancelButton}`}>
-                                          Cancel
-                                    </button>
-
-                                    <div className={productStyles.centerGap}></div>
-
-                                    <button
-                                          className={`${productStyles.button} ${productStyles.addToCartButton}`}
-                                          onClick={() => {
-                                                const selectedOptions = {
-                                                      milk: selectedMilk,
-                                                      strength: selectedStrength,
-                                                      flavour: selectedFlavour,
-                                                };
-                                                addToCart(product, selectedOptions);
-                                                alert("Item added to cart!");
-                                          }}
-                                    >
-                                          Add to Cart
-                                    </button>
-                              </div>
+                              <MilkStrengthFlavourOptions
+                                    product={product}
+                                    selectedMilk={selectedMilk}
+                                    setSelectedMilk={setSelectedMilk}
+                                    selectedStrength={selectedStrength}
+                                    setSelectedStrength={setSelectedStrength}
+                                    selectedFlavour={selectedFlavour}
+                                    setSelectedFlavour={setSelectedFlavour}
+                              />
                         </div>
 
                         <BottomNav />
