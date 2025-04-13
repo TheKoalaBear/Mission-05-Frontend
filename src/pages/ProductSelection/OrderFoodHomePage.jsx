@@ -1,15 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Content from "../../components/shared/HomePageContent";
 import BottomNav from "../../mcfolders/components/BottomNav";
 import styles from "../../styles/Orderfoodhomepagecss/Orderfoodhomepage.module.css";
 
 const Orderfoodhomepage = () => {
+      const navigate = useNavigate();
       return (
             <div className={styles.mobileFrame}>
                   <div className={styles.container}>
                         <div className={styles.hero}>
                               <img
                                     className={styles.leftArrow}
+                                    onClick={() => navigate("/dashboard")}
                                     src="src/assets/orderfoodhomepage_img/leftarrow.png"
                                     alt="Arrow"
                               />

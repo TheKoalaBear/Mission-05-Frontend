@@ -2,7 +2,41 @@ import React, { useRef, useState } from "react";
 import styles from "../../styles/Shared/Horizontalscroll.module.css";
 
 const HorizontalScroll = () => {
-      const items = ["White Coffee", "+ Chocolate", "Tea", "Black Coffee"];
+      const items = [
+            "White Coffee",
+            "+ Chocolate",
+            "Tea",
+            "Black Coffee",
+            "Gingerbread Latte",
+            "Cappuccino",
+            "Americano",
+            "Latte",
+            "Chai Latte",
+            "Flat White",
+            "Mochachino",
+            "Short Black",
+            "Lemon Ginger Honey Tea",
+            "English Tea",
+            "Long Black",
+            "Hot Chocolate",
+            "Flat White",
+            "Chai Latte",
+            "Fluffy",
+            "Benoffee Frappe",
+            "Mocha Frappe",
+            "Chocolate Frappe",
+            "Ice Cold Foam Frappucino",
+            "Ice Latte",
+            "Ice Cold Foam Machiatto",
+            "Ice Match",
+            "Iced Mocha",
+            "Banana Berry Smoothie",
+            "Coffee Frappe",
+            "Iced Americano",
+            "Iced Chocolate",
+            "Hokey Pokey Frappe",
+            "Tropical Smoothie",
+      ];
 
       const scrollRef = useRef(null);
       const [isDragging, setIsDragging] = useState(false);
