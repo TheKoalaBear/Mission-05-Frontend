@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../styles/Shared/ProductQuantity.module.css";
+import styles from "../../styles/Shared/ProductPageQuantityControls.module.css";
 
 function ProductQuantity() {
       const [quantity, setQuantity] = useState(0);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "../../components/shared/Nav";
 import BottomNav from "../../mcfolders/components/BottomNav";
-import ProductCard from "../../components/shared/ProductSize";
+import ProductCard from "../../components/shared/ProductCardAndPrice";
 import ProductQuantity from "../../components/shared/ProductQuantity";
 import { useCart } from "../../components/shared/CartContext";
 import MilkStrengthFlavourOptions from "../../components/shared/MilkStrengthFlavourOptions";
