@@ -1,7 +1,9 @@
 .sizesSection {
       display: flex;
+      margin: 0 auto;
       align-items: center;
-      align-items: center;
+      justify-content: center;
+      width: 40%;
       gap: 60px;
 }
 
@@ -53,15 +55,16 @@
 
 .sizeCard2 {
       display: flex;
+      flex-shrink: 0;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      width: 150px;
+      min-width: 40%;
+      height: 120px;
       background-color: #ffffff;
       text-align: center;
       border-radius: 10px;
-      margin-left: 85px;
-      margin-top: 20px;
+      margin-top: 60px;
       cursor: pointer;
       transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

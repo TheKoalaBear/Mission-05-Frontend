@@ -15,14 +15,14 @@ const ProductPage = () => {
       const { productId } = useParams();
       const [product, setProduct] = useState(null);
 
-      const {
-            selectedMilk,
-            setSelectedMilk,
-            selectedStrength,
-            setSelectedStrength,
-            selectedFlavour,
-            setSelectedFlavour,
-      } = useProductOptions();
+      // const {
+      //       selectedMilk,
+      //       setSelectedMilk,
+      //       selectedStrength,
+      //       setSelectedStrength,
+      //       selectedFlavour,
+      //       setSelectedFlavour,
+      // } = useProductOptions();
 
       //   const { addToCart } = useCart();
 
@@ -157,25 +157,26 @@ const ProductPage = () => {
 
                               {/* Had to style buttons seperately */}
                               <div className={productStyles.actionButtons}>
-                                    <div className={productStyles.cancelButtonWrapper}>
-                                          <button className={productStyles.cancelButton}>Cancel</button>
-                                    </div>
-                                    <div className={productStyles.addToCartButtonWrapper}>
-                                          <button
-                                                className={productStyles.addToCartButton}
-                                                onClick={() => {
-                                                      const selectedOptions = {
-                                                            milk: selectedMilk,
-                                                            strength: selectedStrength,
-                                                            flavour: selectedFlavour,
-                                                      };
-                                                      addToCart(product, selectedOptions);
-                                                      alert("Item added to cart!");
-                                                }}
-                                          >
-                                                Add to Cart
-                                          </button>
-                                    </div>
+                                    <button className={`${productStyles.button} ${productStyles.cancelButton}`}>
+                                          Cancel
+                                    </button>
+
+                                    <div className={productStyles.centerGap}></div>
+
+                                    <button
+                                          className={`${productStyles.button} ${productStyles.addToCartButton}`}
+                                          onClick={() => {
+                                                const selectedOptions = {
+                                                      milk: selectedMilk,
+                                                      strength: selectedStrength,
+                                                      flavour: selectedFlavour,
+                                                };
+                                                addToCart(product, selectedOptions);
+                                                alert("Item added to cart!");
+                                          }}
+                                    >
+                                          Add to Cart
+                                    </button>
                               </div>
                         </div>
 
