@@ -15,7 +15,7 @@ function ProductSize({ product }) {
                                     <img src={mediumImage} alt="Medium" className={productStyles.sizeImage} />
                                     <div className={productStyles.sizeTextGroup}>
                                           <h6>Medium</h6>
-                                          <h5>${product.price.medium}</h5>
+                                          <h5>${product.price.medium.toFixed(2)}</h5>
                                     </div>
                               </div>
                         </div>
@@ -26,7 +26,7 @@ function ProductSize({ product }) {
                                     <img src={largeImage} alt="Large" className={productStyles.sizeImage} />
                                     <div className={productStyles.sizeTextGroup}>
                                           <h6>Large</h6>
-                                          <h5>${product.price.large}</h5>
+                                          <h5>${product.price.large.toFixed(2)}</h5>
                                     </div>
                               </div>
                         </div>
@@ -38,7 +38,7 @@ function ProductSize({ product }) {
                                     <img src={defaultImage} alt="Large" className={productStyles.sizeImage2} />
                                     <div className={productStyles.sizeTextGroup2}>
                                           <h6>Price</h6>
-                                          <h5>${product.price.default}</h5>
+                                          <h5>${product.price.default.toFixed(2)}</h5>
                                     </div>
                               </div>
                         </div>
