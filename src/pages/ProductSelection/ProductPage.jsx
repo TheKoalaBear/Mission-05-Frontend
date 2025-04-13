@@ -21,7 +21,7 @@ const ProductPage = () => {
       const [selectedStrength, setSelectedStrength] = useState("");
       const [selectedFlavour, setSelectedFlavour] = useState("");
 
-      // Add to cart will come back and u8se
+      // Add to cart will come back and u8se, may split it into a component
       //   const { addToCart } = useCart();
 
       useEffect(() => {
