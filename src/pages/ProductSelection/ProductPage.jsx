@@ -9,8 +9,8 @@ import MilkStrengthFlavourOptions from "../../components/shared/MilkStrengthFlav
 // import useProductOptions from "../../components/shared/UseProductOptions";
 
 // Styles
-import styles from "../../styles/Shared/ProductMobileFrame.module.css";
-import productStyles from "../../styles/Shared/ProductPage.module.css";
+import styles from "../../styles/shared/ProductMobileFrame.module.css";
+import productStyles from "../../styles/shared/ProductPage.module.css";
 
 const ProductPage = () => {
       const { productId } = useParams();
