@@ -1,5 +1,4 @@
 import React from "react";
-// import StatusBar from "../../components/shared/StatusBar";
 import Nav from "../../components/shared/Nav";
 import Horizontalscroll from "../../components/shared/Horizontalscroll";
 import Content from "../../components/shared/Content";
@@ -10,7 +9,6 @@ const Orderhotdrinks = () => {
       return (
             <div className={styles.mobileFrame}>
                   <div className={styles.container}>
-                        {/* <StatusBar /> */}
                         <Nav />
                         <Horizontalscroll />
                         <Content category="Hot Drink" title="Hot Drink" />
