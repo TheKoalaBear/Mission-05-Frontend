@@ -77,6 +77,26 @@ const ProductPage = () => {
                                     selectedFlavour={selectedFlavour}
                                     setSelectedFlavour={setSelectedFlavour}
                               />
+                              <div className={productStyles.actionButtons}>
+                                    <button className={`${productStyles.button} ${productStyles.cancelButton}`}>
+                                          Cancel
+                                    </button>
+                                    <div className={productStyles.centerGap}></div>
+                                    <button
+                                          className={`${productStyles.button} ${productStyles.addToCartButton}`}
+                                          onClick={() => {
+                                                const selectedOptions = {
+                                                      milk: selectedMilk,
+                                                      strength: selectedStrength,
+                                                      flavour: selectedFlavour,
+                                                };
+                                                addToCart(product, selectedOptions);
+                                                alert("Item added to cart!");
+                                          }}
+                                    >
+                                          Add to Cart
+                                    </button>
+                              </div>
                         </div>
 
                         <BottomNav />
