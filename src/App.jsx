@@ -13,6 +13,7 @@ import Grabfood from "./pages/ProductSelection/GrabFoodPage";
 import Vegeoptions from "./pages/ProductSelection/VegeOptionsPage";
 import Makecombo from "./pages/ProductSelection/MakeComboPage";
 import Productpage from "./pages/ProductSelection/ProductPage";
+import ShoppingCart from "./pages/ProductSelection/ShoppingCartPage";
 import OrderFoodHomepage from "./pages/ProductSelection/OrderFoodHomePage";
 import "./App.css";
 
@@ -70,6 +71,7 @@ function App() {
                               <Route path="/grabfood" element={<Grabfood />} />
                               <Route path="/vegeoptions" element={<Vegeoptions />} />
                               <Route path="/makecombo" element={<Makecombo />} />
+                              <Route path="/shoppingcart" element={<ShoppingCart />} />
                               <Route path="/productpage/:productId" element={<Productpage />} />
                         </Routes>
                   </div>

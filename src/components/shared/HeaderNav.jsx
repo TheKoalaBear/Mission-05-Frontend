@@ -25,7 +25,7 @@ const Nav = () => {
                   </div>
 
                   <div className={styles.shoppingCartButton}>
-                        <LuShoppingCart size={27} color="Black" />
+                        <LuShoppingCart size={27} color="Black" onClick={() => navigate("/shoppingcart")} />
                   </div>
             </nav>
       );
