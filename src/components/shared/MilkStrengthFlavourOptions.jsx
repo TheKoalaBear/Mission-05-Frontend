@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/Shared/ProductPage.module.css";
+import styles from "../../styles/shared/MilkStrengthFlavourOptions.module.css";
 
 const MilkStrengthFlavourOptions = ({
       product,
@@ -11,12 +11,12 @@ const MilkStrengthFlavourOptions = ({
       setSelectedFlavour,
 }) => {
       return (
-            <>
+            <div className={styles.optionsContainer}>
                   {/* Milk Options */}
                   {product.milkOptions && product.milkOptions.length > 0 && (
-                        <div className={styles.optionSection}>
+                        <div className={styles.optionsGroup}>
                               <h3 className={styles.optionTitle}>Milk</h3>
-                              <div className={styles.optionGrid}>
+                              <div className={styles.radioGrid}>
                                     {product.milkOptions.map((option, index) => (
                                           <label key={index} className={styles.optionItem}>
                                                 <input
@@ -30,20 +30,20 @@ const MilkStrengthFlavourOptions = ({
                                                       className={styles.radioInput}
                                                 />
                                                 <span className={styles.customRadio}></span>
-                                                {option}
+                                                <span className={styles.optionLabel}>{option}</span>
                                           </label>
                                     ))}
                               </div>
                         </div>
                   )}
 
-                  {/* Strength Options */}
+                  {/* Strength Options, check the added 90c */}
                   {product.strengthOptions && product.strengthOptions.length > 0 && (
-                        <div className={styles.optionSection}>
+                        <div className={styles.optionsGroup}>
                               <h3 className={styles.optionTitle}>Strength</h3>
-                              <div className={styles.optionGrid2}>
+                              <div className={styles.radioGrid}>
                                     {product.strengthOptions.map((option, index) => (
-                                          <label key={index} className={styles.optionItem}>
+                                          <label key={index} className={styles.optionItem2}>
                                                 <input
                                                       type="radio"
                                                       name="strength"
@@ -56,24 +56,22 @@ const MilkStrengthFlavourOptions = ({
                                                 <span className={styles.optionLabel}>
                                                       {option}
                                                       {option.toLowerCase().includes("extra shot") && (
-                                                            <span className={styles.extraCost2}></span>
+                                                            <span className={styles.extraCost}> + 90 cents</span>
                                                       )}
                                                 </span>
                                           </label>
                                     ))}
-                                    <h4>+ 90 cents</h4>
                               </div>
                         </div>
                   )}
 
-                  {/* Flavour Options */}
+                  {/*Allll flavours get $1.00 next to it */}
                   {product.flavourOptions && product.flavourOptions.length > 0 && (
-                        <div className={styles.optionSection}>
+                        <div className={styles.optionsGroup}>
                               <h3 className={styles.optionTitle}>Flavour</h3>
-                              <div className={styles.extraCost}></div>
-                              <div className={styles.optionGrid2}>
+                              <div className={styles.radioGrid}>
                                     {product.flavourOptions.map((option, index) => (
-                                          <label key={index} className={styles.optionItem}>
+                                          <label key={index} className={styles.optionItem3}>
                                                 <input
                                                       type="radio"
                                                       name="flavour"
@@ -92,7 +90,7 @@ const MilkStrengthFlavourOptions = ({
                               </div>
                         </div>
                   )}
-            </>
+            </div>
       );
 };
 

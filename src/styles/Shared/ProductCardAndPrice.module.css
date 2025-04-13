@@ -67,10 +67,10 @@
       padding: 15px;
 }
 
-.sizeCard2:hover {
+/* .sizeCard2:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
+} */
 
 .sizeCardContent2 {
       display: flex;
