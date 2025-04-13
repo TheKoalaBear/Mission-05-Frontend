@@ -1,5 +1,5 @@
 import React from "react";
-import Content from "../../components/orderFoodHomePage/Content";
+import Content from "../../components/shared/HomePageContent";
 import BottomNav from "../../mcfolders/components/BottomNav";
 import styles from "../../styles/Orderfoodhomepagecss/Orderfoodhomepage.module.css";
 
