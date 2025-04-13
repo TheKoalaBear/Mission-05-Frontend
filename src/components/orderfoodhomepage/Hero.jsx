@@ -10,11 +10,6 @@ const Hero = () => {
                               src="src/assets/orderfoodhomepage_img/image1.png"
                               alt="Hero"
                         />
-                        <img
-                              className={styles.leftArrow}
-                              src="src/assets/orderfoodhomepage_img/leftarrow.png"
-                              alt="Back"
-                        />
                   </div>
                   <div className={styles.textContainer}>
                         <img className={styles.zLogo} src="src/assets/orderfoodhomepage_img/Z-logo.png" alt="Logo" />

@@ -1,49 +1,60 @@
 .mobileFrame {
-  background-color: #ffffff;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+      background-color: #ffffff;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100vw;
-  /* background: linear-gradient(to bottom, #ff6600, #ffcc00); */
-  overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100vw;
+      /* background: linear-gradient(to bottom, #ff6600, #ffcc00); */
+      overflow-y: auto;
 }
 
 .hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-items: flex-end;
-  height: 30vh;
-  background-image: url("src/assets/orderfoodhomepage_img/image1.png");
-  z-index: 3;
-  padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-items: flex-end;
+      height: 30vh;
+      background-image: url("src/assets/orderfoodhomepage_img/image1.png");
+      z-index: 3;
+      padding: 40px;
+}
+
+.leftArrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 32px;
+      height: 52px;
+      z-index: 3;
+      padding: 0px;
+      cursor: pointer;
 }
 
 .zLogo {
-  width: 60px;
-  height: 60px;
+      width: 60px;
+      height: 60px;
 }
 
 .headline {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1e196b;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e196b;
 }
 
 .textContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
 }
 
 /* @media (min-width: 769px) {

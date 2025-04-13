@@ -1,7 +1,7 @@
 .mobileFrame {
       background-color: #ffffff;
       height: 100vh;
-      width: 100vw;
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -13,8 +13,8 @@
       flex-direction: column;
       position: relative;
       height: 100%;
-      width: 321px;
-      /* outline: 2px solid rgb(0, 0, 0); */
-      background: linear-gradient(to bottom, #ffffff, #fbfbfb);
+      width: 100%;
+      outline: 2px solid rgb(0, 0, 0);
+      background: white;
       overflow-y: auto;
 }
