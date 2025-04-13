@@ -1,5 +1,6 @@
 import React from "react";
 import HeaderNav from "../../components/shared/HeaderNav";
+import ProductQuantity from "../../components/shared/ProductQuantity";
 import styles from "../../styles/shared/ShoppingCartPage.module.css";
 import stylesFrame from "../../styles/shared/ProductMobileFrame.module.css";
 
@@ -36,13 +37,13 @@ const ShoppingCartPage = () => {
                         <h2>Confirm your order</h2>
 
                         <CartItem imageSrc="/coffee.png" name="Coffee" options={["Milk", "Extra"]} price="<Price>" />
-                        <QuantityControls />
+                        <ProductQuantity />
 
                         <CartItem imageSrc="/cold-drink.png" name="Cold Drinks" options={[]} price="<Price>" />
-                        <QuantityControls />
+                        <ProductQuantity />
 
                         <CartItem imageSrc="/hot-food.png" name="Hot Food" options={[]} price="<Price>" />
-                        <QuantityControls />
+                        <ProductQuantity />
 
                         <div className={styles.totalSection}>
                               <span>Total</span>
