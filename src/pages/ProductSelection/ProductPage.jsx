@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Nav from "../../components/shared/Nav";
+import Nav from "../../components/shared/HeaderNav";
 import BottomNav from "../../mcfolders/components/BottomNav";
 import ProductCard from "../../components/shared/ProductCardAndPrice";
 import ProductQuantity from "../../components/shared/ProductQuantity";

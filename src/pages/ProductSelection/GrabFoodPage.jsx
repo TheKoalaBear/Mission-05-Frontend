@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "../../components/shared/Nav";
+import HeaderNav from "../../components/shared/HeaderNav";
 import Horizontalscroll from "../../components/shared/Horizontalscroll";
 import Content from "../../components/shared/Content";
 import BottomNav from "../../mcfolders/components/BottomNav";
@@ -9,7 +9,7 @@ const Grabfood = () => {
       return (
             <div className={styles.mobileFrame}>
                   <div className={styles.container}>
-                        <Nav />
+                        <HeaderNav />
                         <Horizontalscroll />
                         <Content category="Savoury" title="Food" />
 

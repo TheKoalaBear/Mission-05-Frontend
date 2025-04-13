@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../../styles/Shared/Nav.module.css";
+import styles from "../../styles/shared/HeaderNav.module.css";
 // import { FaShoppingCart } from "react-icons/fa";
 import { LuShoppingCart } from "react-icons/lu";
 import { AiOutlineArrowLeft } from "react-icons/ai";
