@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import StatusBar from "../../components/shared/StatusBar";
 import Nav from "../../components/shared/Nav";
 import BottomNav from "../../mcfolders/components/BottomNav";
 import ProductCard from "../../components/shared/ProductSize";
 import ProductQuantity from "../../components/shared/ProductQuantity";
-import { useCart } from "./CartContext";
-import useProductOptions from "./UseProductOptions";
+import { useCart } from "../../components/shared/CartContext";
+// import useProductOptions from "../../components/shared/UseProductOptions";
 
 // Styles
 import styles from "../../styles/Shared/ProductMobileFrame.module.css";
@@ -50,7 +49,6 @@ const ProductPage = () => {
       return (
             <div className={styles.mobileFrame}>
                   <div className={styles.container}>
-                        {/* <StatusBar /> */}
                         <Nav />
 
                         <div className={productStyles.wrapped}>
