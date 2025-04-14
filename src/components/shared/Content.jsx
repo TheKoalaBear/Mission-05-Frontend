@@ -3,10 +3,39 @@ import { Link } from "react-router-dom";
 
 import styles from "../../styles/Shared/Content.module.css";
 
+const categoryGroups = ["Hot Drinks", "Cold Drinks", "Savoury", "Vegetarian"];
+
 const Content = ({ category, title }) => {
+      const location = useLocation();
+      const isMakeCombo = location.pathname === "/makecombo";
+
+      const [productsByCategory, setProductsByCategory] = useState({});
       const [products, setProducts] = useState([]);
       const [loading, setLoading] = useState(true);
       const [error, setError] = useState(null);
+      // This is only for the make combo page
+      useEffect(() => {
+            const fetchAllCategories = async () => {
+                  try {
+                        const allResults = {};
+                        for (const cat of categoryGroups) {
+                              const response = await fetch(`/api/products?category=${encodeURIComponent(cat)}`);
+                              if (!response.ok) throw new Error("Failed to fetch products");
+                              const data = await response.json();
+                              allResults[cat] = data;
+                        }
+                        setProductsByCategory(allResults);
+                  } catch (error) {
+                        setError(error.message);
+                  } finally {
+                        setLoading(false);
+                  }
+            };
+
+            if (isMakeCombo) {
+                  fetchAllCategories();
+            }
+      }, [isMakeCombo]);
 
       useEffect(() => {
             const fetchProducts = async () => {
