@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import MakeComboHorizontalScrollComponentForContent from "./MakeComboHorizontalScrollComponentForContent";
 
 import styles from "../../styles/Shared/Content.module.css";
 
-const categoryGroups = ["Hot Drinks", "Cold Drinks", "Savoury", "Vegetarian"];
+const categoryGroups = ["Hot Drink", "Cold Drink", "Savoury", "Vegetarian"];
 
 const Content = ({ category, title }) => {
       const location = useLocation();
@@ -13,59 +15,36 @@ const Content = ({ category, title }) => {
       const [products, setProducts] = useState([]);
       const [loading, setLoading] = useState(true);
       const [error, setError] = useState(null);
-      // This is only for the make combo page
-      useEffect(() => {
-            const fetchAllCategories = async () => {
-                  try {
-                        const allResults = {};
-                        for (const cat of categoryGroups) {
-                              const response = await fetch(`/api/products?category=${encodeURIComponent(cat)}`);
-                              if (!response.ok) throw new Error("Failed to fetch products");
-                              const data = await response.json();
-                              allResults[cat] = data;
-                        }
-                        setProductsByCategory(allResults);
-                  } catch (error) {
-                        setError(error.message);
-                  } finally {
-                        setLoading(false);
-                  }
-            };
-
-            if (isMakeCombo) {
-                  fetchAllCategories();
-            }
-      }, [isMakeCombo]);
 
       useEffect(() => {
-            const fetchProducts = async () => {
+            const fetchAll = async () => {
                   setLoading(true);
                   try {
-                        const response = await fetch(`/api/products?category=${category}`);
-                        if (!response.ok) {
-                              throw new Error("Failed to fetch products");
+                        if (isMakeCombo) {
+                              const results = {};
+                              for (const cat of categoryGroups) {
+                                    const res = await fetch(`/api/products?category=${encodeURIComponent(cat)}`);
+                                    if (!res.ok) throw new Error("Failed to fetch products");
+                                    results[cat] = await res.json();
+                              }
+                              setProductsByCategory(results);
+                        } else if (category) {
+                              const res = await fetch(`/api/products?category=${category}`);
+                              if (!res.ok) throw new Error("Failed to fetch products");
+                              setProducts(await res.json());
                         }
-                        const data = await response.json();
-                        setProducts(data);
-                  } catch (error) {
-                        setError(error.message);
+                  } catch (err) {
+                        setError(err.message);
                   } finally {
                         setLoading(false);
                   }
             };
 
-            if (category) {
-                  fetchProducts();
-            }
-      }, [category]);
+            fetchAll();
+      }, [isMakeCombo, category]);
 
-      if (loading) {
-            return <div>Loading products...</div>;
-      }
-
-      if (error) {
-            return <div>Error: {error}</div>;
-      }
+      if (loading) return <div>Loading products...</div>;
+      if (error) return <div>Error: {error}</div>;
 
       return (
             <>
@@ -74,26 +53,34 @@ const Content = ({ category, title }) => {
                               <h1 className={styles.title}>{title}</h1>
                         </div>
                   )}
-                  <div className={styles.content}>
-                        {products.length > 0 ? (
-                              products.map((product) => (
-                                    <Link
-                                          to={`/productpage/${product._id}`}
-                                          key={product._id}
-                                          className={styles.productCard}
-                                    >
-                                          <img
-                                                src={product.image?.[0]}
-                                                alt={product.name}
-                                                className={styles.productImage}
-                                          />
-                                          <h2>{product.name}</h2>
-                                    </Link>
-                              ))
-                        ) : (
-                              <p>No products available in this category.</p>
-                        )}
-                  </div>
+
+                  {isMakeCombo ? (
+                        <MakeComboHorizontalScrollComponentForContent
+                              productsByCategory={productsByCategory}
+                              categoryGroups={categoryGroups}
+                        />
+                  ) : (
+                        <div className={styles.content}>
+                              {products.length > 0 ? (
+                                    products.map((product) => (
+                                          <Link
+                                                to={`/productpage/${product._id}`}
+                                                key={product._id}
+                                                className={styles.productCard}
+                                          >
+                                                <img
+                                                      src={product.image?.[0]}
+                                                      alt={product.name}
+                                                      className={styles.productImage}
+                                                />
+                                                <h2>{product.name}</h2>
+                                          </Link>
+                                    ))
+                              ) : (
+                                    <p>No products available in this category.</p>
+                              )}
+                        </div>
+                  )}
             </>
       );
 };
