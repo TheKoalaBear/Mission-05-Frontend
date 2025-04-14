@@ -6,6 +6,7 @@ import {
   FaBatteryThreeQuarters,
   FaBars,
   FaSignOutAlt,
+  FaGasPump,
 } from "react-icons/fa";
 import styles from "../css/Dashboard.module.css";
 import { authService } from "../../services/authService";
@@ -58,11 +59,13 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboard}>
       {/* Header Section */}
+      <div className={styles.headerBG}></div>
       <div className={styles.header}>
         <div className={styles.greeting}>
           <h1>Kia ora {user?.firstName || "Guest"},</h1>
           <div className={styles.sharetankInfo}>
-            <span>{user?.firstName}'s Sharetank</span>
+            <FaGasPump style={{ fontSize: "1.3em" }} />
+            <span style={{ fontSize: "1.3em" }}> Sharetank</span>
             <p>
               Maximize Your Fuel,
               <br />

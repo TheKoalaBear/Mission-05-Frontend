@@ -39,6 +39,13 @@
   margin: 0;
 }
 
+.topUpContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .cardSection {
   width: 100%;
   max-width: 400px;
@@ -75,7 +82,8 @@
 }
 
 .cardIcon {
-  color: #ff9800; /* Orange for icon placeholders */
+  margin-left: auto; /* Push icon to the right */
+  color: #666; /* Adjust icon color if needed */
 }
 
 .amountDisplay {
@@ -151,4 +159,44 @@
 .buttonContainer {
   display: flex;
   justify-content: center;
+}
+
+/* Style for loading placeholder */
+.loadingPlaceholder {
+  padding: 1rem;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  min-height: 50px; /* Ensure it has some height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for Add Card button */
+.addCardButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem;
+  background-color: #e8eaf6; /* Light blue background */
+  color: #1a237e; /* Dark blue text */
+  border: 1px dashed #9fa8da; /* Dashed border */
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.addCardButton:hover {
+  background-color: #c5cae9;
+}
+
+.addCardIcon {
+  font-size: 1.2rem;
 }

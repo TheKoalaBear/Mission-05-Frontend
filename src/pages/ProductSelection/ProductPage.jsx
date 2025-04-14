@@ -25,7 +25,7 @@ const ProductPage = () => {
     setSelectedFlavour,
   } = useProductOptions();
 
-  const { addToCart } = useCart();
+  //   const { addToCart } = useCart();
 
   useEffect(() => {
     // Fetch product data from MongoDB
