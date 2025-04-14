@@ -25,7 +25,6 @@ const TopUpPage = () => {
     setSavedCardData(null);
     setTankBalance(null);
 
-    // --- Fetch Card Summary from Backend ---
     const fetchCardSummary = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -63,9 +62,6 @@ const TopUpPage = () => {
             response.statusText
           );
           if (response.status === 401 || response.status === 403) {
-            // Optional: Handle unauthorized access, e.g., clear token, redirect to login
-            // localStorage.removeItem("token");
-            // navigate('/login');
             console.error(
               "Unauthorized access fetching payment summary. Please log in again."
             );
@@ -77,9 +73,7 @@ const TopUpPage = () => {
         return null;
       }
     };
-    // ---------------------------------------
 
-    // --- Fetch Tank Balance from Backend API --- (MODIFIED)
     const fetchTankBalance = async () => {
       const token = localStorage.getItem("token");
       const userId = localStorage.getItem("userId"); // Get userId
@@ -130,10 +124,8 @@ const TopUpPage = () => {
         return null;
       }
     };
-    // -------------------------------------------
 
-    // Run fetches concurrently and update state when both complete
-    Promise.all([fetchCardSummary(), fetchTankBalance()]) // Both are now async
+    Promise.all([fetchCardSummary(), fetchTankBalance()])
       .then(([cardData, balanceData]) => {
         setSavedCardData(cardData);
         setTankBalance(balanceData);
@@ -144,9 +136,7 @@ const TopUpPage = () => {
       .finally(() => {
         setIsLoading(false);
       });
-
-    // No cleanup needed for fetch, but keep if other async ops added
-  }, [navigate]); // Added navigate as a dependency because it *might* be used in error handling
+  }, [navigate]);
 
   const handleSliderChange = (event) => {
     setTopUpAmount(parseFloat(event.target.value));
@@ -163,70 +153,141 @@ const TopUpPage = () => {
       return;
     }
 
+    let phoneNumber = null;
+    const userString = localStorage.getItem("user");
+    if (userString) {
+      try {
+        const user = JSON.parse(userString);
+        phoneNumber = user?.phoneNumber;
+      } catch (e) {
+        console.error("Failed to parse user data from localStorage:", e);
+      }
+    }
+
+    if (!phoneNumber) {
+      alert("Could not retrieve user phone number. Please log in again.");
+      // Optionally navigate to login
+      return;
+    }
+
+    const calculatedLiters = topUpAmount / petrolPrice;
+
     console.log(
-      `Attempting to top up ${topUpAmount.toFixed(2)} using card ending in ${
-        savedCardData.last4
-      }`
+      `Attempting to record transaction: ${topUpAmount.toFixed(
+        2
+      )} ($), ${calculatedLiters.toFixed(3)} (L) for ${phoneNumber}`
     );
 
-    // --- Perform Top-up API Call ---
+    // --- Perform Top-up and Transaction Recording API Calls ---
     setIsLoading(true);
+    let topupResponseData = null; // To store data from the first call
     try {
       const token = localStorage.getItem("token");
       if (!token) {
         console.error("Authentication error. Please log in again.");
         setIsLoading(false);
+        // Optionally navigate to login
         return;
       }
 
-      const response = await fetch("/api/tanks/topup", {
+      // === Step 1: Call the endpoint to update the tank balance ===
+      const topupResponse = await fetch("/api/tanks/topup", {
+        // Endpoint that updates balance
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          amount: parseFloat(topUpAmount.toFixed(2)),
+          amount: parseFloat(topUpAmount.toFixed(2)), // Send dollar amount
         }),
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Top-up successful:", result);
-        if (typeof result.newBalance === "number") {
-          setTankBalance(result.newBalance);
-          console.log(
-            `Top-up successful! New balance: ${result.newBalance.toFixed(
-              2
-            )} Litres`
-          );
-          setTopUpAmount(0);
-          navigate("/sharetank");
-        } else {
-          console.error("Backend response missing newBalance:", result);
+      if (!topupResponse.ok) {
+        // Handle error from the top-up call specifically
+        const errorData = await topupResponse
+          .json()
+          .catch(() => ({ message: "Failed to process top-up." }));
+        console.error("Tank top-up failed:", topupResponse.status, errorData);
+        alert(
+          `Top-up failed: ${errorData.message || topupResponse.statusText}`
+        );
+        setIsLoading(false);
+        return; // Stop if balance update failed
+      }
+
+      topupResponseData = await topupResponse.json(); // Get { newBalance, litresAdded }
+      console.log("Tank balance updated successfully:", topupResponseData);
+
+      // === Step 2: If balance update was successful, record the transaction ===
+      if (
+        topupResponseData &&
+        typeof topupResponseData.litresAdded === "number"
+      ) {
+        const transactionResponse = await fetch("/api/transactions", {
+          // Endpoint that records history
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            phoneNumber: phoneNumber,
+            litersFilled: parseFloat(topupResponseData.litresAdded.toFixed(3)), // Use litresAdded from step 1
+            pricePerLiter: petrolPrice,
+            totalCost: parseFloat(topUpAmount.toFixed(2)),
+          }),
+        });
+
+        if (!transactionResponse.ok) {
+          // Log error but potentially proceed since balance was updated
+          const errorData = await transactionResponse
+            .json()
+            .catch(() => ({ message: "Failed to record transaction." }));
           console.error(
-            "Top-up processed, but failed to update balance display."
+            "Transaction recording failed (but balance updated):",
+            transactionResponse.status,
+            errorData
           );
-          navigate("/sharetank");
+          alert(
+            `Warning: Top-up successful, but failed to record transaction history: ${
+              errorData.message || transactionResponse.statusText
+            }`
+          );
+        } else {
+          const transactionResult = await transactionResponse.json();
+          console.log("Transaction recorded successfully:", transactionResult);
         }
       } else {
-        const errorData = await response
-          .json()
-          .catch(() => ({ message: "An unknown error occurred." }));
-        console.error("Top-up failed:", response.status, errorData);
         console.error(
-          `Top-up failed: ${errorData.message || response.statusText}`
+          "Could not record transaction: Invalid data received from top-up step.",
+          topupResponseData
+        );
+        alert(
+          "Warning: Top-up successful, but could not record transaction history due to missing data."
         );
       }
+
+      // --- Post-Success Actions (after both calls or if first succeeded) ---
+      alert(`Top-up of $${topUpAmount.toFixed(2)} successful!`);
+      if (
+        topupResponseData &&
+        typeof topupResponseData.newBalance === "number"
+      ) {
+        setTankBalance(topupResponseData.newBalance); // Update local state
+      }
+      setTopUpAmount(0);
+      navigate("/sharetank");
+      // ---------------------------------------------------------------------
     } catch (error) {
-      console.error("Error during top-up API call:", error);
-      console.error(
-        "An network error occurred during top-up. Please try again."
+      console.error("Error during top-up process:", error);
+      alert(
+        "An network error occurred during the top-up process. Please try again."
       );
     } finally {
       setIsLoading(false);
     }
-    // --------------------------------
+    // --------------------------------------------------------
   };
 
   const handleAddCard = () => {

@@ -162,7 +162,12 @@ const ShareTank = () => {
             <FaPlus />
           </button>
         </div>
-        <button className={styles.activityButton}>See tank activity</button>
+        <button
+          onClick={() => navigate("/tank-activity")}
+          className={styles.activityButton}
+        >
+          See tank activity
+        </button>
       </div>
 
       {/* Action List */}
