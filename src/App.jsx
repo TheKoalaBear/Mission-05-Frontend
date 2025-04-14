@@ -19,6 +19,7 @@ import Vegeoptions from "./pages/ProductSelection/VegeOptions";
 import Makecombo from "./pages/ProductSelection/MakeCombo";
 import Productpage from "./pages/ProductSelection/ProductPage";
 import OrderFoodHomepage from "./pages/ProductSelection/OrderFoodHomePage";
+import TankActivity from "./mcfolders/pages/TankActivity";
 import "./App.css";
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
           <Route path="/personal-info" element={<Dashboard />} />
           <Route path="/notifications" element={<Dashboard />} />
           <Route path="/loyalty" element={<Dashboard />} />
-          <Route path="/activity" element={<Dashboard />} />
+          <Route path="/tank-activity" element={<TankActivity />} />
           <Route path="/ev-tag" element={<Dashboard />} />
 
           {/* Promotions Routes */}
@@ -68,7 +69,7 @@ function App() {
 
           {/* How It Works Route */}
           <Route path="/how-it-works" element={<HowItWorks />} />
-            
+
           {/* Puduct Pages */}
           <Route path="/" element={<Onboarding />} />
           <Route path="/orderfood" element={<OrderFoodHomepage />} />
@@ -82,7 +83,6 @@ function App() {
       </div>
     </Router>
   );
-
 }
 
 export default App;
