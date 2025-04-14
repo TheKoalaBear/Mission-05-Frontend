@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // import StatusBar from "../../components/shared/StatusBar";
 import Nav from "../../components/shared/Nav";
-import BottomNav from "../../mcfolders/components/BottomNav";
+import BottomNav from "../../components/global/BottomNav";
 import ProductCard from "../../components/shared/ProductSize";
 import ProductQuantity from "../../components/shared/ProductQuantity";
 import { useCart } from "./CartContext";

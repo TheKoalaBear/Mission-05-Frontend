@@ -4,13 +4,13 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Signup from "./mcfolders/pages/Signup";
-import Onboarding from "./mcfolders/pages/Onboarding";
-import Dashboard from "./mcfolders/pages/Dashboard";
-import ShareTank from "./mcfolders/pages/ShareTank";
-import PaymentDetails from "./mcfolders/pages/PaymentDetails";
-import HowItWorks from "./mcfolders/pages/HowItWorks";
-import TopUpPage from "./mcfolders/pages/TopUpPage";
+import Signup from "./pages/SignUp/SignUp";
+import Onboarding from "./pages/SignUp/Onboarding";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import ShareTank from "./pages/Sharetank/ShareTank";
+import PaymentDetails from "./pages/PaymentDetails/PaymentDetails";
+import HowItWorks from "./pages/Sharetank/HowItWorks";
+import TopUpPage from "./pages/Sharetank/TopUpPage";
 import { CartProvider } from "./pages/ProductSelection/CartContext";
 import Orderhotdrinks from "./pages/ProductSelection/OrderHotDrinks";
 import Ordercolddrinks from "./pages/ProductSelection/OrderColdDrinks";
@@ -19,7 +19,7 @@ import Vegeoptions from "./pages/ProductSelection/VegeOptions";
 import Makecombo from "./pages/ProductSelection/MakeCombo";
 import Productpage from "./pages/ProductSelection/ProductPage";
 import OrderFoodHomepage from "./pages/ProductSelection/OrderFoodHomePage";
-import TankActivity from "./mcfolders/pages/TankActivity";
+import TankActivity from "./pages/Sharetank/TankActivity";
 import "./App.css";
 
 function App() {

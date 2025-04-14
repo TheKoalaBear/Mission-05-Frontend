@@ -6,8 +6,8 @@ import {
   FaCcMastercard,
   FaPlusCircle,
 } from "react-icons/fa";
-import styles from "../css/TopUpPage.module.css";
-import BottomNav from "../../mcfolders/components/BottomNav";
+import styles from "./TopUpPage.module.css";
+import BottomNav from "../../components/global/BottomNav";
 
 const TopUpPage = () => {
   const navigate = useNavigate();

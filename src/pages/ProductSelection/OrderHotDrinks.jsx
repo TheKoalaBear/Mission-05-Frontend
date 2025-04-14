@@ -3,7 +3,7 @@ import React from "react";
 import Nav from "../../components/shared/Nav";
 import Horizontalscroll from "../../components/shared/Horizontalscroll";
 import Content from "../../components/shared/Content";
-import BottomNav from "../../mcfolders/components/BottomNav";
+import BottomNav from "../../components/global/BottomNav";
 import styles from "../../styles/Orderhotdrinkscss/Orderhotdrinks.module.css";
 
 const Orderhotdrinks = () => {

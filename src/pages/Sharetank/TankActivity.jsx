@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import styles from "../css/TankActivity.module.css"; // Corrected path
-import BottomNav from "../components/BottomNav"; // Corrected path
+import styles from "./TankActivity.module.css"; // Corrected path
+import BottomNav from "../../components/global/BottomNav"; // Corrected path
 
 const TankActivity = () => {
   const navigate = useNavigate();

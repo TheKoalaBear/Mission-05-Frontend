@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../../services/authService";
-import styles from "../css/Signup.module.css";
+import styles from "./Signup.module.css";
 import ZEnergyLogo from "../../assets/orderfoodhomepage_img/Z_Energy_logo.png";
 import { FaArrowLeft } from "react-icons/fa";
 

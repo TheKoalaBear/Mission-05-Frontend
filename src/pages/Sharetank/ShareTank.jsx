@@ -12,11 +12,11 @@ import {
   FaBars,
   FaSignOutAlt,
 } from "react-icons/fa";
-import styles from "../css/ShareTank.module.css";
+import styles from "./ShareTank.module.css";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../../services/authService";
 import { tankService } from "../../services/tankService";
-import BottomNav from "../components/BottomNav";
+import BottomNav from "../../components/global/BottomNav";
 
 const ShareTank = () => {
   const navigate = useNavigate();

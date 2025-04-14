@@ -8,9 +8,9 @@ import {
   FaSignOutAlt,
   FaGasPump,
 } from "react-icons/fa";
-import styles from "../css/Dashboard.module.css";
+import styles from "./Dashboard.module.css";
 import { authService } from "../../services/authService";
-import BottomNav from "../../mcfolders/components/BottomNav";
+import BottomNav from "../../components/global/BottomNav";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);

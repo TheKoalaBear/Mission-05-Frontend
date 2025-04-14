@@ -2,7 +2,7 @@ import React from "react";
 // import StatusBar from "../../components/shared/StatusBar";
 import Hero from "../../components/orderFoodHomePage/Hero";
 import Content from "../../components/orderFoodHomePage/Content";
-import BottomNav from "../../mcfolders/components/BottomNav";
+import BottomNav from "../../components/global/BottomNav";
 import styles from "../../styles/Orderfoodhomepagecss/Orderfoodhomepage.module.css";
 
 const Orderfoodhomepage = () => {
