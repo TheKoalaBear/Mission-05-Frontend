@@ -1,0 +1,232 @@
+.container {
+  padding: 20px;
+  background-color: white;
+  min-height: 100vh;
+  -webkit-overflow-scrolling: touch;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: #333;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerTitle h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a237e;
+}
+
+.cardIcon {
+  color: #1a237e;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroup label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a237e;
+}
+
+.cardNumberInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cardNumberInput input {
+  width: 100%;
+  padding-right: 80px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.cardTypes {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.cardTypes img {
+  height: 20px;
+  width: auto;
+}
+
+.labelWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.helpIcon {
+  color: #666;
+  font-size: 16px;
+}
+
+input {
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.saveLaterButton,
+.saveButton {
+  flex: 1;
+  padding: 14px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.saveLaterButton {
+  background: none;
+  border: 1px solid #1a237e;
+  color: #1a237e;
+}
+
+.saveButton {
+  background: #1a237e;
+  border: none;
+  color: white;
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  .header {
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .headerTitle h1 {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .form {
+    gap: 15px;
+  }
+
+  .formGroup label {
+    font-size: 13px;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .saveLaterButton,
+  .saveButton {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 12px;
+  }
+
+  .header {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .headerTitle h1 {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+
+  .form {
+    gap: 12px;
+  }
+
+  .formGroup label {
+    font-size: 12px;
+  }
+
+  input {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .saveLaterButton,
+  .saveButton {
+    padding: 10px;
+    font-size: 12px;
+  }
+}
+
+/* Safe area insets for modern mobile devices */
+@supports (padding: max(0px)) {
+  .container {
+    padding: max(20px, env(safe-area-inset-top))
+      max(20px, env(safe-area-inset-right))
+      max(20px, env(safe-area-inset-bottom))
+      max(20px, env(safe-area-inset-left));
+  }
+}
