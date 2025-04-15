@@ -11,17 +11,19 @@ const MakeComboHorizontalScrollComponentForContent = ({ productsByCategory, cate
       const handleMouseDown = (e, title) => {
             setIsDragging(true);
             const scrollEl = scrollRefs.current[title];
-            setStartX(e.pageX - scrollRefs[title].offsetLeft);
-            setScrollLeft(scrollRefs[title].scrollLeft);
+            setStartX(e.pageX - scrollEl.offsetLeft);
+            setScrollLeft(scrollEl.scrollLeft);
       };
 
       const handleMouseMove = (e, title) => {
             if (!isDragging) return;
-            const x = e.pageX - scrollRefs[title].offsetLeft;
+            const scrollEl = scrollRefs.current[title];
+            if (!scrollEl) return;
+            const x = e.pageX - scrollEl.offsetLeft;
             const walk = (x - startX) * 1.5;
-            scrollRefs[title].scrollLeft = scrollLeft - walk;
+            scrollEl.scrollLeft = scrollLeft - walk;
       };
-
+      // keep this because scroll acts weird if removed
       const handleMouseUpOrLeave = (title) => {
             setIsDragging(false);
       };
@@ -38,7 +40,10 @@ const MakeComboHorizontalScrollComponentForContent = ({ productsByCategory, cate
                                     onMouseMove={(e) => handleMouseMove(e, title)}
                                     onMouseUp={() => handleMouseUpOrLeave(title)}
                                     onMouseLeave={() => handleMouseUpOrLeave(title)}
-                                    style={{ cursor: isDragging ? "grabbing" : "grab" }}
+                                    style={{
+                                          cursor: isDragging ? "grabbing" : "grab",
+                                          userSelect: isDragging ? "none" : "auto",
+                                    }}
                               >
                                     {productsByCategory[title]?.length > 0 ? (
                                           productsByCategory[title].map((product) => (
