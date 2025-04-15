@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import styles from "../../styles/Shared/Content.module.css";
 
 const MakeComboHorizontalScrollComponentForContent = ({ productsByCategory, categoryGroups }) => {
+      const scrollRef = useRef({});
+      const [isDragging, setIsDragging] = useState(false);
+      const [startX, setStartX] = useState(0);
+      const [scrollLeft, setScrollLeft] = useState(0);
+
       return (
             <>
                   {categoryGroups.map((title) => (
