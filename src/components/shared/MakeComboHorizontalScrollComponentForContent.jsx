@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/Shared/Content.module.css";
 
 const MakeComboHorizontalScrollComponentForContent = ({ productsByCategory, categoryGroups }) => {
-      const scrollRef = useRef({});
+      const scrollRefs = useRef({});
       const [isDragging, setIsDragging] = useState(false);
       const [startX, setStartX] = useState(0);
       const [scrollLeft, setScrollLeft] = useState(0);
@@ -11,15 +11,15 @@ const MakeComboHorizontalScrollComponentForContent = ({ productsByCategory, cate
       const handleMouseDown = (e, title) => {
             setIsDragging(true);
             const scrollEl = scrollRefs.current[title];
-            setStartX(e.pageX - scrollRef[title].offsetLeft);
-            setScrollLeft(scrollRef[title].scrollLeft);
+            setStartX(e.pageX - scrollRefs[title].offsetLeft);
+            setScrollLeft(scrollRefs[title].scrollLeft);
       };
 
       const handleMouseMove = (e, title) => {
             if (!isDragging) return;
-            const x = e.pageX - scrollRef[title].offsetLeft;
+            const x = e.pageX - scrollRefs[title].offsetLeft;
             const walk = (x - startX) * 1.5;
-            scrollRef[title].scrollLeft = scrollLeft - walk;
+            scrollRefs[title].scrollLeft = scrollLeft - walk;
       };
 
       const handleMouseUpOrLeave = (title) => {
@@ -32,7 +32,7 @@ const MakeComboHorizontalScrollComponentForContent = ({ productsByCategory, cate
                         <div key={title} className={styles.horizontalSection}>
                               <h2 className={styles.subTitle}>{title}</h2>
                               <div
-                                    ref={(el) => (scrollRef.current[title] = el)}
+                                    ref={(el) => (scrollRefs.current[title] = el)}
                                     className={styles.horizontalScroll}
                                     onMouseDown={(e) => handleMouseDown(e, title)}
                                     onMouseMove={(e) => handleMouseMove(e, title)}
