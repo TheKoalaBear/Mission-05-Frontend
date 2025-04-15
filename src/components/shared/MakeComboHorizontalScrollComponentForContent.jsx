@@ -8,12 +8,38 @@ const MakeComboHorizontalScrollComponentForContent = ({ productsByCategory, cate
       const [startX, setStartX] = useState(0);
       const [scrollLeft, setScrollLeft] = useState(0);
 
+      const handleMouseDown = (e, title) => {
+            setIsDragging(true);
+            const scrollEl = scrollRefs.current[title];
+            setStartX(e.pageX - scrollRef[title].offsetLeft);
+            setScrollLeft(scrollRef[title].scrollLeft);
+      };
+
+      const handleMouseMove = (e, title) => {
+            if (!isDragging) return;
+            const x = e.pageX - scrollRef[title].offsetLeft;
+            const walk = (x - startX) * 1.5;
+            scrollRef[title].scrollLeft = scrollLeft - walk;
+      };
+
+      const handleMouseUpOrLeave = (title) => {
+            setIsDragging(false);
+      };
+
       return (
             <>
                   {categoryGroups.map((title) => (
                         <div key={title} className={styles.horizontalSection}>
                               <h2 className={styles.subTitle}>{title}</h2>
-                              <div className={styles.horizontalScroll}>
+                              <div
+                                    ref={(el) => (scrollRef.current[title] = el)}
+                                    className={styles.horizontalScroll}
+                                    onMouseDown={(e) => handleMouseDown(e, title)}
+                                    onMouseMove={(e) => handleMouseMove(e, title)}
+                                    onMouseUp={() => handleMouseUpOrLeave(title)}
+                                    onMouseLeave={() => handleMouseUpOrLeave(title)}
+                                    style={{ cursor: isDragging ? "grabbing" : "grab" }}
+                              >
                                     {productsByCategory[title]?.length > 0 ? (
                                           productsByCategory[title].map((product) => (
                                                 <Link
