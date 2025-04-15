@@ -1,8 +1,9 @@
 import { useState } from "react";
-import creditCardIcon from "../assets/images/creditcard.svg";
-import visaLogo from "../assets/images/visa.svg";
-import mastercardLogo from "../assets/images/mastercard.svg";
+import creditCardIcon from "../../../assets/images/creditcard.svg";
+import visaLogo from "../../../assets/images/visa.svg";
+import mastercardLogo from "../../../assets/images/mastercard.svg";
 import "./PaymentForm.css";
+import { useNavigate } from "react-router-dom";
 
 const PaymentForm = ({ onPaymentSubmit, onBackClick }) => {
   const [formData, setFormData] = useState({
@@ -233,3 +234,14 @@ const PaymentForm = ({ onPaymentSubmit, onBackClick }) => {
 };
 
 export default PaymentForm;
+
+// Navigation wrapper for use in routing
+export const PaymentFormWithNav = () => {
+  const navigate = useNavigate();
+  return (
+    <PaymentForm
+      onBackClick={() => navigate("/vehicle-preferences")}
+      onPaymentSubmit={() => navigate("/payment/success")}
+    />
+  );
+};

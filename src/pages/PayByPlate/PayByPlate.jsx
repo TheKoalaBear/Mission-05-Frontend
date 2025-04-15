@@ -1,8 +1,9 @@
-import creditCardIcon from "../assets/images/creditcard.svg";
-import carIllustration from "../assets/images/car-illustration.svg";
-import zLogo from "../assets/images/z.png";
+import creditCardIcon from "../../assets/images/creditcard.svg";
+import carIllustration from "../../assets/images/car-illustration.svg";
+import zLogo from "../../assets/images/z.png";
 import { IoMdArrowBack } from "react-icons/io";
 import "./PayByPlate.css";
+import { useNavigate } from "react-router-dom";
 
 const PayByPlate = ({
   onAddVehicle,
@@ -232,3 +233,23 @@ const PayByPlate = ({
 };
 
 export default PayByPlate;
+
+// Navigation wrapper for use in routing
+export const PayByPlateWithNav = ({ vehicleData, setIsEditing }) => {
+  const navigate = useNavigate();
+  return (
+    <PayByPlate
+      vehicleData={vehicleData}
+      onAddVehicle={() => {
+        setIsEditing(false);
+        navigate("/vehicle-preferences");
+      }}
+      onEditVehicle={() => {
+        setIsEditing(true);
+        navigate("/vehicle-preferences");
+      }}
+      onNavigateToPriceComparison={() => navigate("/price-comparison")}
+      onBackClick={() => navigate("/price-comparison")}
+    />
+  );
+};

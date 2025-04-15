@@ -1,9 +1,20 @@
-import creditCardIcon from "../assets/images/creditcard.svg";
-import "./PaymentSuccess.css";
+import { useEffect } from "react";
+import creditCardIcon from "../../../assets/images/creditcard.svg";
+import "./PaymentLoading.css";
+import { useNavigate } from "react-router-dom";
 
-const PaymentSuccess = ({ onGoHome }) => {
+const PaymentLoading = ({ onLoadComplete }) => {
+  useEffect(() => {
+    // Simulate loading time and call the callback to navigate
+    const timer = setTimeout(() => {
+      if (onLoadComplete) onLoadComplete();
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [onLoadComplete]);
+
   return (
-    <div className="payment-success-container">
+    <div className="payment-loading-container">
       {/* Status Bar */}
       <div className="status-bar-container">
         <div className="status-bar">
@@ -84,74 +95,30 @@ const PaymentSuccess = ({ onGoHome }) => {
 
       {/* Main Content */}
       <div className="main-content">
-        {/* Header with Back Button and Add Payment method */}
+        {/* Header with Logo and Add Payment method */}
         <div className="header">
-          <div className="header-left">
-            <button className="back-button" onClick={onGoHome} aria-label="Go back" tabIndex="0">
-              <svg
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18 8L10 15L18 22"
-                  stroke="#1E196B"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <div className="title-section">
-              <div className="icon-container">
-                <img src={creditCardIcon} alt="Credit Card" className="credit-card-icon" />
-              </div>
-              <span className="title">Add Payment method</span>
+          <div className="title-section">
+            <div className="icon-container">
+              <img src={creditCardIcon} alt="Credit Card" className="credit-card-icon" />
             </div>
+            <span className="title">Add Payment method</span>
           </div>
         </div>
 
-        {/* Success Content */}
-        <div className="success-content">
-          <div className="success-icon-container">
-            <div className="success-icon-outer-circle"></div>
-            <div className="success-icon-middle-circle"></div>
-            <div className="success-icon-inner-circle">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 12L10 17L19 8"
-                  stroke="#FFFFFF"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          </div>
-          <div className="success-message">
-            <h2 className="success-title">Payment method added successful</h2>
-            <p className="success-subtitle">Thank you for choosing Z app</p>
-          </div>
-          <button
-            className="home-button"
-            onClick={onGoHome}
-            aria-label="Go back to home"
-            tabIndex="0"
-          >
-            Go back to home
-          </button>
+        {/* Loading Content */}
+        <div className="loading-content">
+          <div className="loading-text">Loading...</div>
+          <div className="loading-subtext">Please wait while the page loads</div>
         </div>
       </div>
     </div>
   );
 };
 
-export default PaymentSuccess;
+export default PaymentLoading;
+
+// Navigation wrapper for use in routing
+export const PaymentLoadingWithNav = () => {
+  const navigate = useNavigate();
+  return <PaymentLoading onLoadComplete={() => navigate("/payment")} />;
+};

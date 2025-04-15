@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import "./VehiclePreferences.css";
 import { FaCarSide, FaBell } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
-import creditCardIcon from "../assets/images/creditcard.svg";
-import zLogo from "../assets/images/z.png";
+import creditCardIcon from "../../assets/images/creditcard.svg";
+import zLogo from "../../assets/images/z.png";
+import { useNavigate } from "react-router-dom";
 
 const VehiclePreferences = ({
   onBackClick,
@@ -289,3 +290,41 @@ const VehiclePreferences = ({
 };
 
 export default VehiclePreferences;
+
+// Navigation wrapper for use in routing
+export const VehiclePreferencesWithNav = ({ vehicleData, isEditing, handleSaveVehicle }) => {
+  const navigate = useNavigate();
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSave = async (data) => {
+    try {
+      setIsSaving(true);
+      setError(null);
+
+      const result = await handleSaveVehicle(data);
+
+      if (result.success) {
+        navigate("/pay-by-plate");
+      } else {
+        setError(result.error);
+      }
+    } catch {
+      setError("An unexpected error occurred");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  return (
+    <VehiclePreferences
+      onBackClick={() => navigate("/pay-by-plate")}
+      onSave={handleSave}
+      existingVehicle={isEditing ? vehicleData : null}
+      isEditing={isEditing}
+      onAddPayment={() => navigate("/payment/processing")}
+      isSaving={isSaving}
+      error={error}
+    />
+  );
+};

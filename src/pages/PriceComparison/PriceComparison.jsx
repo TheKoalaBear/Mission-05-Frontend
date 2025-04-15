@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./PriceComparison.css";
-import zLogo from "../assets/images/z-logo.png";
-import zFuelLogo from "../assets/images/z.png";
+import zLogo from "../../assets/images/z-logo.png";
+import zFuelLogo from "../../assets/images/z.png";
 import { FaHome } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const PriceComparison = ({ onNavigateToPayByPlate }) => {
   const [currentTime, setCurrentTime] = useState(getCurrentTime());
@@ -607,4 +608,11 @@ const PriceComparison = ({ onNavigateToPayByPlate }) => {
   );
 };
 
+// Export the base component
 export default PriceComparison;
+
+// Navigation wrapper for use in routing
+export const PriceComparisonWithNav = () => {
+  const navigate = useNavigate();
+  return <PriceComparison onNavigateToPayByPlate={() => navigate("/pay-by-plate")} />;
+};
