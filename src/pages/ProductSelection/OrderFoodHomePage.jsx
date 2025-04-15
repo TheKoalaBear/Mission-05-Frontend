@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Content from "../../components/shared/HomePageContent";
-import BottomNav from "../../mcfolders/components/BottomNav";
+import BottomNav from "../../components/global/BottomNav";
 import styles from "../../styles/shared/Orderfoodhomepage.module.css";
 
 const Orderfoodhomepage = () => {

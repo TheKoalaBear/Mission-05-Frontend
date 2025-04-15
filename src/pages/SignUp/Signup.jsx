@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../../services/authService";
-import styles from "../css/Signup.module.css";
+import styles from "./Signup.module.css";
 import ZEnergyLogo from "../../assets/orderfoodhomepage_img/Z_Energy_logo.png";
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -21,10 +21,10 @@ const LoadingIndicator = ({ message = "Please wait..." }) => (
 // Combined Signup/Login Component
 const Signup = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(1); // 1: Mobile Input, 1.5: OTP/Login Prompt, 2: Create Account, 3: Loading, 4: Notif Perm, 5: Loc Perm
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     phoneNumber: "",
-    otp: Array(6).fill(""), // Initialize otp as an array of 6 empty strings
+    otp: Array(6).fill(""),
     firstName: "",
     lastName: "",
     email: "",
@@ -34,7 +34,6 @@ const Signup = () => {
   const [loadingMessage, setLoadingMessage] = useState("Please wait...");
   const otpInputs = useRef([]); // Ref to hold references to the OTP input fields
 
-  // Focus the first OTP input when Step 1.5 becomes active
   useEffect(() => {
     if (step === 1.5 && otpInputs.current[0]) {
       otpInputs.current[0].focus();
@@ -85,16 +84,16 @@ const Signup = () => {
       const checkResult = await authService.checkPhoneNumber(phoneToSubmit);
       const exists = checkResult.exists;
 
-      await sleep(ARTIFICIAL_DELAY_MS); // <<< ADDED DELAY
+      await sleep(ARTIFICIAL_DELAY_MS);
 
       setIsLoading(false);
       if (exists) {
         console.log("Phone exists, sending OTP...");
-        setLoadingMessage("Sending code..."); // Optional: Change message
+        setLoadingMessage("Sending code...");
         setIsLoading(true);
         setStep(3);
         await authService.sendOtp(phoneToSubmit);
-        await sleep(ARTIFICIAL_DELAY_MS / 2); // Shorter delay after sending OTP
+        await sleep(ARTIFICIAL_DELAY_MS / 2);
         setIsLoading(false);
         console.log("OTP sent, proceeding to login flow (OTP Step)");
         setStep(1.5);
@@ -116,7 +115,7 @@ const Signup = () => {
   const handleOtpChange = (e, index) => {
     const { value } = e.target;
     if (/^[0-9]$/.test(value) || value === "") {
-      // Only allow digits or empty string
+      // Only allow digits
       const newOtp = [...formData.otp];
       newOtp[index] = value;
       setFormData((prev) => ({ ...prev, otp: newOtp }));
@@ -175,7 +174,6 @@ const Signup = () => {
           ? "Invalid code. Please try again."
           : "Login failed. Please try again."
       );
-      // No delay on error
       setIsLoading(false);
       setStep(1.5);
     }
@@ -291,14 +289,12 @@ const Signup = () => {
                 className={styles.button}
                 disabled={isLoading}
               >
-                {/* Button text changes slightly? Or keep as Confirm? */}
                 Confirm
               </button>
               <div className={styles.troubleLink}>
                 Having Trouble?{" "}
                 <span className={styles.linkOptions}>More Options here</span>
               </div>
-              {/* Maybe add a subtle link to explicit Sign Up / Login? Optional */}
             </div>
           </form>
         );
@@ -313,16 +309,8 @@ const Signup = () => {
               </div>
             </div>
             <div className={styles.formContent}>
-              {/* Optional: Back button to step 1? */}
-              {/* <button onClick={() => setStep(1)} className={styles.backButtonInline}>Back</button> */}
-              {/* <h3>Enter Confirmation Code</h3>
-              <p className={styles.hint}>
-                Enter the code sent to {formData.phoneNumber}
-              </p> */}
-
               <div className={styles.inputGroup}>
                 <label htmlFor="otp-0">Confirmation Code</label>{" "}
-                {/* Label points to the first input */}
                 <div className={styles.otpInputContainer}>
                   {formData.otp.map((digit, index) => (
                     <input
@@ -356,7 +344,6 @@ const Signup = () => {
                 onClick={() => console.log("Resend OTP clicked")}
               >
                 {" "}
-                {/* Add resend OTP functionality */}
                 Resend Code
               </button>
             </div>
@@ -368,12 +355,10 @@ const Signup = () => {
             <div className={styles.stepHeader}>
               <button onClick={() => setStep(1)} className={styles.backButton}>
                 {" "}
-                {/* Back goes to step 1 */}
                 <FaArrowLeft />
               </button>
               <h2 className={styles.stepTitle}>Create account</h2>
             </div>
-            {/* onSubmit now calls handleAccountSubmit */}
             <form className={styles.form} onSubmit={handleAccountSubmit}>
               <div className={styles.bowContainer2}>
                 <div className={styles.blueBow}></div>
@@ -382,9 +367,6 @@ const Signup = () => {
               </div>
               <div className={styles.formContent}>
                 {" "}
-                {/* Re-use form content wrapper */}
-                {/* Input fields for firstName, lastName, email */}
-                {/* ... existing input fields ... */}
                 <div className={styles.inputGroup}>
                   <label htmlFor="firstName">First name</label>
                   <input
@@ -436,15 +418,21 @@ const Signup = () => {
             </form>
           </div>
         );
-      case 3: // Loading Indicator (Common)
+      case 3:
         return <LoadingIndicator message={loadingMessage} />;
 
       case 4: // Notification Permission (Signup Flow)
         return (
           <div className={styles.permissionContainer}>
-            <div className={styles.headerImageContainer}></div>
+            <div className={styles.headerImageContainer}>
+              <div className={styles.bowContainer2}>
+                <div className={styles.blueBow}></div>
+                <div className={styles.yellowBow}></div>
+                <div className={styles.whiteBow}></div>
+              </div>
+            </div>
             <div className={styles.permissionContent}>
-              <p>
+              <p style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}>
                 Notifications may include alerts, sounds, and icon badges. These
                 can be configured in Settings.
               </p>
@@ -469,7 +457,13 @@ const Signup = () => {
       case 5: // Location Permission (Signup Flow)
         return (
           <div className={styles.permissionContainer}>
-            <div className={styles.headerImageContainer}></div>
+            <div className={styles.headerImageContainer}>
+              <div className={styles.bowContainer2}>
+                <div className={styles.blueBow}></div>
+                <div className={styles.yellowBow}></div>
+                <div className={styles.whiteBow}></div>
+              </div>
+            </div>
             <div className={styles.permissionContent}>
               <p>
                 Allow this application to access your device's Location. These
@@ -493,7 +487,6 @@ const Signup = () => {
           </div>
         );
       default:
-        // Should reset to step 1 or show generic error?
         console.error("Invalid step reached:", step);
         setStep(1);
         return <div>An unexpected error occurred. Please try again.</div>;

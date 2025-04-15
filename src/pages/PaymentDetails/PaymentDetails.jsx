@@ -7,7 +7,7 @@ import {
   FaCcVisa,
   FaCcMastercard,
 } from "react-icons/fa";
-import styles from "../css/PaymentDetails.module.css";
+import styles from "./PaymentDetails.module.css";
 
 const PaymentDetails = () => {
   const navigate = useNavigate();
@@ -29,18 +29,12 @@ const PaymentDetails = () => {
     console.log("Submitting Card Number:", cardNumber);
 
     try {
-      // Simulate successful API call for now
-      // await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
-      // console.log("Simulated API call successful");
-
       const token = localStorage.getItem("token"); // Get token
       if (!token) {
         console.error("Authentication token not found. Please log in.");
-        // Handle appropriately - maybe redirect to login
         return;
       }
 
-      // const response = await fetch("/api/payments", { // OLD endpoint
       const response = await fetch("/api/users/me/payment", {
         // NEW endpoint
         method: "PUT", // Changed from POST in previous example to PUT

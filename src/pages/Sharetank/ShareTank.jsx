@@ -12,11 +12,11 @@ import {
   FaBars,
   FaSignOutAlt,
 } from "react-icons/fa";
-import styles from "../css/ShareTank.module.css";
+import styles from "./ShareTank.module.css";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../../services/authService";
 import { tankService } from "../../services/tankService";
-import BottomNav from "../components/BottomNav";
+import BottomNav from "../../components/global/BottomNav";
 
 const ShareTank = () => {
   const navigate = useNavigate();
@@ -121,14 +121,19 @@ const ShareTank = () => {
               {isLoadingBalance ? (
                 <h2>Loading...</h2>
               ) : (
-                <>
-                  <h2>${balance}</h2>
-                  <span>{fuelPercentage.toFixed(0)}%</span>
-                </>
+                <div className={styles.tankInfo}>
+                  <h2 style={{ fontSize: "2rem", color: "#ff9933" }}>
+                    {Math.floor(balance)} L
+                  </h2>
+                  <p style={{ color: "#ff9933" }}>max. 225 L</p>
+                </div>
               )}
             </div>
           </figure>
           <div className={styles.actionButtons}>
+            <span style={{ fontSize: "3rem", fontWeight: "bold" }}>
+              {fuelPercentage.toFixed(0)}%
+            </span>
             <button
               onClick={() => navigate("/top-up")}
               className={styles.topUpButton}
@@ -142,8 +147,10 @@ const ShareTank = () => {
 
       {/* Members Section */}
       <div className={styles.membersSection}>
-        <h3>Shared with 2 members</h3>
-        <p className={styles.subtitle}>Everyone can use fuel from this tank</p>
+        <h3 style={{ justifyContent: "flex-start", margin: 0 }}>
+          Shared with 2 members
+        </h3>
+        <p className={styles.subtitle}>Share your tank with 5 others</p>
         <div className={styles.membersList}>
           <div className={styles.memberAvatar}>
             <img src="https://i.pravatar.cc/40?img=1" alt="Member 1" />
@@ -155,7 +162,12 @@ const ShareTank = () => {
             <FaPlus />
           </button>
         </div>
-        <button className={styles.activityButton}>See tank activity</button>
+        <button
+          onClick={() => navigate("/tank-activity")}
+          className={styles.activityButton}
+        >
+          See tank activity
+        </button>
       </div>
 
       {/* Action List */}
