@@ -1,186 +1,108 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import StatusBar from "../../components/shared/StatusBar";
-import Nav from "../../components/shared/Nav";
+import Nav from "../../components/shared/HeaderNav";
 import BottomNav from "../../components/global/BottomNav";
-import ProductCard from "../../components/shared/ProductSize";
+import ProductCard from "../../components/shared/ProductCardAndPrice";
 import ProductQuantity from "../../components/shared/ProductQuantity";
-import { useCart } from "./CartContext";
-import useProductOptions from "./UseProductOptions";
+import { useCart } from "../../components/shared/CartContext";
+import MilkStrengthFlavourOptions from "../../components/shared/MilkStrengthFlavourOptions";
+// import useProductOptions from "../../components/shared/UseProductOptions";
 
 // Styles
-import styles from "../../styles/Shared/ProductMobileFrame.module.css";
-import productStyles from "../../styles/Shared/ProductPage.module.css";
+import styles from "../../styles/shared/ProductMobileFrame.module.css";
+import productStyles from "../../styles/shared/ProductPage.module.css";
 
 const ProductPage = () => {
-  const { productId } = useParams();
-  const [product, setProduct] = useState(null);
+      const { productId } = useParams();
+      const [product, setProduct] = useState(null);
 
-  const {
-    selectedMilk,
-    setSelectedMilk,
-    selectedStrength,
-    setSelectedStrength,
-    selectedFlavour,
-    setSelectedFlavour,
-  } = useProductOptions();
+      // Temp will use again (:D)
+      const [selectedMilk, setSelectedMilk] = useState("");
+      const [selectedStrength, setSelectedStrength] = useState("");
+      const [selectedFlavour, setSelectedFlavour] = useState("");
 
-  //   const { addToCart } = useCart();
+      // Add to cart will come back and u8se, may split it into a component
+      //   const { addToCart } = useCart();
 
-  useEffect(() => {
-    // Fetch product data from MongoDB
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(`/api/products/${productId}`);
-        const data = await response.json();
-        console.log("Fetched product:", data);
-        setProduct(data);
-      } catch (error) {
-        console.error("Error fetching product:", error);
+      useEffect(() => {
+            // Fetch product data from MongoDB
+            const fetchProduct = async () => {
+                  try {
+                        const response = await fetch(`/api/products/${productId}`);
+                        const data = await response.json();
+                        console.log("Fetched product:", data);
+                        setProduct(data);
+                  } catch (error) {
+                        console.error("Error fetching product:", error);
+                  }
+            };
+
+            fetchProduct();
+      }, [productId]);
+
+      if (!product) {
+            return <div>Loading...</div>;
       }
-    };
 
-    fetchProduct();
-  }, [productId]);
+      return (
+            <div className={styles.mobileFrame}>
+                  <div className={styles.container}>
+                        <Nav />
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+                        <div className={productStyles.wrapped}>
+                              <div className={productStyles.productLayout}>
+                                    <div className={productStyles.productImage}>
+                                          <img src={product.image?.[0]} alt={product.name} />
+                                    </div>
 
-  return (
-    <div className={styles.mobileFrame}>
-      <div className={styles.container}>
-        {/* <StatusBar /> */}
-        <Nav />
+                                    <div className={productStyles.productDetails}>
+                                          <h1>{product.name}</h1>
+                                          <p>{product.description}</p>
+                                    </div>
+                              </div>
 
-        <div className={productStyles.wrapped}>
-          <div className={productStyles.productLayout}>
-            <div className={productStyles.productImage}>
-              <img src={product.image?.[0]} alt={product.name} />
+                              {!(product.category === "Savoury" || product.category === "Vegetarian") && <h3>Size</h3>}
+
+                              <ProductCard product={product} />
+
+                              <h3>Quantity</h3>
+                              <ProductQuantity />
+
+                              <MilkStrengthFlavourOptions
+                                    product={product}
+                                    selectedMilk={selectedMilk}
+                                    setSelectedMilk={setSelectedMilk}
+                                    selectedStrength={selectedStrength}
+                                    setSelectedStrength={setSelectedStrength}
+                                    selectedFlavour={selectedFlavour}
+                                    setSelectedFlavour={setSelectedFlavour}
+                              />
+                              <div className={productStyles.actionButtons}>
+                                    <button className={`${productStyles.button} ${productStyles.cancelButton}`}>
+                                          Cancel
+                                    </button>
+                                    <div className={productStyles.centerGap}></div>
+                                    <button
+                                          className={`${productStyles.button} ${productStyles.addToCartButton}`}
+                                          onClick={() => {
+                                                const selectedOptions = {
+                                                      milk: selectedMilk,
+                                                      strength: selectedStrength,
+                                                      flavour: selectedFlavour,
+                                                };
+                                                addToCart(product, selectedOptions);
+                                                alert("Item added to cart!");
+                                          }}
+                                    >
+                                          Add to Cart
+                                    </button>
+                              </div>
+                        </div>
+
+                        <BottomNav />
+                  </div>
             </div>
-
-            <div className={productStyles.productDetails}>
-              <h1>{product.name}</h1>
-              <p>{product.description}</p>
-            </div>
-          </div>
-          {!(
-            product.category === "Savoury" || product.category === "Vegetarian"
-          ) && <h3>Size</h3>}
-
-          <ProductCard product={product} />
-
-          <h3>Quantity</h3>
-          <ProductQuantity />
-          {product.milkOptions && product.milkOptions.length > 0 && (
-            <div className={productStyles.optionSection}>
-              <h3 className={productStyles.optionTitle}>Milk</h3>
-              <div className={productStyles.optionGrid}>
-                {product.milkOptions.map((option, index) => (
-                  <label key={index} className={productStyles.optionItem}>
-                    <input
-                      type="radio"
-                      name="milk"
-                      value={option}
-                      checked={selectedMilk === option}
-                      onChange={() => {
-                        setSelectedMilk((prev) =>
-                          prev === option ? "" : option
-                        );
-                      }}
-                      className={productStyles.radioInput}
-                    />
-                    <span className={productStyles.customRadio}></span>
-                    {option}
-                  </label>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {product.strengthOptions && product.strengthOptions.length > 0 && (
-            <div className={productStyles.optionSection}>
-              <h3 className={productStyles.optionTitle}>Strength</h3>
-              <div className={productStyles.optionGrid2}>
-                {product.strengthOptions.map((option, index) => (
-                  <label key={index} className={productStyles.optionItem}>
-                    <input
-                      type="radio"
-                      name="strength"
-                      value={option}
-                      checked={selectedStrength === option}
-                      onChange={() => setSelectedStrength(option)}
-                      className={productStyles.radioInput}
-                    />
-                    <span className={productStyles.customRadio}></span>
-                    <span className={productStyles.optionLabel}>
-                      {option}
-                      {option.toLowerCase().includes("extra shot") && (
-                        <span className={productStyles.extraCost2}></span>
-                      )}
-                    </span>
-                  </label>
-                ))}
-                <h4>+ 90 cents</h4>
-              </div>
-            </div>
-          )}
-
-          {product.flavourOptions && product.flavourOptions.length > 0 && (
-            <div className={productStyles.optionSection}>
-              <h3 className={productStyles.optionTitle}>Flavour </h3>
-              <div className={productStyles.extraCost}></div>
-              <div className={productStyles.optionGrid2}>
-                {product.flavourOptions.map((option, index) => (
-                  <label key={index} className={productStyles.optionItem}>
-                    <input
-                      type="radio"
-                      name="flavour"
-                      value={option}
-                      checked={selectedFlavour === option}
-                      onChange={() => setSelectedFlavour(option)}
-                      className={productStyles.radioInput}
-                    />
-
-                    <span className={productStyles.customRadio}></span>
-                    <span className={productStyles.optionLabel}>
-                      {option}
-                      <span className={productStyles.extraCost}> + $1.00</span>
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Had to style buttons seperately */}
-          <div className={productStyles.actionButtons}>
-            <div className={productStyles.cancelButtonWrapper}>
-              <button className={productStyles.cancelButton}>Cancel</button>
-            </div>
-            <div className={productStyles.addToCartButtonWrapper}>
-              <button
-                className={productStyles.addToCartButton}
-                onClick={() => {
-                  const selectedOptions = {
-                    milk: selectedMilk,
-                    strength: selectedStrength,
-                    flavour: selectedFlavour,
-                  };
-                  addToCart(product, selectedOptions);
-                  alert("Item added to cart!");
-                }}
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <BottomNav />
-      </div>
-    </div>
-  );
+      );
 };
 
 export default ProductPage;

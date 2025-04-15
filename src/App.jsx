@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
 import "./App.css";
 
 // Hamish
@@ -19,6 +20,7 @@ import PaymentSuccess, {
 import { saveVehicle } from "./services/vehicleService";
 
 // Main branch components
+
 import Signup from "./pages/SignUp/SignUp";
 import Onboarding from "./pages/SignUp/Onboarding";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -26,18 +28,21 @@ import ShareTank from "./pages/Sharetank/ShareTank";
 import PaymentDetails from "./pages/PaymentDetails/PaymentDetails";
 import HowItWorks from "./pages/Sharetank/HowItWorks";
 import TopUpPage from "./pages/Sharetank/TopUpPage";
-import { CartProvider } from "./pages/ProductSelection/CartContext";
-import Orderhotdrinks from "./pages/ProductSelection/OrderHotDrinks";
-import Ordercolddrinks from "./pages/ProductSelection/OrderColdDrinks";
-import Grabfood from "./pages/ProductSelection/GrabFood";
-import Vegeoptions from "./pages/ProductSelection/VegeOptions";
-import Makecombo from "./pages/ProductSelection/MakeCombo";
+// import { CartProvider } from "./pages/ProductSelection/CartContext";
+// import { CartProvider } from "./pages/ProductSelection/CartContext"; // Don't delete
+import Orderhotdrinks from "./pages/ProductSelection/OrderHotDrinksPage";
+import Ordercolddrinks from "./pages/ProductSelection/OrderColdDrinksPage";
+import Grabfood from "./pages/ProductSelection/GrabFoodPage";
+import Vegeoptions from "./pages/ProductSelection/VegeOptionsPage";
+import Makecombo from "./pages/ProductSelection/MakeComboPage";
 import Productpage from "./pages/ProductSelection/ProductPage";
+import ShoppingCart from "./pages/ProductSelection/ShoppingCartPage";
 import OrderFoodHomepage from "./pages/ProductSelection/OrderFoodHomePage";
 import TankActivity from "./pages/Sharetank/TankActivity";
 import { useState, useEffect } from "react";
 
 function App() {
+
   // State for vehicle data management
   const [vehicleData, setVehicleData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -142,6 +147,6 @@ function App() {
       </Router>
     </CartProvider>
   );
-}
 
+}
 export default App;

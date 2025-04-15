@@ -1,0 +1,40 @@
+.nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background-color: white;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.arrowButton,
+.shoppingCartButton {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+}
+
+.logoContainer {
+      flex: 2;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+}
+
+.logo img {
+      height: 40px;
+      object-fit: contain;
+}
+
+.logoText {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1e196b;
+      margin-top: 5px;
+}
