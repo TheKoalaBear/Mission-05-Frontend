@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { authService } from "../../services/authService";
 import { tankService } from "../../services/tankService";
 import BottomNav from "../../components/global/BottomNav";
+import Toggle from "../../components/global/Toggle";
 
 const ShareTank = () => {
   const navigate = useNavigate();
@@ -140,7 +141,12 @@ const ShareTank = () => {
             >
               Top up now
             </button>
-            <button className={styles.useButton}>Use fuel</button>
+            <button
+              onClick={() => navigate("/qr-code")}
+              className={styles.useButton}
+            >
+              Use fuel
+            </button>
           </div>
         </div>
       </div>
@@ -172,10 +178,7 @@ const ShareTank = () => {
 
       {/* Action List */}
       <div className={styles.actionList}>
-        <div
-          className={styles.actionItem}
-          onClick={() => navigate("/notifications")}
-        >
+        <div className={styles.actionItem}>
           <div className={styles.actionIcon}>
             <FaBell />
           </div>
@@ -183,7 +186,7 @@ const ShareTank = () => {
             <h4>Notify me</h4>
             <p>Get notified when tank is low or prices drop</p>
           </div>
-          <FaChevronRight className={styles.chevron} />
+          <Toggle />
         </div>
 
         <div
@@ -202,7 +205,7 @@ const ShareTank = () => {
 
         <div
           className={styles.actionItem}
-          onClick={() => navigate("/payment-details")}
+          onClick={() => navigate("/pay-by-plate")}
         >
           <div className={styles.actionIcon}>
             <FaCreditCard />

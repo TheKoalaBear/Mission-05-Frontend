@@ -45,10 +45,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding: 20px 15px;
+  padding-top: 100px;
   padding-bottom: 80px; /* Space for bottom nav */
   text-align: center;
+  z-index: 2;
 }
 
 .message {
@@ -68,7 +69,10 @@
   background-color: #ffffff;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.33);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.6px);
+  -webkit-backdrop-filter: blur(11.6px);
 }
 
 .instructions {
@@ -89,4 +93,55 @@
   font-size: 0.9rem;
   color: #777;
   margin-top: 10px;
+}
+
+.editorial {
+  display: block;
+  width: 100%;
+  height: 10em;
+  max-height: 100vh;
+  margin: 0;
+}
+
+.waveContainer {
+  position: absolute;
+  bottom: 300px;
+  left: 0;
+  width: 100%;
+  height: 10em;
+  z-index: 1;
+}
+
+.waveFiller {
+  width: 100%;
+  height: 150%;
+  background-color: #ff9933;
+}
+
+::selection {
+  background-color: salmon;
+  color: white;
+}
+.parallax > use {
+  animation: move-forever 12s linear infinite;
+  &:nth-child(1) {
+    animation-delay: -2s;
+  }
+  &:nth-child(2) {
+    animation-delay: -2s;
+    animation-duration: 5s;
+  }
+  &:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 3s;
+  }
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
 }

@@ -8,6 +8,7 @@ import {
   FaCcMastercard,
 } from "react-icons/fa";
 import styles from "./PaymentDetails.module.css";
+import Dashboard from "../Dashboard/Dashboard";
 
 const PaymentDetails = () => {
   const navigate = useNavigate();
@@ -156,7 +157,11 @@ const PaymentDetails = () => {
         </div>
 
         <div className={styles.buttonGroup}>
-          <button type="button" className={styles.saveLaterButton}>
+          <button
+            onClick={() => navigate("/dashboard")}
+            type="button"
+            className={styles.saveLaterButton}
+          >
             Save later
           </button>
           <button type="submit" className={styles.saveButton}>
