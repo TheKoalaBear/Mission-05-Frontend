@@ -44,7 +44,7 @@ import Grabfood from "./pages/OrderFoodHome/GrabFood/GrabFood";
 import Vegeoptions from "./pages/OrderFoodHome/Vegetarian/Vegetarian";
 import Makecombo from "./pages/OrderFoodHome/MakeCombo/MakeCombo";
 import Productpage from "./pages/Products/Products";
-// import ShoppingCart from "./pages/ProductSelection/ShoppingCartPage";
+import ShoppingCart from "./pages/ShoppingCart/ShoppingCart";
 import OrderFoodHomepage from "./pages/OrderFoodHome/OrderFoodHome";
 import TankActivity from "./pages/Sharetank/TankActivity";
 import { useState, useEffect } from "react";
@@ -169,6 +169,7 @@ function App() {
             <Route path="/vegeoptions" element={<Vegeoptions />} />
             <Route path="/makecombo" element={<Makecombo />} />
             <Route path="/productpage/:productId" element={<Productpage />} />
+            <Route path="/shoppingcart" element={<ShoppingCart />} />
           </Routes>
         </div>
       </CartFlowProvider>
