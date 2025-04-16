@@ -4,7 +4,7 @@ import Nav from "../../components/shared/HeaderNav";
 import BottomNav from "../../components/global/BottomNav";
 import ProductCard from "../../components/shared/ProductCardAndPrice";
 import ProductQuantity from "../../components/shared/ProductQuantity";
-import { useCart } from "../../components/shared/CartContext";
+import AddToCart from "../../components/shared/AddToCart";
 import MilkStrengthFlavourOptions from "../../components/shared/MilkStrengthFlavourOptions";
 // import useProductOptions from "../../components/shared/UseProductOptions";
 
@@ -82,20 +82,14 @@ const ProductPage = () => {
                                           Cancel
                                     </button>
                                     <div className={productStyles.centerGap}></div>
-                                    <button
-                                          className={`${productStyles.button} ${productStyles.addToCartButton}`}
-                                          onClick={() => {
-                                                const selectedOptions = {
-                                                      milk: selectedMilk,
-                                                      strength: selectedStrength,
-                                                      flavour: selectedFlavour,
-                                                };
-                                                addToCart(product, selectedOptions);
-                                                alert("Item added to cart!");
-                                          }}
-                                    >
-                                          Add to Cart
-                                    </button>
+
+                                    <AddToCart
+                                          product={product}
+                                          selectedMilk={selectedMilk}
+                                          selectedStrength={selectedStrength}
+                                          selectedFlavour={selectedFlavour}
+                                          buttonClass={`${productStyles.button} ${productStyles.addToCartButton}`}
+                                    />
                               </div>
                         </div>
 

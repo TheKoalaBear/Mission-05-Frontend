@@ -22,8 +22,7 @@ import ShareTank from "./pages/Sharetank/ShareTank";
 import PaymentDetails from "./pages/PaymentDetails/PaymentDetails";
 import HowItWorks from "./pages/Sharetank/HowItWorks";
 import TopUpPage from "./pages/Sharetank/TopUpPage";
-// import { CartProvider } from "./pages/ProductSelection/CartContext";
-// import { CartProvider } from "./pages/ProductSelection/CartContext"; // Don't delete
+import { CartFlowProvider } from "./components/shared/CartFlow";
 import Orderhotdrinks from "./pages/ProductSelection/OrderHotDrinksPage";
 import Ordercolddrinks from "./pages/ProductSelection/OrderColdDrinksPage";
 import Grabfood from "./pages/ProductSelection/GrabFoodPage";
