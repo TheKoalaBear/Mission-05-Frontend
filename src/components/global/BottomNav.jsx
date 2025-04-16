@@ -107,7 +107,7 @@ const BottomNav = () => {
               <FaStar className={styles.menuIcon} />
               <span>Loyalty card</span>
             </Link>
-            <Link to="/activity" className={styles.menuItem}>
+            <Link to="/tank-activity" className={styles.menuItem}>
               <FaHistory className={styles.menuIcon} />
               <span>Recent activity</span>
             </Link>

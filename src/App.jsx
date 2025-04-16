@@ -33,6 +33,7 @@ import ShoppingCart from "./pages/ShoppingCart/ShoppingCart";
 import OrderFoodHomepage from "./pages/OrderFoodHome/OrderFoodHome";
 import TankActivity from "./pages/Sharetank/TankActivity";
 import { useState, useEffect } from "react";
+import QrCodePage from "./pages/PaymentDetails/QrCodePage";
 
 function App() {
       // State for vehicle data management
@@ -86,6 +87,21 @@ function App() {
                                     <Route path="/top-up" element={<TopUpPage />} />
                                     <Route path="/tank-activity" element={<TankActivity />} />
                                     <Route path="/how-it-works" element={<HowItWorks />} />
+                                    {/* Sharetank Routes */}
+                                    <Route path="/sharetank" element={<ShareTank />} />
+                                    <Route path="/payment-details" element={<PaymentDetails />} />
+                                    <Route path="/top-up" element={<TopUpPage />} />
+                                    <Route path="/tank-activity" element={<TankActivity />} />
+                                    <Route path="/how-it-works" element={<HowItWorks />} />
+
+                                    <Route path="/qr-code" element={<QrCodePage />} />
+
+                                    {/*Fuel Comparison*/}
+
+                                    <Route path="/fuel-comparison" element={<PriceComparison />} />
+
+                                    {/*Pay by Plate*/}
+                                    <Route path="/pay-by-plate" element={<PayByPlate />} />
 
                                     {/* Vehicle Payment Routes */}
                                     <Route path="/price-comparison" element={<PriceComparisonWithNav />} />
@@ -138,8 +154,8 @@ function App() {
                                     <Route path="/grabfood" element={<Grabfood />} />
                                     <Route path="/vegeoptions" element={<Vegeoptions />} />
                                     <Route path="/makecombo" element={<Makecombo />} />
-                                    <Route path="/shoppingcart" element={<ShoppingCart />} />
                                     <Route path="/productpage/:productId" element={<Productpage />} />
+                                    <Route path="/shoppingcart" element={<ShoppingCart />} />
                               </Routes>
                         </div>
                   </CartFlowProvider>
