@@ -1,82 +1,90 @@
 .contentContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      gap: 20px;
-      background: linear-gradient(to bottom, #ff6600, #ffcc00);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+  background: linear-gradient(to bottom, #ff6600, #ffcc00);
 }
 
 .description {
-      text-align: center;
-      padding: 15px;
-      color: white;
-      margin-bottom: 10px;
+  text-align: center;
+  padding: 15px;
+  color: white;
+  margin-bottom: 10px;
 }
 
 .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      padding: 20px;
-      margin-bottom: 100px;
-      width: 79%;
-      overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 20px;
+  margin-bottom: 100px;
+  width: 79%;
+  overflow-y: auto;
 }
 
 .cardLarge {
-      height: 100px;
-      background: rgb(254, 249, 245);
-      padding: 10px;
-      border-radius: 20px;
-      text-align: center;
-      font-size: 14px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      grid-column: span 2;
-      color: black;
+  height: 100px;
+  background: rgb(254, 249, 245);
+  padding: 10px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  grid-column: span 2;
+  color: black;
+}
+
+.imageContainer {
+  width: 50px;
+  height: 40px;
 }
 
 .card {
-      background: rgb(254, 249, 245);
-      padding: 10px;
-      border-radius: 20px;
-      text-align: center;
-      font-size: 14px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100px;
-      color: black;
+  background: rgb(254, 249, 245);
+  padding: 10px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100px;
+  color: black;
 }
 
 .card:hover,
 .cardLarge:hover {
-      transform: scale(1.01);
-      color: rgb(0, 13, 255);
+  transform: scale(1.01);
+  color: rgb(0, 13, 255);
 }
 
 .card img,
 .cardLarge img {
-      width: 35px;
-      height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .cardImageLeft {
-      order: 0;
+  order: 0;
 }
 
 .cardImageRight {
-      order: 1;
-      margin-left: 0px;
+  order: 1;
+  margin-left: 0px;
+  width: 40px;
+  height: 40px;
 }

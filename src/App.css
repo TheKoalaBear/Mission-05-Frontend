@@ -22,6 +22,10 @@
   flex: 1;
 }
 
+body {
+  overflow-y: hidden; /* Hide vertical scrollbar */
+}
+
 /* Make sure price comparison takes up full space */
 .price-comparison-container {
   min-height: 100vh !important;
@@ -239,7 +243,7 @@
 /* Safe area insets for modern mobile devices */
 @supports (padding: max(0px)) {
   .app {
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
-      env(safe-area-inset-left);
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+      env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
 }

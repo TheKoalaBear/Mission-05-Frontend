@@ -37,6 +37,7 @@ import ShareTank from "./pages/Sharetank/ShareTank";
 import PaymentDetails from "./pages/PaymentDetails/PaymentDetails";
 import HowItWorks from "./pages/Sharetank/HowItWorks";
 import TopUpPage from "./pages/Sharetank/TopUpPage";
+<<<<<<< HEAD
 import { CartFlowProvider } from "./pages/Products/Components/CartFlow";
 import Orderhotdrinks from "./pages/OrderFoodHome/HotDrinks/HotDrinks";
 import Ordercolddrinks from "./pages/OrderFoodHome/ColdDrinks/ColdDrinks";
@@ -46,8 +47,20 @@ import Makecombo from "./pages/OrderFoodHome/MakeCombo/MakeCombo";
 import Productpage from "./pages/Products/Products";
 import ShoppingCart from "./pages/ShoppingCart/ShoppingCart";
 import OrderFoodHomepage from "./pages/OrderFoodHome/OrderFoodHome";
+=======
+import { CartFlowProvider } from "./components/shared/CartFlow";
+import Orderhotdrinks from "./pages/ProductSelection/OrderHotDrinksPage";
+import Ordercolddrinks from "./pages/ProductSelection/OrderColdDrinksPage";
+import Grabfood from "./pages/ProductSelection/GrabFoodPage";
+import Vegeoptions from "./pages/ProductSelection/VegeOptionsPage";
+import Makecombo from "./pages/ProductSelection/MakeComboPage";
+import Productpage from "./pages/ProductSelection/ProductPage";
+import ShoppingCart from "./pages/ProductSelection/ShoppingCartPage";
+import OrderFoodHomepage from "./pages/ProductSelection/OrderFoodHomePage";
+>>>>>>> mc2
 import TankActivity from "./pages/Sharetank/TankActivity";
 import { useState, useEffect } from "react";
+import QrCodePage from "./pages/PaymentDetails/QrCodePage";
 
 function App() {
   // State for vehicle data management
@@ -107,6 +120,7 @@ function App() {
             <Route path="/top-up" element={<TopUpPage />} />
             <Route path="/tank-activity" element={<TankActivity />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
+<<<<<<< HEAD
 
             {/* Vehicle Payment Routes */}
             <Route
@@ -161,6 +175,70 @@ function App() {
             {/* QR Code Route */}
             <Route path="/qr-code" element={<Dashboard />} />
 
+=======
+            <Route path="/qr-code" element={<QrCodePage />} />
+
+            {/*Fuel Comparison*/}
+
+            <Route path="/fuel-comparison" element={<PriceComparison />} />
+
+            {/*Pay by Plate*/}
+            <Route path="/pay-by-plate" element={<PayByPlate />} />
+
+            {/* Vehicle Payment Routes */}
+            <Route
+              path="/price-comparison"
+              element={<PriceComparisonWithNav />}
+            />
+            <Route
+              path="/pay-by-plate"
+              element={
+                <PayByPlateWithNav
+                  vehicleData={vehicleData}
+                  setIsEditing={setIsEditing}
+                />
+              }
+            />
+            <Route
+              path="/vehicle-preferences"
+              element={
+                <VehiclePreferencesWithNav
+                  vehicleData={vehicleData}
+                  isEditing={isEditing}
+                  handleSaveVehicle={handleSaveVehicle}
+                />
+              }
+            />
+            <Route path="/payment" element={<PaymentFormWithNav />} />
+            <Route
+              path="/payment/processing"
+              element={<PaymentLoadingWithNav />}
+            />
+            <Route
+              path="/payment/success"
+              element={<PaymentSuccessWithNav />}
+            />
+
+            {/* My Account Routes */}
+            <Route path="/personal-info" element={<Dashboard />} />
+            <Route path="/notifications" element={<Dashboard />} />
+            <Route path="/loyalty" element={<Dashboard />} />
+            <Route path="/ev-tag" element={<Dashboard />} />
+
+            {/* Promotions Routes */}
+            <Route path="/vouchers" element={<Dashboard />} />
+            <Route path="/invite" element={<Dashboard />} />
+
+            {/* Help & Support Routes */}
+            <Route path="/find-z" element={<Dashboard />} />
+            <Route path="/legal" element={<Dashboard />} />
+            <Route path="/feedback" element={<Dashboard />} />
+            <Route path="/contact" element={<Dashboard />} />
+
+            {/* QR Code Route */}
+            <Route path="/qr-code" element={<Dashboard />} />
+
+>>>>>>> mc2
             {/* Product Pages */}
             <Route path="/orderfood" element={<OrderFoodHomepage />} />
             <Route path="/orderhotdrinks" element={<Orderhotdrinks />} />
