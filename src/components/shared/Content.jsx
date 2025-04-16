@@ -68,12 +68,20 @@ const Content = ({ category, title }) => {
                                                 key={product._id}
                                                 className={styles.productCard}
                                           >
-                                                <img
-                                                      src={product.image?.[0]}
-                                                      alt={product.name}
-                                                      className={styles.productImage}
-                                                />
-                                                <h2>{product.name}</h2>
+                                                <div className={styles.productImageContainer}>
+                                                      <img
+                                                            src={product.image?.[0]}
+                                                            alt={product.name}
+                                                            className={styles.productImage}
+                                                      />
+                                                </div>
+                                                <div
+                                                      style={{
+                                                            backgroundColor: "rgb(254, 249, 245)",
+                                                      }}
+                                                >
+                                                      <h2>{product.name}</h2>
+                                                </div>
                                           </Link>
                                     ))
                               ) : (
