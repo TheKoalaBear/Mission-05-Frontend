@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "../../components/shared/HeaderNav";
 import BottomNav from "../../components/global/BottomNav";
-import ProductCard from "../../components/shared/ProductCardAndPrice";
-import ProductQuantity from "../../components/shared/ProductQuantity";
-import AddToCart from "../../components/shared/AddToCart";
+import ProductCard from "./Components/ProductCardAndPrice";
+import ProductQuantity from "./Components/ProductQuantity";
+import AddToCart from "./Components/AddToCart";
 import MilkStrengthFlavourOptions from "../../components/shared/MilkStrengthFlavourOptions";
 // import useProductOptions from "../../components/shared/UseProductOptions";
 
 // Styles
 import styles from "../../styles/shared/ProductMobileFrame.module.css";
-import productStyles from "../../styles/shared/ProductPage.module.css";
+import productStyles from "./Products.module.css";
 
 const ProductPage = () => {
       const { productId } = useParams();

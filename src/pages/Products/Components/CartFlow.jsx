@@ -24,11 +24,6 @@ const cartReducer = (state, action) => {
                         };
                   }
 
-                  return {
-                        ...state,
-                        items: [...state.items, action.payload],
-                  };
-
             case "REMOVE_FROM_CART":
                   return {
                         ...state,

@@ -1,9 +1,9 @@
 import react from "react";
 import { useCartFlow } from "./CartFlow";
-import productStyles from "../../styles/shared/ProductPage.module.css";
+import productStyles from "../Products.module.css";
 
 const AddToCart = ({ product, selectedMilk, selectedStrength, selectedFlavour }) => {
-      const { addToCart } = useCartFlow();
+      // const { addToCart } = useCartFlow();
       const handleAddToCart = () => {
             const selectedOptions = {
                   ...product,

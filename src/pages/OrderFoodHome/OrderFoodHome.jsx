@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Content from "../../components/shared/HomePageContent";
+import Content from "./Components/HomePageContent";
 import BottomNav from "../../components/global/BottomNav";
-import styles from "../../styles/shared/Orderfoodhomepage.module.css";
+import styles from "./OrderFoodHome.module.css";
 
-const Orderfoodhomepage = () => {
+const OrderFoodHomePage = () => {
       const navigate = useNavigate();
       return (
             <div className={styles.mobileFrame}>
@@ -33,4 +33,4 @@ const Orderfoodhomepage = () => {
       );
 };
 
-export default Orderfoodhomepage;
+export default OrderFoodHomePage;

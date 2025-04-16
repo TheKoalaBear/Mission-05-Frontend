@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderNav from "../../components/shared/HeaderNav";
-import ProductQuantity from "../../components/shared/ProductQuantity";
-import styles from "../../styles/shared/ShoppingCartPage.module.css";
+import ProductQuantity from "../Products/Components/ProductQuantity";
+import styles from "./ShoppingCart.module.css";
 import stylesFrame from "../../styles/shared/ProductMobileFrame.module.css";
 
 const CartItem = ({ imageSrc, name, options, price }) => (

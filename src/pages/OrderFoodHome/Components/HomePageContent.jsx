@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "../../styles/shared/OrderFoodHomePageContent.module.css";
+import styles from "./HomePageContent.module.css";
 
 const Content = () => {
       return (
