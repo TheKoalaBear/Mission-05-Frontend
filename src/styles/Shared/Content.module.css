@@ -1,119 +1,119 @@
 .content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
-  max-width: 800px;
-  padding-top: 20px;
-  padding-bottom: 100px;
-  margin: 0 auto;
-  position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 800px;
+      padding-top: 20px;
+      padding-bottom: 100px;
+      margin: 0 auto;
+      position: relative;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
 }
 
 .titleContainer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 20px;
 }
 
 .title {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 10px auto;
-  padding-left: 35px;
-  padding-bottom: -90px;
-  width: 100%;
-  max-width: 800px;
-  text-align: left;
-  color: rgb(30, 25, 107);
+      font-size: 20px;
+      font-weight: bold;
+      margin: 10px auto;
+      padding-left: 35px;
+      padding-bottom: -90px;
+      width: 100%;
+      max-width: 800px;
+      text-align: left;
+      color: rgb(30, 25, 107);
 }
 
 .productCard {
-  width: 100%;
-  max-width: 110px;
-  min-width: 60px;
-  height: 120px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: rgb(254, 249, 245);
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      max-width: 110px;
+      min-width: 60px;
+      height: 120px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .productCard:hover {
-  transform: scale(1.05);
-  box-shadow: 0 3px 6px rgb(30, 31, 111);
+      transform: scale(1.05);
+      box-shadow: 0 3px 6px rgb(30, 31, 111);
 }
 
 .productImage {
-  height: auto;
-  object-fit: cover;
-  border-radius: 5px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 5px;
 }
 
 .productImageContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px 10px 0 0;
-  background-color: rgb(255, 194, 154);
-  width: 100%;
-  height: 69%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px 10px 0 0;
+      background-color: rgb(290, 249, 245);
+      width: 100%;
+      height: 69%;
 }
 
 .productCard h2 {
-  font-size: 11px;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 5px;
-  max-width: 120px;
-  color: black;
+      font-size: 11px;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 5px;
+      max-width: 120px;
+      color: black;
 }
 
 .content::-webkit-scrollbar {
-  display: none;
+      display: none;
 }
 
 /* Horizontal scroll for make a combo page  */
 .horizontalSection {
-  width: 100%;
-  margin-bottom: 50px;
+      width: 100%;
+      margin-bottom: 50px;
 }
 
 .subTitle {
-  font-size: 18px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  color: rgb(30, 25, 107);
+      font-size: 18px;
+      margin-left: 10px;
+      margin-bottom: 10px;
+      color: rgb(30, 25, 107);
 }
 
 .horizontalScroll {
-  display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  gap: 16px;
-  padding: 10px;
-  cursor: grab;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 16px;
+      padding: 10px;
+      cursor: grab;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
 }
 
 .horizontalScroll:active {
-  cursor: grabbing;
+      cursor: grabbing;
 }
 
 .horizontalScroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+      display: none; /* Chrome, Safari */
 }
 
 .productCard {
-  flex: 0 0 auto; /* may need to fix this*/
+      flex: 0 0 auto; /* may need to fix this*/
 }
