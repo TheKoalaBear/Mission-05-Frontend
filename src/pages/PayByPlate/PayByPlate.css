@@ -102,8 +102,8 @@
   border: none;
   cursor: pointer;
   color: #1e196b;
-  margin-top: -10px;
-  margin-left: -20px;
+  margin-top: 1px;
+  margin-left: 5px;
 }
 
 .pay-by-plate-container .icon-container {
