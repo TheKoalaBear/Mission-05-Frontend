@@ -42,21 +42,14 @@ const StationDetails = ({ station, onClose }) => {
               <div className="services-section">
                 <h3 className="services-title">Services Offered</h3>
                 <div className="services-icons">
-                  {station.services && station.services.includes("Toilet") && (
-                    <div className="service-icon">🚻</div>
-                  )}
-                  {station.services && station.services.includes("Fuel") && (
-                    <div className="service-icon">⛽</div>
-                  )}
-                  {station.services && station.services.includes("Coffee") && (
-                    <div className="service-icon">☕</div>
-                  )}
-                  {station.services && station.services.includes("Car Wash") && (
-                    <div className="service-icon">🚿</div>
-                  )}
-                  {station.services && station.services.includes("EV Charging") && (
-                    <div className="service-icon">🔌</div>
-                  )}
+                  {/* Show all service icons for all stations */}
+                  <div className="service-icon">⛽</div>
+                  <div className="service-icon">🚻</div>
+                  <div className="service-icon">☕</div>
+                  <div className="service-icon">🚿</div>
+                  <div className="service-icon">🔌</div>
+                  <div className="service-icon">🍔</div>
+                  <div className="service-icon">💨</div>
                 </div>
               </div>
 
@@ -118,14 +111,14 @@ const StationDetails = ({ station, onClose }) => {
 
 StationDetails.propTypes = {
   station: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     location: PropTypes.shape({
       lat: PropTypes.number.isRequired,
       lng: PropTypes.number.isRequired,
     }).isRequired,
-    services: PropTypes.array.isRequired,
+    services: PropTypes.array,
     isOpen: PropTypes.bool,
     phone: PropTypes.string,
   }),

@@ -4,6 +4,11 @@ import { getZStations, getStationById } from "../../services/mapService";
 import { FiHome, FiSearch } from "react-icons/fi";
 import zLogo from "../../assets/images/z.png";
 import StationDetails from "./StationDetails";
+import toiletIcon from "../../assets/map_img/map_toilet_service.png";
+import fuelIcon from "../../assets/map_img/pay in app_service.png";
+import coffeeIcon from "../../assets/map_img/Order coffee_service.png";
+import carwashIcon from "../../assets/map_img/carwash_service.png";
+import evIcon from "../../assets/map_img/carcharger_service.png";
 import "./map.css";
 
 // Map constants
@@ -16,12 +21,11 @@ const mapContainerStyle = {
 
 // Available services
 const SERVICES = [
-  { id: "toilet", name: "Toilet", icon: "🚻" },
-  { id: "fuel", name: "Fuel", icon: "⛽" },
-  { id: "coffee", name: "Coffee", icon: "☕" },
-  { id: "carwash", name: "Car Wash", icon: "🚿" },
-  { id: "ev", name: "EV Charging", icon: "🔌" },
-  { id: "pay", name: "Pay in App", icon: "📱" },
+  { id: "toilet", name: "Toilet", icon: toiletIcon },
+  { id: "fuel", name: "Fuel", icon: fuelIcon },
+  { id: "coffee", name: "Coffee", icon: coffeeIcon },
+  { id: "carwash", name: "Car Wash", icon: carwashIcon },
+  { id: "ev", name: "EV Charging", icon: evIcon },
 ];
 
 const MapPage = () => {
@@ -254,7 +258,7 @@ const MapPage = () => {
     (serviceId) => {
       if (!serviceId || allStations.length === 0 || !googleMapRef.current) return;
 
-      // Filter stations that provide the selected service
+      // Map serviceId to display name
       const serviceString =
         serviceId === "ev"
           ? "EV Charging"
@@ -263,11 +267,26 @@ const MapPage = () => {
           : serviceId === "pay"
           ? "Pay in App"
           : serviceId === "coffee"
-          ? "Shop"
+          ? "Coffee"
           : serviceId.charAt(0).toUpperCase() + serviceId.slice(1);
 
-      const stationsWithService = allStations.filter((station) =>
-        station.services.some((s) => s.includes(serviceString))
+      // Case-insensitive matching for services
+      const hasService = (station, searchTerm) => {
+        if (!station.services || !Array.isArray(station.services)) {
+          // Default stations have basic services
+          return searchTerm.toLowerCase() === "fuel" || searchTerm.toLowerCase() === "toilet";
+        }
+
+        // Check if any service contains the search term (case insensitive)
+        return station.services.some(
+          (service) =>
+            typeof service === "string" && service.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      };
+
+      // Filter stations that provide the selected service
+      const stationsWithService = allStations.filter(
+        (station) => hasService(station, serviceId) || hasService(station, serviceString)
       );
 
       if (stationsWithService.length === 0) {
@@ -433,7 +452,9 @@ const MapPage = () => {
             className={`service-icon ${selectedService === service.id ? "active" : ""}`}
             onClick={() => findNearestWithService(service.id)}
           >
-            <div className="icon">{service.icon}</div>
+            <div className="icon">
+              <img src={service.icon} alt={service.name} />
+            </div>
             <div className="name">{service.name}</div>
           </div>
         ))}

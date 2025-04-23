@@ -1,61 +1,29 @@
-import api from "./api";
-
-// Mock data for Z Energy stations
-
-const mockZStations = [
-  {
-    id: 1,
-    name: "Z Energy Auckland CBD",
-    location: { lat: -36.848461, lng: 174.763336 },
-    address: "123 Queen Street, Auckland",
-    services: ["Fuel", "Shop", "Car Wash", "EV Charging"],
-    isOpen: true,
-  },
-  {
-    id: 2,
-    name: "Z Energy Wellington Central",
-    location: { lat: -41.286461, lng: 174.776236 },
-    address: "456 Lambton Quay, Wellington",
-    services: ["Fuel", "Shop"],
-    isOpen: true,
-  },
-  {
-    id: 3,
-    name: "Z Energy Christchurch",
-    location: { lat: -43.531111, lng: 172.636667 },
-    address: "789 Colombo Street, Christchurch",
-    services: ["Fuel", "Shop", "Car Wash"],
-    isOpen: false,
-  },
-  {
-    id: 4,
-    name: "Z Energy Hamilton",
-    location: { lat: -37.787001, lng: 175.279253 },
-    address: "321 Victoria Street, Hamilton",
-    services: ["Fuel", "Shop", "Car Wash", "EV Charging"],
-    isOpen: true,
-  },
-  {
-    id: 5,
-    name: "Z Energy Dunedin",
-    location: { lat: -45.874761, lng: 170.503798 },
-    address: "567 George Street, Dunedin",
-    services: ["Fuel", "Shop"],
-    isOpen: true,
-  },
-];
-
-// Get all stations (simulating an API call)
+// Get all stations from the backend API
 export const getZStations = async () => {
   try {
-    // In a real implementation, you would uncomment the next line to fetch from your API
-    // const response = await api.get('/stations');
-    // return response.data;
+    // Fetch stations from the backend API
+    const response = await fetch("http://localhost:5000/api/stations");
 
-    // For now, return mock data
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Transform data to match the format expected by the map component
+    const formattedData = data.map((station) => ({
+      id: station._id,
+      name: station.name,
+      location: station.location,
+      address: station.address,
+      services: station.services || [],
+      isOpen: station.isOpen || true, // Default to open if not specified
+      phone: station.phone || "09 123 4567", // Default phone if not available
+    }));
+
     return {
       success: true,
-      data: mockZStations,
+      data: formattedData,
     };
   } catch (error) {
     console.error("Error fetching Z stations:", error);
@@ -69,25 +37,72 @@ export const getZStations = async () => {
 // Get station details by ID
 export const getStationById = async (stationId) => {
   try {
-    // In a real implementation, you would uncomment the next line
-    // const response = await api.get(`/stations/${stationId}`);
-    // return response.data;
+    // Fetch specific station by ID
+    const response = await fetch(`http://localhost:5000/api/stations/${stationId}`);
 
-    // For now, return mock data
-    const station = mockZStations.find((s) => s.id === parseInt(stationId));
-    if (!station) {
-      throw new Error("Station not found");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
+
+    const station = await response.json();
+
+    // Transform to match expected format
+    const formattedStation = {
+      id: station._id,
+      name: station.name,
+      location: station.location,
+      address: station.address,
+      services: station.services || [],
+      isOpen: station.isOpen || true,
+      phone: station.phone || "09 123 4567",
+    };
 
     return {
       success: true,
-      data: station,
+      data: formattedStation,
     };
   } catch (error) {
     console.error(`Error fetching station with ID ${stationId}:`, error);
     return {
       success: false,
       error: error.message || "Failed to fetch station details",
+    };
+  }
+};
+
+// Search for stations by query
+export const searchStations = async (query) => {
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/stations/search?query=${encodeURIComponent(query)}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Transform data to match expected format
+    const formattedData = data.map((station) => ({
+      id: station._id,
+      name: station.name,
+      location: station.location,
+      address: station.address,
+      services: station.services || [], // Keep all services as they come from the API
+      isOpen: station.isOpen || true,
+      phone: station.phone || "09 123 4567",
+    }));
+
+    return {
+      success: true,
+      data: formattedData,
+    };
+  } catch (error) {
+    console.error("Error searching for stations:", error);
+    return {
+      success: false,
+      error: error.message || "Failed to search for stations",
     };
   }
 };
