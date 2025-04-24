@@ -29,22 +29,22 @@ import ShareTank from "./pages/Sharetank/ShareTank";
 import PaymentDetails from "./pages/PaymentDetails/PaymentDetails";
 import HowItWorks from "./pages/Sharetank/HowItWorks";
 import TopUpPage from "./pages/Sharetank/TopUpPage";
-// import { CartProvider } from "./pages/ProductSelection/CartContext";
-// import { CartProvider } from "./pages/ProductSelection/CartContext"; // Don't delete
-import Orderhotdrinks from "./pages/ProductSelection/OrderHotDrinksPage";
-import Ordercolddrinks from "./pages/ProductSelection/OrderColdDrinksPage";
-import Grabfood from "./pages/ProductSelection/GrabFoodPage";
-import Vegeoptions from "./pages/ProductSelection/VegeOptionsPage";
-import Makecombo from "./pages/ProductSelection/MakeComboPage";
-import Productpage from "./pages/ProductSelection/ProductPage";
-// import ShoppingCart from "./pages/ProductSelection/ShoppingCartPage";
-import OrderFoodHomepage from "./pages/ProductSelection/OrderFoodHomePage";
+import { CartFlowProvider } from "./pages/Products/Components/CartFlow";
+import Orderhotdrinks from "./pages/OrderFoodHome/HotDrinks/HotDrinks";
+import Ordercolddrinks from "./pages/OrderFoodHome/ColdDrinks/ColdDrinks";
+import Grabfood from "./pages/OrderFoodHome/GrabFood/GrabFood";
+import Vegeoptions from "./pages/OrderFoodHome/Vegetarian/Vegetarian";
+import Makecombo from "./pages/OrderFoodHome/MakeCombo/MakeCombo";
+import Productpage from "./pages/Products/Products";
+import ShoppingCart from "./pages/ShoppingCart/ShoppingCart";
+import OrderFoodHomepage from "./pages/OrderFoodHome/OrderFoodHome";
 import TankActivity from "./pages/Sharetank/TankActivity";
 import ConfirmOrder from "./pages/Cart/ConfirmOrder";
 import Payment from "./pages/Cart/Payment";
 import OrderConfirmation from "./pages/OrderConfirmed/OrderConfirmation";
 import TopUpConfirmation from "./pages/OrderConfirmed/TopUpConfirmation";
 import { useState, useEffect } from "react";
+import QrCodePage from "./pages/PaymentDetails/QrCodePage";
 
 function App() {
   // State for vehicle data management
@@ -77,88 +77,97 @@ function App() {
 
   return (
     <Router>
-      <div className="app">
-        <Routes>
-          {/* Main Routes */}
-          <Route
-            path="/"
-            element={hasSeenOnboarding ? <Dashboard /> : <Navigate to="/onboarding" />}
-          />
-          <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/onboarding"
-            element={hasSeenOnboarding ? <Navigate to="/" /> : <Onboarding />}
-          />
-          <Route path="/dashboard" element={<Dashboard />} />
+      <CartFlowProvider>
+        <div className="app">
+          <Routes>
+            {/* Main Routes */}
+            <Route
+              path="/"
+              element={hasSeenOnboarding ? <Dashboard /> : <Navigate to="/onboarding" />}
+            />
+            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/onboarding"
+              element={hasSeenOnboarding ? <Navigate to="/" /> : <Onboarding />}
+            />
+            <Route path="/dashboard" element={<Dashboard />} />
 
-          {/* Sharetank Routes */}
-          <Route path="/sharetank" element={<ShareTank />} />
-          <Route path="/payment-details" element={<PaymentDetails />} />
-          <Route path="/top-up" element={<TopUpPage />} />
-          <Route path="/tank-activity" element={<TankActivity />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
+            {/* Sharetank Routes */}
+            <Route path="/sharetank" element={<ShareTank />} />
+            <Route path="/payment-details" element={<PaymentDetails />} />
+            <Route path="/top-up" element={<TopUpPage />} />
+            <Route path="/tank-activity" element={<TankActivity />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
 
-          {/* Vehicle Payment Routes */}
-          <Route path="/price-comparison" element={<PriceComparisonWithNav />} />
-          <Route
-            path="/pay-by-plate"
-            element={<PayByPlateWithNav vehicleData={vehicleData} setIsEditing={setIsEditing} />}
-          />
-          <Route
-            path="/vehicle-preferences"
-            element={
-              <VehiclePreferencesWithNav
-                vehicleData={vehicleData}
-                isEditing={isEditing}
-                handleSaveVehicle={handleSaveVehicle}
-              />
-            }
-          />
-          <Route path="/payment" element={<PaymentFormWithNav />} />
-          <Route path="/payment/processing" element={<PaymentLoadingWithNav />} />
-          <Route path="/payment/success" element={<PaymentSuccessWithNav />} />
+            {/* QR Code Route */}
+            <Route path="/qr-code" element={<QrCodePage />} />
 
-          {/* Map Routes */}
-          <Route path="/map" element={<MapPage />} />
-          <Route path="/map/:stationId" element={<MapPage />} />
-          <Route path="/find-z" element={<MapPage />} />
+            {/*Fuel Comparison*/}
+            <Route path="/fuel-comparison" element={<PriceComparison />} />
 
-          {/* My Account Routes */}
-          <Route path="/personal-info" element={<Dashboard />} />
-          <Route path="/notifications" element={<Dashboard />} />
-          <Route path="/loyalty" element={<Dashboard />} />
-          <Route path="/ev-tag" element={<Dashboard />} />
+            {/*Pay by Plate*/}
+            <Route path="/pay-by-plate" element={<PayByPlate />} />
 
-          {/* Promotions Routes */}
-          <Route path="/vouchers" element={<Dashboard />} />
-          <Route path="/invite" element={<Dashboard />} />
+            {/* Vehicle Payment Routes */}
+            <Route path="/price-comparison" element={<PriceComparisonWithNav />} />
+            <Route
+              path="/pay-by-plate"
+              element={<PayByPlateWithNav vehicleData={vehicleData} setIsEditing={setIsEditing} />}
+            />
+            <Route
+              path="/vehicle-preferences"
+              element={
+                <VehiclePreferencesWithNav
+                  vehicleData={vehicleData}
+                  isEditing={isEditing}
+                  handleSaveVehicle={handleSaveVehicle}
+                />
+              }
+            />
+            <Route path="/payment" element={<PaymentFormWithNav />} />
+            <Route path="/payment/processing" element={<PaymentLoadingWithNav />} />
+            <Route path="/payment/success" element={<PaymentSuccessWithNav />} />
 
-          {/* Help & Support Routes - Find Z is now a map */}
-          <Route path="/legal" element={<Dashboard />} />
-          <Route path="/feedback" element={<Dashboard />} />
-          <Route path="/contact" element={<Dashboard />} />
+            {/* Map Routes */}
+            <Route path="/map" element={<MapPage />} />
+            <Route path="/map/:stationId" element={<MapPage />} />
+            <Route path="/find-z" element={<MapPage />} />
 
-          {/* QR Code Route */}
-          <Route path="/qr-code" element={<Dashboard />} />
+            {/* My Account Routes */}
+            <Route path="/personal-info" element={<Dashboard />} />
+            <Route path="/notifications" element={<Dashboard />} />
+            <Route path="/loyalty" element={<Dashboard />} />
+            <Route path="/ev-tag" element={<Dashboard />} />
 
-          {/* Product Pages */}
-          <Route path="/orderfood" element={<OrderFoodHomepage />} />
-          <Route path="/orderhotdrinks" element={<Orderhotdrinks />} />
-          <Route path="/ordercolddrinks" element={<Ordercolddrinks />} />
-          <Route path="/grabfood" element={<Grabfood />} />
-          <Route path="/vegeoptions" element={<Vegeoptions />} />
-          <Route path="/makecombo" element={<Makecombo />} />
-          <Route path="/productpage/:productId" element={<Productpage />} />
+            {/* Promotions Routes */}
+            <Route path="/vouchers" element={<Dashboard />} />
+            <Route path="/invite" element={<Dashboard />} />
 
-          {/* Cart Routes */}
-          <Route path="/cart/confirm" element={<ConfirmOrder />} />
-          <Route path="/cart/add-payment" element={<Payment />} />
+            {/* Help & Support Routes */}
+            <Route path="/legal" element={<Dashboard />} />
+            <Route path="/feedback" element={<Dashboard />} />
+            <Route path="/contact" element={<Dashboard />} />
 
-          {/* Order Confirmed Routes */}
-          <Route path="/order-confirmed" element={<OrderConfirmation />} />
-          <Route path="/top-up-confirmed" element={<TopUpConfirmation />} />
-        </Routes>
-      </div>
+            {/* Cart Routes */}
+            <Route path="/confirm-order" element={<ConfirmOrder />} />
+            <Route path="/cart-payment" element={<Payment />} />
+
+            {/* Order Confirmation Routes */}
+            <Route path="/order-confirmation" element={<OrderConfirmation />} />
+            <Route path="/topup-confirmation" element={<TopUpConfirmation />} />
+
+            {/* Product Pages */}
+            <Route path="/orderfood" element={<OrderFoodHomepage />} />
+            <Route path="/orderhotdrinks" element={<Orderhotdrinks />} />
+            <Route path="/ordercolddrinks" element={<Ordercolddrinks />} />
+            <Route path="/grabfood" element={<Grabfood />} />
+            <Route path="/vegeoptions" element={<Vegeoptions />} />
+            <Route path="/makecombo" element={<Makecombo />} />
+            <Route path="/productpage/:productId" element={<Productpage />} />
+            <Route path="/shoppingcart" element={<ShoppingCart />} />
+          </Routes>
+        </div>
+      </CartFlowProvider>
     </Router>
   );
 }

@@ -80,21 +80,24 @@ const Dashboard = () => {
 
       {/* Cards Grid */}
       <div className={styles.cardsGrid}>
-        <div className={styles.card}>
+        <div
+          onClick={() => navigate("/fuel-comparison")}
+          className={styles.card}
+        >
           <span className={styles.cardContent}>
             Fuel Price
             <br />
             Comparison
           </span>
         </div>
-        <div className={styles.card}>
-          <span className={styles.cardContent}>Z</span>
+        <div className={styles.card} onClick={() => navigate("/pay-by-plate")}>
+          <span className={styles.cardContent}>Pay by Plate</span>
         </div>
         <div className={styles.card} onClick={() => navigate("/orderfood")}>
           <span className={styles.cardContent}>Order Food</span>
         </div>
         <div className={styles.card}>
-          <span className={styles.cardContent}>Near me</span>
+          <span className={styles.cardContent}>Z Near me</span>
         </div>
       </div>
 

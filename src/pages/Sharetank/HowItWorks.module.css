@@ -1,9 +1,11 @@
 .container {
-  padding: 16px;
+  padding: 20px !important;
   max-width: 768px;
   margin: 0 auto;
   min-height: 100vh;
   background: #fff;
+  margin-bottom: 200px;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
 .header {
@@ -43,11 +45,6 @@
   padding: 4px;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.featuresContainer::-webkit-scrollbar {
-  display: none;
 }
 
 .featureCard {
@@ -133,6 +130,7 @@
 }
 
 .wayContent h3 {
+  justify-content: flex-start;
   color: #27187e;
   margin: 0 0 8px 0;
   font-size: 18px;
@@ -164,6 +162,7 @@
 @media (max-width: 480px) {
   .container {
     padding: 12px;
+    overflow-x: hidden;
   }
 
   .title {

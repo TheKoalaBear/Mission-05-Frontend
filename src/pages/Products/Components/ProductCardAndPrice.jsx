@@ -1,5 +1,5 @@
 import React from "react";
-import productStyles from "../../styles/Shared/ProductCardAndPrice.module.css";
+import productStyles from "./ProductCardAndPrice.module.css";
 
 // Images
 import mediumImage from "/src/assets/orderfoodhomepage_img/medium.png";
