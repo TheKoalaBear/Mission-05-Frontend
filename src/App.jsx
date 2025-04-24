@@ -148,7 +148,7 @@ function App() {
           <Route path="/productpage/:productId" element={<Productpage />} />
 
           {/* Cart Routes */}
-          <Route path="/confirm-order" element={<ConfirmOrder />} />
+          <Route path="/cart/confirm" element={<ConfirmOrder />} />
         </Routes>
       </div>
     </Router>

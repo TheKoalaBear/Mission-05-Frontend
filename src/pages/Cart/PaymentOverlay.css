@@ -1,0 +1,201 @@
+/* PaymentOverlay.css */
+
+.payment-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.payment-overlay-content {
+  background-color: #f9fafb;
+  width: 100%;
+  max-width: 500px;
+  min-height: 400px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+}
+
+/* Header styles */
+.payment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.back-icon {
+  font-size: 24px;
+  color: #312e81;
+}
+
+.payment-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #312e81;
+  text-align: center;
+}
+
+.header-placeholder {
+  width: 24px; /* Same width as back-button for balanced spacing */
+}
+
+/* Card info styles */
+.card-info-container {
+  margin-bottom: 32px;
+}
+
+.card-info {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-name {
+  font-size: 0.9rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.card-type {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.card-last4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #312e81;
+}
+
+/* Action buttons styles */
+.payment-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: auto;
+  margin-bottom: 16px;
+}
+
+.cancel-payment-button {
+  flex: 1;
+  border: 1px solid #312e81;
+  background-color: transparent;
+  color: #312e81;
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancel-payment-button:hover {
+  background-color: #eef2ff;
+}
+
+.confirm-payment-button {
+  flex: 1;
+  background-color: #312e81;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirm-payment-button:hover {
+  background-color: #1e1b4b;
+}
+
+/* Other payment method button */
+.other-payment-button {
+  width: 100%;
+  padding: 12px;
+  background-color: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 30px;
+  color: #4b5563;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.other-payment-button:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+/* Accessibility focus styles */
+button:focus {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .payment-overlay-content {
+    margin: 12px;
+    padding: 20px 12px;
+  }
+
+  .payment-title {
+    font-size: 1rem;
+  }
+
+  .back-icon {
+    font-size: 20px;
+  }
+
+  .payment-actions {
+    gap: 12px;
+  }
+}

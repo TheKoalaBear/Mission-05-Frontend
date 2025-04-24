@@ -4,6 +4,8 @@ import { FiEdit2, FiArrowLeft } from "react-icons/fi";
 import { FaMinus, FaPlus, FaRegTrashCan } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
 import BottomNav from "../../components/global/BottomNav";
+import PaymentOverlay from "./PaymentOverlay";
+import PaymentDeclinedOverlay from "./PaymentDeclinedOverlay";
 import "./ConfirmOrder.css";
 
 // Import images
@@ -14,6 +16,10 @@ import locationPin from "../../assets/confirmorder_png/Pin.png";
 
 const ConfirmOrder = () => {
   const navigate = useNavigate();
+
+  // State for payment overlays
+  const [showPaymentOverlay, setShowPaymentOverlay] = useState(false);
+  const [showPaymentDeclinedOverlay, setShowPaymentDeclinedOverlay] = useState(false);
 
   // Initial state for order items
   const [orderItems, setOrderItems] = useState([
@@ -70,6 +76,34 @@ const ConfirmOrder = () => {
   // Format price to 2 decimal places
   const formatPrice = (price) => {
     return `$${price.toFixed(2)}`;
+  };
+
+  // Handle payment actions
+  const handlePayClick = () => {
+    setShowPaymentOverlay(true);
+  };
+
+  const handlePaymentClose = () => {
+    setShowPaymentOverlay(false);
+  };
+
+  const handlePaymentConfirm = () => {
+    // Simulate payment processing
+    setShowPaymentOverlay(false);
+
+    // For demo purposes, show the payment declined overlay instead of processing a real payment
+    // In a real app, this would check the payment result from an API
+    setShowPaymentDeclinedOverlay(true);
+  };
+
+  const handlePaymentDeclinedClose = () => {
+    setShowPaymentDeclinedOverlay(false);
+  };
+
+  const handleTryAnotherCard = () => {
+    // Close the declined overlay and show the payment overlay again
+    setShowPaymentDeclinedOverlay(false);
+    setShowPaymentOverlay(true);
   };
 
   return (
@@ -184,7 +218,7 @@ const ConfirmOrder = () => {
             Cancel
           </button>
           <button
-            onClick={() => navigate("/payment")}
+            onClick={handlePayClick}
             className="pay-button"
             aria-label="Pay for order"
             tabIndex="0"
@@ -196,6 +230,20 @@ const ConfirmOrder = () => {
 
       {/* Bottom Navigation */}
       <BottomNav />
+
+      {/* Payment Overlay */}
+      <PaymentOverlay
+        isVisible={showPaymentOverlay}
+        onClose={handlePaymentClose}
+        onPay={handlePaymentConfirm}
+      />
+
+      {/* Payment Declined Overlay */}
+      <PaymentDeclinedOverlay
+        isVisible={showPaymentDeclinedOverlay}
+        onClose={handlePaymentDeclinedClose}
+        onTryAnotherCard={handleTryAnotherCard}
+      />
     </div>
   );
 };
