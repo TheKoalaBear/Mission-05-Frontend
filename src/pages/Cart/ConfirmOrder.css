@@ -313,12 +313,19 @@ html,
   flex: 1;
   background-color: #312e81;
   color: #ffffff;
-  padding: 12px;
-  border-radius: 30px;
+
   font-weight: 500;
-  border: none;
   transition: background-color 0.2s;
+  padding: 10px 20px;
+
+  border-radius: 30px;
+  border: none;
   cursor: pointer;
+  background: #1e196b;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 41px;
 }
 
 .pay-button:hover {
