@@ -89,7 +89,7 @@ export const searchStations = async (query) => {
       name: station.name,
       location: station.location,
       address: station.address,
-      services: station.services || [], // Keep all services as they come from the API
+      services: station.services || [],
       isOpen: station.isOpen || true,
       phone: station.phone || "09 123 4567",
     }));

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getZStations, getStationById } from "../../services/mapService";
 import { FiHome, FiSearch } from "react-icons/fi";
-import zLogo from "../../assets/images/z.png";
+import pinIcon from "../../assets/images/Pin.png";
 import StationDetails from "./StationDetails";
 import toiletIcon from "../../assets/map_img/map_toilet_service.png";
 import fuelIcon from "../../assets/map_img/pay in app_service.png";
@@ -168,78 +168,21 @@ const MapPage = () => {
 
     // Add markers for each station
     stations.forEach((station) => {
-      // Create a custom marker with transparent background instead of orange circle
       const marker = new window.google.maps.Marker({
         position: station.location,
         map: googleMapRef.current,
         title: station.name,
-        // Remove icon with orange background
         icon: {
-          path: window.google.maps.SymbolPath.CIRCLE,
-          fillOpacity: 0, // Make the background transparent
-          strokeWeight: 0,
-          scale: 0, // Invisible marker
+          url: pinIcon,
+          scaledSize: new window.google.maps.Size(40, 40), // Adjust size as needed
+          origin: new window.google.maps.Point(0, 0),
+          anchor: new window.google.maps.Point(20, 40), // Center bottom of the image
         },
-        visible: true, // Still make it clickable
         animation: window.google.maps.Animation.DROP,
-        optimized: false, // Helps with z-index issues on some browsers
+        optimized: false,
       });
 
-      // Add Z logo overlay on top of the marker
-      class ZLogoOverlay extends window.google.maps.OverlayView {
-        constructor(position, map) {
-          super();
-          this.position = position;
-          this.setMap(map);
-        }
-
-        onAdd() {
-          this.div = document.createElement("div");
-          this.div.className = "z-marker-overlay";
-
-          const img = document.createElement("img");
-          img.src = zLogo;
-          img.alt = "Z";
-          img.className = "z-logo";
-
-          this.div.appendChild(img);
-
-          const panes = this.getPanes();
-          panes.overlayMouseTarget.appendChild(this.div);
-
-          // Add click handler to the overlay
-          this.div.addEventListener("click", () => {
-            setSelectedStation(station);
-
-            // Bounce animation when clicked
-            marker.setAnimation(window.google.maps.Animation.BOUNCE);
-            setTimeout(() => marker.setAnimation(null), 1500);
-          });
-        }
-
-        draw() {
-          const projection = this.getProjection();
-          if (!projection) return;
-
-          const pos = projection.fromLatLngToDivPixel(this.position);
-
-          this.div.style.position = "absolute";
-          this.div.style.left = pos.x - 15 + "px";
-          this.div.style.top = pos.y - 15 + "px";
-        }
-
-        onRemove() {
-          if (this.div) {
-            this.div.parentNode.removeChild(this.div);
-            this.div = null;
-          }
-        }
-      }
-
-      const overlay = new ZLogoOverlay(station.location, googleMapRef.current);
-      overlaysRef.current.push(overlay);
-
-      // Add click listener to marker (in addition to overlay)
+      // Add click listener to marker
       marker.addListener("click", () => {
         // Open the station details popup
         setSelectedStation(station);

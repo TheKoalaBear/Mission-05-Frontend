@@ -21,7 +21,7 @@ import {
 import styles from "./BottomNav.module.css";
 import { authService } from "../../services/authService";
 
-const BottomNav = () => {
+const BottomNav = ({ style }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [showMoreMenu, setShowMoreMenu] = useState(false);
@@ -63,26 +63,18 @@ const BottomNav = () => {
   }, [showMoreMenu]);
 
   return (
-    <nav className={styles.bottomNav}>
-      <Link
-        to="/"
-        className={isActive("/") ? styles.navItemActive : styles.navItem}
-      >
+    <nav className={styles.bottomNav} style={style}>
+      <Link to="/" className={isActive("/") ? styles.navItemActive : styles.navItem}>
         <FaHome className={styles.navIcon} />
         <span className={styles.navLabel}>Home</span>
       </Link>
-      <Link
-        to="/qr-code"
-        className={isActive("/qr-code") ? styles.navItemActive : styles.navItem}
-      >
+      <Link to="/qr-code" className={isActive("/qr-code") ? styles.navItemActive : styles.navItem}>
         <FaQrcode className={styles.navIcon} />
         <span className={styles.navLabel}>QR code</span>
       </Link>
       <Link
         to="/sharetank"
-        className={
-          isActive("/sharetank") ? styles.navItemActive : styles.navItem
-        }
+        className={isActive("/sharetank") ? styles.navItemActive : styles.navItem}
       >
         <FaGasPump className={styles.navIcon} />
         <span className={styles.navLabel}>Share Tank</span>

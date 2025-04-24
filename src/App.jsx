@@ -40,6 +40,7 @@ import Productpage from "./pages/ProductSelection/ProductPage";
 // import ShoppingCart from "./pages/ProductSelection/ShoppingCartPage";
 import OrderFoodHomepage from "./pages/ProductSelection/OrderFoodHomePage";
 import TankActivity from "./pages/Sharetank/TankActivity";
+import ConfirmOrder from "./pages/Cart/ConfirmOrder";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -145,6 +146,9 @@ function App() {
           <Route path="/vegeoptions" element={<Vegeoptions />} />
           <Route path="/makecombo" element={<Makecombo />} />
           <Route path="/productpage/:productId" element={<Productpage />} />
+
+          {/* Cart Routes */}
+          <Route path="/confirm-order" element={<ConfirmOrder />} />
         </Routes>
       </div>
     </Router>
