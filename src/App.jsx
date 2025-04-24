@@ -42,6 +42,8 @@ import OrderFoodHomepage from "./pages/ProductSelection/OrderFoodHomePage";
 import TankActivity from "./pages/Sharetank/TankActivity";
 import ConfirmOrder from "./pages/Cart/ConfirmOrder";
 import Payment from "./pages/Cart/Payment";
+import OrderConfirmation from "./pages/OrderConfirmed/OrderConfirmation";
+import TopUpConfirmation from "./pages/OrderConfirmed/TopUpConfirmation";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -151,6 +153,10 @@ function App() {
           {/* Cart Routes */}
           <Route path="/cart/confirm" element={<ConfirmOrder />} />
           <Route path="/cart/add-payment" element={<Payment />} />
+
+          {/* Order Confirmed Routes */}
+          <Route path="/order-confirmed" element={<OrderConfirmation />} />
+          <Route path="/top-up-confirmed" element={<TopUpConfirmation />} />
         </Routes>
       </div>
     </Router>

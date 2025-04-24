@@ -8,34 +8,13 @@
   font-family: "Roboto", sans-serif;
 }
 
-/* Status Bar */
-.status-bar-container {
-  padding: 6px 16px;
-  background-color: white;
-  height: 44px;
-  display: flex;
-  align-items: center;
-}
-
-.status-bar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.icons {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 /* Main Content */
 .main-content {
   flex: 1;
   padding: 0 16px;
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
 }
 
 /* Header */
