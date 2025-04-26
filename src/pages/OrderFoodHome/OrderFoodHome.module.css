@@ -1,8 +1,9 @@
 .mobileFrame {
       background-color: #ffffff;
       height: 100vh;
-      width: 100%;
+      width: 430px;
       display: flex;
+      margin: 0 auto;
       justify-content: center;
       align-items: center;
       overflow: hidden;
