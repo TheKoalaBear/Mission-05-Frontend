@@ -20,7 +20,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px 10px;
-      margin-left: 50px;
+      margin-left: 55px;
       justify-content: center;
       align-items: center;
 }
@@ -78,5 +78,6 @@
 .extraCost {
       display: block;
       align-items: center;
+      font-size: 9.8px;
       line-height: normal;
 }
