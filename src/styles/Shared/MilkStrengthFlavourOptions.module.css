@@ -18,8 +18,9 @@
 
 .radioGrid {
       display: grid;
-      grid-template-columns: repeat(2, auto);
-      gap: 10px 60px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 10px;
+      margin-left: 50px;
       justify-content: center;
       align-items: center;
 }
@@ -31,31 +32,15 @@
       margin-right: 20px;
 }
 
-.optionItem {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      margin-right: 30px;
-      font-weight: 500;
-      cursor: pointer;
-}
-.optionItem2 {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      margin-left: 44px;
-      font-weight: 500;
-      cursor: pointer;
-}
+.optionItem,
+.optionItem2,
 .optionItem3 {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 5px;
       font-size: 14px;
-      margin-left: 17px;
       font-weight: 500;
+      margin: 0;
       cursor: pointer;
 }
 
@@ -91,10 +76,7 @@
 }
 
 .extraCost {
-      color: #847f7f;
-      font-size: 12px;
-      margin-left: 6px;
-      transform: translateY(1px);
-      position: relative;
-      top: 1px;
+      display: block;
+      align-items: center;
+      line-height: normal;
 }

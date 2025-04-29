@@ -52,11 +52,11 @@ const MilkStrengthFlavourOptions = ({
                                                       onChange={() => setSelectedStrength(option)}
                                                       className={styles.radioInput}
                                                 />
-                                                <span className={styles.customRadio}></span>
+                                                <span className={`${styles.customRadio}`}></span>
                                                 <span className={styles.optionLabel}>
-                                                      {option}
+                                                      <div>{option}</div>
                                                       {option.toLowerCase().includes("extra shot") && (
-                                                            <span className={styles.extraCost}> + 90 cents</span>
+                                                            <div className={styles.extraCost}> + 90 cents</div>
                                                       )}
                                                 </span>
                                           </label>
