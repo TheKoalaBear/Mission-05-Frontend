@@ -9,7 +9,11 @@ const initialState = {
 const cartReducer = (state, action) => {
       switch (action.type) {
             case "ADD_TO_CART":
-                  const existingItem = state.items.find((item) => item.id === action.payload.id);
+                  const existingItem = state.items.find(
+                        (item) =>
+                              item.id === action.payload.id &&
+                              item.addedFromMakeCombo === action.payload.addedFromMakeCombo
+                  );
                   if (existingItem) {
                         return {
                               ...state,

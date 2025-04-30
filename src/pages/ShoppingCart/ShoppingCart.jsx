@@ -24,8 +24,8 @@ const QuantityControls = () => (
             <button>-</button>
             <span>0</span>
             <button>+</button>
-            <button className={styles.editBtn}>✏️</button>
-            <button className={styles.deleteBtn}>🗑️</button>
+            <button className={styles.editBtn}></button>
+            <button className={styles.deleteBtn}></button>
       </div>
 );
 // Need to add some conditional logic to show the edit and delete buttons only when the item is in the cart

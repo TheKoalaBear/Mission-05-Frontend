@@ -32,7 +32,9 @@ const MakeComboHorizontalScrollComponentForContent = ({ productsByCategory, cate
             <>
                   {categoryGroups.map((title) => (
                         <div key={title} className={styles.horizontalSection}>
-                              <h2 className={styles.subTitle}>{title}</h2>
+                              <h2 className={styles.subTitle}>
+                                    {title === "Make Combo" ? "Make Combo 20% Off" : title}
+                              </h2>
                               <div
                                     ref={(el) => (scrollRefs.current[title] = el)}
                                     className={styles.horizontalScroll}
