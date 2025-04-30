@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "../../styles/Shared/Content.module.css";
+import styles from "../../styles/shared/Content.module.css";
 
 const MakeComboHorizontalScrollComponentForContent = ({ productsByCategory, categoryGroups }) => {
       const scrollRefs = useRef({});
@@ -52,12 +52,16 @@ const MakeComboHorizontalScrollComponentForContent = ({ productsByCategory, cate
                                                       key={product._id}
                                                       className={styles.productCard}
                                                 >
-                                                      <img
-                                                            src={product.image?.[0]}
-                                                            alt={product.name}
-                                                            className={styles.productImage}
-                                                      />
-                                                      <h2>{product.name}</h2>
+                                                      <div className={styles.productImageContainer}>
+                                                            <img
+                                                                  src={product.image?.[0]}
+                                                                  alt={product.name}
+                                                                  className={styles.productImage}
+                                                            />
+                                                      </div>
+                                                      <div className={styles.productTitleContainer}>
+                                                            <h2>{product.name}</h2>
+                                                      </div>
                                                 </Link>
                                           ))
                                     ) : (
