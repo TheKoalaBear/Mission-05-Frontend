@@ -1,6 +1,7 @@
 import React from "react";
 import HeaderNav from "../../components/shared/HeaderNav";
 import ProductQuantity from "../Products/Components/ProductQuantity";
+import { useCartFlow } from "../Products/Components/CartFlow";
 import styles from "./ShoppingCart.module.css";
 import stylesFrame from "../../styles/shared/ProductMobileFrame.module.css";
 
@@ -19,7 +20,7 @@ const CartItem = ({ imageSrc, name, options, price }) => (
       </div>
 );
 
-const QuantityControls = () => (
+const QuantityControls = (itemIndex, quantity) => (
       <div className={styles.quantityControls}>
             <button>-</button>
             <span>0</span>
@@ -30,24 +31,33 @@ const QuantityControls = () => (
 );
 // Need to add some conditional logic to show the edit and delete buttons only when the item is in the cart
 const ShoppingCartPage = () => {
+      const { state } = useCartFlow();
+
+      const totalPrice = state.items.reduce((total, item) => total + item.price * item.quantity, 0);
       return (
             <div className={stylesFrame.mobileFrame}>
                   <div className={stylesFrame.container}>
                         <HeaderNav></HeaderNav>
                         <h2>Confirm your order</h2>
 
-                        <CartItem imageSrc="/coffee.png" name="Coffee" options={["Milk", "Extra"]} price="<Price>" />
-                        <ProductQuantity />
-
-                        <CartItem imageSrc="/cold-drink.png" name="Cold Drinks" options={[]} price="<Price>" />
-                        <ProductQuantity />
-
-                        <CartItem imageSrc="/hot-food.png" name="Hot Food" options={[]} price="<Price>" />
-                        <ProductQuantity />
+                        {state.items.map((item, idx) => (
+                              <CartItem
+                                    key={idx}
+                                    imageSrc={item.imageSrc}
+                                    name={item.name}
+                                    options={[
+                                          item.selectedMilk,
+                                          item.selectedStrength,
+                                          ...(item.selectedFlavour || []),
+                                    ]}
+                                    price={item.price}
+                                    quantity={item.quantity}
+                              />
+                        ))}
 
                         <div className={styles.totalSection}>
-                              <span>Total</span>
-                              <span className={styles.totalPrice}>$00.00</span>
+                              <div>Total</div>
+                              <div className={styles.totalPrice}>$00.00</div>
                         </div>
                   </div>
             </div>

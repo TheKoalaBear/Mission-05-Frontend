@@ -6,7 +6,6 @@ import ProductCard from "./Components/ProductCardAndPrice";
 import ProductQuantity from "./Components/ProductQuantity";
 import AddToCart from "./Components/AddToCart";
 import MilkStrengthFlavourOptions from "../../components/shared/MilkStrengthFlavourOptions";
-// import useProductOptions from "../../components/shared/UseProductOptions";
 
 // Styles
 import styles from "../../styles/shared/ProductMobileFrame.module.css";
@@ -15,8 +14,8 @@ import productStyles from "./Products.module.css";
 const ProductPage = () => {
       const { productId } = useParams();
       const [product, setProduct] = useState(null);
-
-      // Temp will use again (:D)
+      const [selectedSize, setSelectedSize] = useState(null);
+      const [selectedPrice, setSelectedPrice] = useState(null);
       const [selectedMilk, setSelectedMilk] = useState("");
       const [selectedStrength, setSelectedStrength] = useState("");
       const [selectedFlavour, setSelectedFlavour] = useState("");
@@ -43,6 +42,10 @@ const ProductPage = () => {
       if (!product) {
             return <div>Loading...</div>;
       }
+      const handleSizeSelect = (size, price) => {
+            setSelectedSize(size);
+            setSelectedPrice(price);
+      };
 
       return (
             <div className={styles.mobileFrame}>
@@ -63,7 +66,7 @@ const ProductPage = () => {
 
                               {!(product.category === "Savoury" || product.category === "Vegetarian") && <h3>Size</h3>}
 
-                              <ProductCard product={product} />
+                              <ProductCard product={product} onSizeSelect={handleSizeSelect} />
 
                               <h3>Quantity</h3>
                               <ProductQuantity />
@@ -85,6 +88,8 @@ const ProductPage = () => {
 
                                     <AddToCart
                                           product={product}
+                                          selectedSize={selectedSize}
+                                          selectedPrice={selectedPrice}
                                           selectedMilk={selectedMilk}
                                           selectedStrength={selectedStrength}
                                           selectedFlavour={selectedFlavour}
